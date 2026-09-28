@@ -151,3 +151,35 @@ def refresh(cfg, cache, now, session=None):
 def values(cache):
     """Solo i set con un valore calcolato."""
     return {k: v for k, v in (cache or {}).items() if v.get("ev_busta")}
+
+
+def refresh_names(cfg, cache, now, session=None):
+    """Nomi delle carte ex / Mega di ogni set (anche speciali), per riconoscere i prodotti che
+    nel titolo hanno il Pokémon protagonista ma non il nome del set. Una richiesta per set al giorno."""
+    cache = dict(cache or {})
+    todo = [s for s in cfg["set"] if s.get("en") and not (
+        cache.get(s["nome"]) and now - datetime.fromisoformat(cache[s["nome"]]["aggiornato"]) < REFRESH)]
+    if not todo:
+        return cache
+    session = session or requests.Session()
+    try:
+        sets = _get(session, f"{API}/sets")
+        if not isinstance(sets, list):
+            raise ValueError("risposta inattesa")
+    except Exception as e:
+        print("TCGdex non raggiungibile:", e)
+        return cache
+    for s in todo:
+        match = next((x for x in sets if _norm(x.get("name")) == _norm(s["en"])), None)
+        names = []
+        if match:
+            try:
+                info = _get(session, f"{API}/sets/{match['id']}")
+                names = sorted({c["name"] for c in info.get("cards", [])
+                                if c.get("name") and (_norm(c["name"]).endswith(" ex") or
+                                                      _norm(c["name"]).startswith("mega "))})
+            except Exception as e:
+                print(f"TCGdex: nomi di {s['en']} non letti: {e}")
+                continue
+        cache[s["nome"]] = {"nomi": names, "aggiornato": now.isoformat(timespec="minutes")}
+    return cache

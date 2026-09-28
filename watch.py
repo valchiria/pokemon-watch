@@ -320,11 +320,43 @@ def search_woo(session, site, query, today, extra=""):
     return out
 
 
+def pokemon_keys(card_name):
+    """ "Mega Zygarde ex" -> " mega zygarde " (quello che si cerca nel titolo di un prodotto)."""
+    k = norm(card_name)
+    return k[:-3] if k.endswith(" ex ") else k
+
+
+def make_guesser(names_by_set):
+    """Funzione titolo -> nome del set, se il Pokémon protagonista (ex o Mega) è di un solo set seguito.
+    Restituisce anche la chiave trovata (es. "mega zygarde") per cercarla poi in tutti i negozi."""
+    keys = {}
+    for set_name, v in (names_by_set or {}).items():
+        for n in v.get("nomi", []):
+            k = pokemon_keys(n)
+            # solo le Mega: sono legate a un'espansione precisa, i Pokémon "ex" si ripetono tra i set
+            if k.startswith(" mega ") and len(k.strip()) >= 8:
+                keys.setdefault(k, set()).add(set_name)
+
+    def guess(title):
+        t = norm(title)
+        hits = {}
+        for k, sets_ in keys.items():
+            if k in t:
+                for sn in sets_:
+                    hits.setdefault(sn, []).append(k.strip())
+        if len(hits) == 1:
+            sn, ks = next(iter(hits.items()))
+            return sn, max(ks, key=len)
+        return None, None
+    return guess
+
+
 QUERIES_SHOPIFY = ["{s}", "{s} box", "{s} set allenatore", "{s} bundle", "{s} collezione"]
 
 
-def scan_shop(shop, sets, today):
-    """Tutte le offerte di un negozio per i set seguiti. Restituisce (offerte, ok, novità)."""
+def scan_shop(shop, sets, today, guess=None):
+    """Tutte le offerte di un negozio per i set seguiti. Restituisce (offerte, ok, novità).
+    Oltre al nome del set cerca i Pokémon protagonisti già scoperti (s["extra"], es. "mega zygarde")."""
     session = requests.Session()
     offers, found_any, errors = {}, False, 0
 
@@ -335,6 +367,7 @@ def scan_shop(shop, sets, today):
 
     for s in sets:
         queries = [s["cerca"]] if shop["tipo"] == "woo" else [q.format(s=s["cerca"]) for q in QUERIES_SHOPIFY]
+        queries += [f"pokemon {x}" for x in s.get("extra", [])]
         for q in queries:
             try:
                 res = search(q)
@@ -345,7 +378,9 @@ def scan_shop(shop, sets, today):
                     return {}, False, []
                 continue
             for r in res:
-                if not matches_set(r["titolo"], s):
+                if not matches_set(r["titolo"], s) and not (
+                        guess and not any(matches_set(r["titolo"], x) for x in sets)
+                        and guess(r["titolo"])[0] == s["nome"]):
                     continue
                 kind = classify(r["titolo"])
                 if not kind:
@@ -869,8 +904,16 @@ def main():
     prev = state.get("offerte", {})
     known_shops = set(state.get("negozi_visti", []))
 
+    # nomi delle carte ex/Mega di ogni set: servono a riconoscere i prodotti senza nome del set
+    state["nomi_set"] = market.refresh_names(cfg, state.get("nomi_set", {}), now)
+    guess = make_guesser(state["nomi_set"])
+    first_guess = "cerca_extra" not in state  # primo giro con il riconoscimento: niente avvisi arretrati
+    extra = state.setdefault("cerca_extra", {})
+    quiet = set()
+    sets = [{**s, "extra": extra.get(s["nome"], [])} for s in cfg["set"]]
+
     with ThreadPoolExecutor(max_workers=8) as ex:
-        results = list(ex.map(lambda sh: (sh, *scan_shop(sh, cfg["set"], today)), cfg["negozi"]))
+        results = list(ex.map(lambda sh: (sh, *scan_shop(sh, sets, today, guess)), cfg["negozi"]))
 
     offers, news, shops_ok = {}, [], 0
     for shop, off, ok, nw in results:
@@ -878,7 +921,18 @@ def main():
         if ok:
             shops_ok += 1
             offers.update(off)
-            news += nw
+            for n in nw:
+                set_name, key = guess(n["titolo"])
+                if set_name:  # es. "Collezione Premium Mega Zygarde ex" → Equilibrio Perfetto
+                    offers.setdefault(n["url"], {**n, "set": set_name})
+                    if first_guess:
+                        quiet.add(n["url"])
+                    ks = extra.setdefault(set_name, [])
+                    if key not in ks:
+                        ks.append(key)
+                        del ks[:-4]  # al massimo 4 ricerche extra per set
+                else:
+                    news.append(n)
         else:
             # negozio muto: teniamo quello che sapevamo, senza avvisare
             offers.update({u: o for u, o in prev.items() if o.get("negozio") == shop["nome"]})
@@ -915,7 +969,7 @@ def main():
         pre_new, pre_drop = {}, {}
         for url, o in offers.items():
             old = prev.get(url) or ghosts.get(url)
-            if o["negozio"] not in known_shops:
+            if o["negozio"] not in known_shops or url in quiet:
                 continue  # la prima lettura di un negozio fa da base
             k = product_key(o)
             if o["stato"] == "preordine":
