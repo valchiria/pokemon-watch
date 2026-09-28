@@ -1,0 +1,27 @@
+{
+  "_nota": "Lista dei prodotti controllati. 'soglia' = prezzo massimo a cui ti interessa comprarlo. Gamelife escluso: la sua pagina dice 'Aggiungi al carrello' anche quando non si compra.",
+  "prodotti": [
+    {"nome": "30° Anniversario – Bundle 6 buste", "negozio": "Cardverse", "url": "https://cardverse.it/products/pokemon-30-anniversario-bundle-6-buste-ita", "soglia": 40},
+    {"nome": "30° Anniversario – Bundle 6 buste", "negozio": "Manuelpoke3", "url": "https://manuelpoke3.it/products/confezione-6-buste-pokemon-30-anniversario-it", "soglia": 40},
+    {"nome": "30° Anniversario – Bundle 6 buste", "negozio": "Strategia2", "url": "https://www.strategia2.it/negozio/pokemon-30-anniversario-bundle-6-buste/", "soglia": 42},
+    {"nome": "30° Anniversario – Blister 2 buste", "negozio": "Strategia2", "url": "https://www.strategia2.it/negozio/pokemon-30-anniversario-blister-2-buste/", "soglia": 15},
+    {"nome": "30° Anniversario – Blister 2 buste", "negozio": "Toys Center", "url": "https://www.toyscenter.it/prodotto/pokemon-30-anniversario-blister-2-buste/", "soglia": 15},
+    {"nome": "30° Anniversario – Collezione Premium Ditto", "negozio": "CarteMagic", "url": "https://www.cartemagic.com/prodotto/pokemon-30-anniversario-collezione-premium-ditto-ita/", "soglia": 50},
+    {"nome": "30° Anniversario – Ultra Premium Umbreon", "negozio": "CarteMagic", "url": "https://www.cartemagic.com/prodotto/pokemon-30-anniversario-collezione-ultra-premium-umbreon-ita/", "soglia": 235},
+    {"nome": "30° Anniversario – Ultra Premium Espeon", "negozio": "CarteMagic", "url": "https://www.cartemagic.com/prodotto/pokemon-30-anniversario-collezione-ultra-premium-espeon-ita/", "soglia": 235},
+    {"nome": "30° Anniversario – Set Allenatore Fuoriclasse", "negozio": "Toys Center", "url": "https://www.toyscenter.it/prodotto/pokemon-30-anniversario-set-allenatore-fuoriclasse/", "soglia": 60},
+    {"nome": "30° Anniversario – Set Allenatore Fuoriclasse", "negozio": "Mornati Paglia", "url": "https://www.mornatipaglia.com/products/gamevision-pokemon-30th-anniversario-set-allenatore-fuoriclasse", "soglia": 60},
+    {"nome": "Equilibrio Perfetto – Box 36 buste", "negozio": "CarteMagic", "url": "https://www.cartemagic.com/prodotto/pokemon-equilibrio-perfetto-box-36-bustine-versione-italiano/", "soglia": 170},
+    {"nome": "Equilibrio Perfetto – Box 36 buste", "negozio": "Federicstore", "url": "https://federicstore.it/prodotto/megaevoluzione-equilibrio-perfetto-display-36-buste-it/", "soglia": 170},
+    {"nome": "Equilibrio Perfetto – Bundle 6 buste", "negozio": "Baruzcard", "url": "https://baruzcard.it/products/pokemon-equilibrio-perfetto-bundle-6-buste-ita", "soglia": 36},
+    {"nome": "Caos Nascente – Box 36 buste", "negozio": "CarteMagic", "url": "https://www.cartemagic.com/prodotto/pokemon-caos-nascente-box-36-bustine-versione-italiano/", "soglia": 170},
+    {"nome": "Caos Nascente – Box 36 buste", "negozio": "Federicstore", "url": "https://federicstore.it/prodotto/megaevoluzione-caos-nascente-display-36-buste-it/", "soglia": 170},
+    {"nome": "Buio Pesto – Box 36 buste", "negozio": "Federicstore", "url": "https://federicstore.it/prodotto/megaevoluzione-buio-pesto-display-36-buste-it/", "soglia": 170},
+    {"nome": "Buio Pesto – Box 36 buste", "negozio": "Baruzcard", "url": "https://baruzcard.it/products/pokemon-buio-pesto-box-display-36-buste-ita", "soglia": 170},
+    {"nome": "Avventure Insieme – Box 36 buste", "negozio": "CarteMagic", "url": "https://www.cartemagic.com/prodotto/pokemon-avventure-insieme-sv09-booster-box-36-bustine-versione-italiano/", "soglia": 160},
+    {"nome": "Avventure Insieme – Box 36 buste", "negozio": "Baruzcard", "url": "https://baruzcard.it/products/pokemon-avventure-insieme-display-box-36-bustine-ita", "soglia": 160},
+    {"nome": "Dominio Delta – Set Allenatore Fuoriclasse", "negozio": "MagicNerd", "url": "https://magicnerd.it/products/dominio-delta-set-allenatore-fuoriclasse-etb-mega-rayquaza-ita", "soglia": 60},
+    {"nome": "Dominio Delta – Set Allenatore Fuoriclasse", "negozio": "Manuelpoke3", "url": "https://manuelpoke3.it/products/set-allenatore-fuoriclasse-pokemon-dominio-delta-etb-ita", "soglia": 60},
+    {"nome": "Dominio Delta – Box 36 buste", "negozio": "Nox Collectibles", "url": "https://www.noxcollectibles.it/products/preordine-dominio-delta-booster-box-italiano", "soglia": 185}
+  ]
+}
