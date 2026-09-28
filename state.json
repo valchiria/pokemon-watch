@@ -228,18 +228,6 @@
    "negozio": "Federicstore",
    "stato": "esaurito"
   },
-  "https://federicstore.it/prodotto/mini-tin-da-collezione-ascesa-eroica-set-5-artwork-it/": {
-   "titolo": "Mini Tin da Collezione Ascesa Eroica – Set 5 Artwork (IT)",
-   "url": "https://federicstore.it/prodotto/mini-tin-da-collezione-ascesa-eroica-set-5-artwork-it/",
-   "comprabile": true,
-   "preordine": false,
-   "prezzo": 68.9,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Mini Tin",
-   "negozio": "Federicstore",
-   "stato": "disponibile"
-  },
   "https://federicstore.it/prodotto/collezione-ascesa-eroica-con-poster-premium-mega-gardevoir-it/": {
    "titolo": "Collezione Ascesa Eroica con Poster Premium Mega Gardevoir (IT)",
    "url": "https://federicstore.it/prodotto/collezione-ascesa-eroica-con-poster-premium-mega-gardevoir-it/",
@@ -777,18 +765,6 @@
    "uscita": null,
    "set": "Ascesa Eroica",
    "tipo": "Collezione",
-   "negozio": "Scimmia",
-   "stato": "esaurito"
-  },
-  "https://scimmia.it/prodotto/set-mini-tin-ascesa-eroica/": {
-   "titolo": "Set 5 Mini Tin Ascesa Eroica – Collezione Completa (IT)",
-   "url": "https://scimmia.it/prodotto/set-mini-tin-ascesa-eroica/",
-   "comprabile": false,
-   "preordine": false,
-   "prezzo": 73.9,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Mini Tin",
    "negozio": "Scimmia",
    "stato": "esaurito"
   },
@@ -2040,18 +2016,6 @@
    "negozio": "Baruzcard",
    "stato": "disponibile"
   },
-  "https://baruzcard.it/products/pokemon-box-sigillato-ascesa-eroica-10x-bundle-da-6-buste-10-carte-ita": {
-   "titolo": "Pokémon Box Sigillato Ascesa Eroica 10x Bundle da 6 Buste 10 Carte ITA",
-   "url": "https://baruzcard.it/products/pokemon-box-sigillato-ascesa-eroica-10x-bundle-da-6-buste-10-carte-ita",
-   "comprabile": false,
-   "prezzo": 419.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Bundle 6 buste",
-   "negozio": "Baruzcard",
-   "stato": "esaurito"
-  },
   "https://baruzcard.it/products/pokemon-set-allenatore-fuoriclasse-ascesa-eroica-ita": {
    "titolo": "Pokémon Set Allenatore Fuoriclasse Ascesa Eroica ITA",
    "url": "https://baruzcard.it/products/pokemon-set-allenatore-fuoriclasse-ascesa-eroica-ita",
@@ -2100,18 +2064,6 @@
    "negozio": "Baruzcard",
    "stato": "esaurito"
   },
-  "https://baruzcard.it/products/pokemon-m2-5-box-sigillato-12x-collezione-con-adesivi-ascesa-eroica": {
-   "titolo": "Pokemon M2.5 Box Sigillato 12x Collezione con Adesivi Ascesa Eroica",
-   "url": "https://baruzcard.it/products/pokemon-m2-5-box-sigillato-12x-collezione-con-adesivi-ascesa-eroica",
-   "comprabile": false,
-   "prezzo": 300.0,
-   "preordine": false,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Baruzcard",
-   "stato": "esaurito"
-  },
   "https://baruzcard.it/products/pokemon-m2-5-collezione-con-adesivi-ascesa-eroica-coppia": {
    "titolo": "Pokemon M2.5 Collezione con Adesivi Ascesa Eroica Coppia",
    "url": "https://baruzcard.it/products/pokemon-m2-5-collezione-con-adesivi-ascesa-eroica-coppia",
@@ -2121,18 +2073,6 @@
    "uscita": null,
    "set": "Ascesa Eroica",
    "tipo": "Collezione",
-   "negozio": "Baruzcard",
-   "stato": "esaurito"
-  },
-  "https://baruzcard.it/products/pokemon-box-display-10x-mini-tin-da-collezione-ascesa-eroica-ita": {
-   "titolo": "Pokémon Box Display 10x Mini Tin da Collezione Ascesa Eroica ITA",
-   "url": "https://baruzcard.it/products/pokemon-box-display-10x-mini-tin-da-collezione-ascesa-eroica-ita",
-   "comprabile": false,
-   "prezzo": 134.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Mini Tin",
    "negozio": "Baruzcard",
    "stato": "esaurito"
   },
@@ -3372,18 +3312,6 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-minitin-da-collezione-set-5-artwork-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Minitin da Collezione - Set 5 Artwork (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-minitin-da-collezione-set-5-artwork-it",
-   "comprabile": false,
-   "prezzo": 78.0,
-   "preordine": true,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Otakura",
-   "stato": "esaurito"
-  },
   "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
    "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
    "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
@@ -4125,6 +4053,84 @@
    "sparito": "2026-09-28",
    "preordine": false,
    "stato": "disponibile"
+  },
+  "https://federicstore.it/prodotto/mini-tin-da-collezione-ascesa-eroica-set-5-artwork-it/": {
+   "titolo": "Mini Tin da Collezione Ascesa Eroica – Set 5 Artwork (IT)",
+   "url": "https://federicstore.it/prodotto/mini-tin-da-collezione-ascesa-eroica-set-5-artwork-it/",
+   "comprabile": true,
+   "preordine": false,
+   "prezzo": 68.9,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Mini Tin",
+   "negozio": "Federicstore",
+   "stato": "disponibile",
+   "sparito": "2026-09-28"
+  },
+  "https://scimmia.it/prodotto/set-mini-tin-ascesa-eroica/": {
+   "titolo": "Set 5 Mini Tin Ascesa Eroica – Collezione Completa (IT)",
+   "url": "https://scimmia.it/prodotto/set-mini-tin-ascesa-eroica/",
+   "comprabile": false,
+   "preordine": false,
+   "prezzo": 73.9,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Mini Tin",
+   "negozio": "Scimmia",
+   "stato": "esaurito",
+   "sparito": "2026-09-28"
+  },
+  "https://baruzcard.it/products/pokemon-box-sigillato-ascesa-eroica-10x-bundle-da-6-buste-10-carte-ita": {
+   "titolo": "Pokémon Box Sigillato Ascesa Eroica 10x Bundle da 6 Buste 10 Carte ITA",
+   "url": "https://baruzcard.it/products/pokemon-box-sigillato-ascesa-eroica-10x-bundle-da-6-buste-10-carte-ita",
+   "comprabile": false,
+   "prezzo": 419.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Bundle 6 buste",
+   "negozio": "Baruzcard",
+   "stato": "esaurito",
+   "sparito": "2026-09-28"
+  },
+  "https://baruzcard.it/products/pokemon-m2-5-box-sigillato-12x-collezione-con-adesivi-ascesa-eroica": {
+   "titolo": "Pokemon M2.5 Box Sigillato 12x Collezione con Adesivi Ascesa Eroica",
+   "url": "https://baruzcard.it/products/pokemon-m2-5-box-sigillato-12x-collezione-con-adesivi-ascesa-eroica",
+   "comprabile": false,
+   "prezzo": 300.0,
+   "preordine": false,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Baruzcard",
+   "stato": "esaurito",
+   "sparito": "2026-09-28"
+  },
+  "https://baruzcard.it/products/pokemon-box-display-10x-mini-tin-da-collezione-ascesa-eroica-ita": {
+   "titolo": "Pokémon Box Display 10x Mini Tin da Collezione Ascesa Eroica ITA",
+   "url": "https://baruzcard.it/products/pokemon-box-display-10x-mini-tin-da-collezione-ascesa-eroica-ita",
+   "comprabile": false,
+   "prezzo": 134.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Mini Tin",
+   "negozio": "Baruzcard",
+   "stato": "esaurito",
+   "sparito": "2026-09-28"
+  },
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-minitin-da-collezione-set-5-artwork-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Minitin da Collezione - Set 5 Artwork (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-minitin-da-collezione-set-5-artwork-it",
+   "comprabile": false,
+   "prezzo": 78.0,
+   "preordine": true,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Otakura",
+   "stato": "esaurito",
+   "sparito": "2026-09-28"
   }
  },
  "mercato": {
@@ -4541,10 +4547,14 @@
   "2026-09-16|30° Anniversario|Uscita 30° Anniversario|7",
   "2026-10-02|30° Anniversario|Mini Tin, Collezione con Raccoglitore, Bundle 6 buste|42",
   "2026-10-02|30° Anniversario|Mini Tin, Collezione con Raccoglitore, Bundle 6 buste|7",
+  "2026-10-02|30° Anniversario|Mini Tin, Raccoglitore, Bundle 6 buste|42",
+  "2026-10-02|30° Anniversario|Mini Tin, Raccoglitore, Bundle 6 buste|7",
   "2026-10-24|Dominio Delta|Prerelease nei negozi|42",
+  "2026-10-24|Dominio Delta|Prerelease|42",
   "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto, Collezioni Mewtwo e Mew|42",
+  "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto|42",
   "2026-11-06|Dominio Delta|Uscita Dominio Delta|42"
  ],
- "ultimo_controllo": "2026-09-28T18:01+02:00",
+ "ultimo_controllo": "2026-09-28T18:05+02:00",
  "negozi_letti": 13
 }
