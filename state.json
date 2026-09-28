@@ -563,7 +563,7 @@
    "url": "https://scimmia.it/prodotto/pokemon-dominio-delta-display-box/",
    "comprabile": true,
    "preordine": false,
-   "prezzo": 179.9,
+   "prezzo": 185.9,
    "data": "",
    "set": "Dominio Delta",
    "tipo": "Box 36 buste",
@@ -1700,15 +1700,6 @@
    "tipo": "Box 36 buste",
    "negozio": "Baruzcard"
   },
-  "https://baruzcard.it/products/pokemon-bundle-box-scintille-folgoranti-avventure-insieme-box-ita": {
-   "titolo": "Pokemon Bundle Box Scintille Folgoranti + Avventure Insieme BOX ITA",
-   "url": "https://baruzcard.it/products/pokemon-bundle-box-scintille-folgoranti-avventure-insieme-box-ita",
-   "comprabile": true,
-   "prezzo": 389.9,
-   "set": "Avventure Insieme",
-   "tipo": "Bundle 6 buste",
-   "negozio": "Baruzcard"
-  },
   "https://baruzcard.it/products/pokemon-avventure-insieme-topper-special-display-box-36-bustine-ita": {
    "titolo": "Pokemon Avventure Insieme Box Topper Display 36 Bustine ITA",
    "url": "https://baruzcard.it/products/pokemon-avventure-insieme-topper-special-display-box-36-bustine-ita",
@@ -1716,6 +1707,15 @@
    "prezzo": 279.9,
    "set": "Avventure Insieme",
    "tipo": "Box 36 buste",
+   "negozio": "Baruzcard"
+  },
+  "https://baruzcard.it/products/pokemon-bundle-box-scintille-folgoranti-avventure-insieme-box-ita": {
+   "titolo": "Pokemon Bundle Box Scintille Folgoranti + Avventure Insieme BOX ITA",
+   "url": "https://baruzcard.it/products/pokemon-bundle-box-scintille-folgoranti-avventure-insieme-box-ita",
+   "comprabile": true,
+   "prezzo": 389.9,
+   "set": "Avventure Insieme",
+   "tipo": "Bundle 6 buste",
    "negozio": "Baruzcard"
   },
   "https://baruzcard.it/products/pokemon-megaevoluzione-fiamme-spettrali-display-box-36-buste-ita": {
@@ -2595,7 +2595,7 @@
    "titolo": "Bundle 2 Set Allenatore Fuoriclasse: 30° Anniversario + Buio Pesto - Pokémon TCG (ITA)",
    "url": "https://otakura.com/products/bundle-set-allenatore-30-anniversario-buio-pesto-pokemon-tcg-ita",
    "comprabile": false,
-   "prezzo": 140.0,
+   "prezzo": 139.0,
    "set": "Buio Pesto",
    "tipo": "Set Allenatore",
    "negozio": "Otakura"
@@ -2604,7 +2604,7 @@
    "titolo": "Bundle 2 Set Allenatore Fuoriclasse: 30° Anniversario + Caos Nascente - Pokémon TCG (ITA)",
    "url": "https://otakura.com/products/bundle-set-allenatore-30-anniversario-caos-nascente-pokemon-tcg-ita",
    "comprabile": false,
-   "prezzo": 140.0,
+   "prezzo": 139.0,
    "set": "Caos Nascente",
    "tipo": "Set Allenatore",
    "negozio": "Otakura"
@@ -2622,7 +2622,7 @@
    "titolo": "Bundle 2 Set Allenatore Fuoriclasse: 30° Anniversario + Equilibrio Perfetto - Pokémon TCG (ITA)",
    "url": "https://otakura.com/products/bundle-set-allenatore-30-anniversario-equilibrio-perfetto-pokemon-tcg-ita",
    "comprabile": false,
-   "prezzo": 140.0,
+   "prezzo": 139.0,
    "set": "Equilibrio Perfetto",
    "tipo": "Set Allenatore",
    "negozio": "Otakura"
@@ -2897,6 +2897,15 @@
    "tipo": "Tin",
    "negozio": "GS Gameon"
   },
+  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
+   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
+   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
+   "comprabile": true,
+   "prezzo": 119.99,
+   "set": "30° Anniversario",
+   "tipo": "Set Allenatore",
+   "negozio": "GS Gameon"
+  },
   "https://www.gs-gameon.com/products/30-anniversario-tin-da-collezione-sylveon-ex-greninja-ex-ita": {
    "titolo": "30° Anniversario: Tin da Collezione Sylveon-ex (ITA)",
    "url": "https://www.gs-gameon.com/products/30-anniversario-tin-da-collezione-sylveon-ex-greninja-ex-ita",
@@ -3168,7 +3177,7 @@
    "negozio": "Warcard"
   }
  },
- "ultimo_controllo": "2026-09-28T16:02+02:00",
+ "ultimo_controllo": "2026-09-28T17:02+02:00",
  "negozi_letti": 13,
  "negozi_visti": [
   "Baruzcard",
