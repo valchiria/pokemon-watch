@@ -1,0 +1,46 @@
+{
+  "_come_funziona": "Il robot cerca da solo ogni set in tutti i negozi qui sotto: non servono link ai singoli prodotti. Per seguire una nuova espansione basta aggiungere il suo nome in 'set'. I negozi che non rispondono vengono ignorati senza avvisi.",
+
+  "negozi": [
+    {"nome": "CarteMagic",       "sito": "https://www.cartemagic.com",     "tipo": "woo"},
+    {"nome": "Federicstore",     "sito": "https://federicstore.it",        "tipo": "woo"},
+    {"nome": "Strategia2",       "sito": "https://www.strategia2.it",      "tipo": "woo"},
+    {"nome": "Il Covo del Nerd", "sito": "https://www.ilcovodelnerd.com",  "tipo": "woo"},
+    {"nome": "NerdStore Italia", "sito": "https://www.nerdstoreitalia.it", "tipo": "woo"},
+    {"nome": "Magic Store",      "sito": "https://www.magicstoreshop.com", "tipo": "woo"},
+    {"nome": "Scimmia",          "sito": "https://scimmia.it",             "tipo": "woo"},
+    {"nome": "Cardverse",        "sito": "https://cardverse.it",           "tipo": "shopify"},
+    {"nome": "Manuelpoke3",      "sito": "https://manuelpoke3.it",         "tipo": "shopify"},
+    {"nome": "Baruzcard",        "sito": "https://baruzcard.it",           "tipo": "shopify"},
+    {"nome": "MagicNerd",        "sito": "https://magicnerd.it",           "tipo": "shopify"},
+    {"nome": "Nox Collectibles", "sito": "https://www.noxcollectibles.it", "tipo": "shopify"},
+    {"nome": "Mornati Paglia",   "sito": "https://www.mornatipaglia.com",  "tipo": "shopify"},
+    {"nome": "Otakura",          "sito": "https://otakura.com",            "tipo": "shopify"},
+    {"nome": "GS Gameon",        "sito": "https://www.gs-gameon.com",      "tipo": "shopify"},
+    {"nome": "Warcard",          "sito": "https://www.warcard.it",         "tipo": "shopify"}
+  ],
+
+  "set": [
+    {"nome": "Dominio Delta",      "cerca": "dominio delta"},
+    {"nome": "30° Anniversario",   "cerca": "30 anniversario", "alias": ["30th", "30°"]},
+    {"nome": "Equilibrio Perfetto","cerca": "equilibrio perfetto"},
+    {"nome": "Caos Nascente",      "cerca": "caos nascente"},
+    {"nome": "Buio Pesto",         "cerca": "buio pesto"},
+    {"nome": "Avventure Insieme",  "cerca": "avventure insieme"},
+    {"nome": "Fiamme Spettrali",   "cerca": "fiamme spettrali"},
+    {"nome": "Ascesa Eroica",      "cerca": "ascesa eroica"}
+  ],
+
+  "_soglie": "Prezzo massimo (circa il listino) oltre il quale un prodotto non ti interessa. Si può cambiare per singolo set con 'soglie' dentro il set.",
+  "soglie": {
+    "Box 36 buste": 200,
+    "Set Allenatore": 60,
+    "Bundle 6 buste": 40,
+    "Blister": 19,
+    "Ultra Premium": 235,
+    "Collezione Premium": 50,
+    "Collezione": 50,
+    "Tin": 27,
+    "Mini Tin": 13
+  }
+}
