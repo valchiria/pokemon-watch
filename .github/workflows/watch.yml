@@ -1,0 +1,45 @@
+name: Controllo Pokémon
+
+on:
+  schedule:
+    - cron: "17 * * * *"   # ogni ora, al minuto 17
+  workflow_dispatch:
+    inputs:
+      riepilogo:
+        description: "Manda anche il riepilogo completo"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: controllo-pokemon
+  cancel-in-progress: false
+
+jobs:
+  controllo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Controlla i negozi
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FORCE_SUMMARY: ${{ github.event_name == 'workflow_dispatch' && inputs.riepilogo }}
+        run: python watch.py
+      - name: Salva lo stato
+        if: always()
+        run: |
+          git config user.name "robot-pokemon"
+          git config user.email "robot-pokemon@users.noreply.github.com"
+          [ -f state.json ] || exit 0
+          git add state.json
+          git diff --cached --quiet || git commit -m "stato $(date -u +%F\ %H:%M)"
+          git push
