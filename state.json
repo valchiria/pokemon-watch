@@ -1728,21 +1728,9 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
-   "comprabile": false,
-   "prezzo": 39.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Manuelpoke3",
-   "stato": "esaurito"
-  },
-  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
+   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -1764,11 +1752,23 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
-   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
+   "preordine": false,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Manuelpoke3",
+   "stato": "esaurito"
+  },
+  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
+   "comprabile": false,
+   "prezzo": 39.9,
    "preordine": false,
    "uscita": null,
    "set": "Ascesa Eroica",
@@ -1835,6 +1835,30 @@
    "tipo": "Set Allenatore",
    "negozio": "Baruzcard",
    "stato": "disponibile"
+  },
+  "https://baruzcard.it/products/pokemon-buio-pesto-bundle-6-buste-ita": {
+   "titolo": "Pokémon Buio Pesto Bundle 6 Buste ITA",
+   "url": "https://baruzcard.it/products/pokemon-buio-pesto-bundle-6-buste-ita",
+   "comprabile": false,
+   "prezzo": 36.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Buio Pesto",
+   "tipo": "Bundle 6 buste",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
+  "https://baruzcard.it/products/pokemon-buio-pesto-blister-3-buste-binacle-ita": {
+   "titolo": "Pokémon Buio Pesto Blister 3 Buste Binacle ITA",
+   "url": "https://baruzcard.it/products/pokemon-buio-pesto-blister-3-buste-binacle-ita",
+   "comprabile": false,
+   "prezzo": 19.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Buio Pesto",
+   "tipo": "Blister",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
   },
   "https://baruzcard.it/products/pokemon-caos-nascente-box-display-36-buste-ita": {
    "titolo": "Pokémon Caos Nascente Box Display 36 Buste ITA",
@@ -1908,6 +1932,66 @@
    "negozio": "Baruzcard",
    "stato": "esaurito"
   },
+  "https://baruzcard.it/products/pokemon-equilibrio-perfetto-display-36-buste-ita": {
+   "titolo": "Pokémon Equilibrio Perfetto Display 36 Buste ITA",
+   "url": "https://baruzcard.it/products/pokemon-equilibrio-perfetto-display-36-buste-ita",
+   "comprabile": false,
+   "prezzo": 179.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Box 36 buste",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
+  "https://baruzcard.it/products/pokemon-equilibrio-perfetto-blister-3-buste-ita": {
+   "titolo": "Pokémon Equilibrio Perfetto Blister 3 Buste ITA",
+   "url": "https://baruzcard.it/products/pokemon-equilibrio-perfetto-blister-3-buste-ita",
+   "comprabile": false,
+   "prezzo": 19.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Blister",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
+  "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-set-allenatore-ita": {
+   "titolo": "Pokémon Promo Bundle Equilibrio Perfetto Display 36 Buste + Set Allenatore ITA",
+   "url": "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-set-allenatore-ita",
+   "comprabile": false,
+   "prezzo": 239.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Set Allenatore",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
+  "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-bundle-6-bustine-ita": {
+   "titolo": "Pokémon Promo Bundle Equilibrio Perfetto Display 36 Buste + Bundle 6 Bustine ITA",
+   "url": "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-bundle-6-bustine-ita",
+   "comprabile": false,
+   "prezzo": 229.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Box 36 buste",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
+  "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-box-primi-compagni-set-allenatore-ita": {
+   "titolo": "Pokémon Promo Bundle Equilibrio Perfetto Display Box + Primi Compagni + 3 Bundle da 6 ITA",
+   "url": "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-box-primi-compagni-set-allenatore-ita",
+   "comprabile": false,
+   "prezzo": 319.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Bundle 6 buste",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
   "https://baruzcard.it/products/pokemon-ascesa-eroica-collezione-mega-emboar-ex-mega-feraligatr-ex-mega-meganium-ex-trio-ita": {
    "titolo": "Pokémon Ascesa Eroica Collezione Mega Emboar-ex Mega Feraligatr-ex Mega Meganium-ex - Trio ITA",
    "url": "https://baruzcard.it/products/pokemon-ascesa-eroica-collezione-mega-emboar-ex-mega-feraligatr-ex-mega-meganium-ex-trio-ita",
@@ -1977,6 +2061,30 @@
    "uscita": null,
    "set": "Ascesa Eroica",
    "tipo": "Bundle 6 buste",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
+  "https://baruzcard.it/products/pokemon-m2-5-collezione-con-adesivi-ascesa-eroica-coppia": {
+   "titolo": "Pokemon M2.5 Collezione con Adesivi Ascesa Eroica Coppia",
+   "url": "https://baruzcard.it/products/pokemon-m2-5-collezione-con-adesivi-ascesa-eroica-coppia",
+   "comprabile": false,
+   "prezzo": 48.0,
+   "preordine": false,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
+  "https://baruzcard.it/products/pokemon-megaevoluzione-fiamme-spettrali-display-box-36-buste-ita": {
+   "titolo": "Pokemon Megaevoluzione Fiamme Spettrali Display Box 36 Buste ITA",
+   "url": "https://baruzcard.it/products/pokemon-megaevoluzione-fiamme-spettrali-display-box-36-buste-ita",
+   "comprabile": false,
+   "prezzo": 220.0,
+   "preordine": false,
+   "uscita": null,
+   "set": "Fiamme Spettrali",
+   "tipo": "Box 36 buste",
    "negozio": "Baruzcard",
    "stato": "esaurito"
   },
@@ -3192,21 +3300,21 @@
    "negozio": "Otakura",
    "stato": "disponibile"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it": {
-   "titolo": "Megaevoluzione - Ascesa Eroica - Set Allenatore Fuoriclasse (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Gengar (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it",
    "comprabile": false,
-   "prezzo": 76.0,
+   "prezzo": 27.0,
    "preordine": true,
    "uscita": null,
    "set": "Ascesa Eroica",
-   "tipo": "Set Allenatore",
+   "tipo": "Collezione",
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Lucario-ex (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it",
    "comprabile": false,
    "prezzo": 76.0,
    "preordine": true,
@@ -3216,15 +3324,15 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-e-mega-gengar-bundle-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Charizard Y e Mega Gengar - Bundle (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-e-mega-gengar-bundle-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it": {
+   "titolo": "Megaevoluzione - Ascesa Eroica - Set Allenatore Fuoriclasse (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it",
    "comprabile": false,
-   "prezzo": 53.0,
+   "prezzo": 76.0,
    "preordine": true,
    "uscita": null,
    "set": "Ascesa Eroica",
-   "tipo": "Bundle 6 buste",
+   "tipo": "Set Allenatore",
    "negozio": "Otakura",
    "stato": "esaurito"
   },
@@ -3240,15 +3348,15 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Gengar (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-e-mega-gengar-bundle-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Charizard Y e Mega Gengar - Bundle (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-e-mega-gengar-bundle-it",
    "comprabile": false,
-   "prezzo": 27.0,
+   "prezzo": 53.0,
    "preordine": true,
    "uscita": null,
    "set": "Ascesa Eroica",
-   "tipo": "Collezione",
+   "tipo": "Bundle 6 buste",
    "negozio": "Otakura",
    "stato": "esaurito"
   },
@@ -3264,9 +3372,9 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Lucario-ex (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
    "comprabile": false,
    "prezzo": 76.0,
    "preordine": true,
@@ -3624,18 +3732,6 @@
    "negozio": "Warcard",
    "stato": "disponibile"
   },
-  "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste": {
-   "titolo": "Equilibrio Perfetto - Box da 36 Buste",
-   "url": "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste",
-   "comprabile": true,
-   "prezzo": 179.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Box 36 buste",
-   "negozio": "Warcard",
-   "stato": "disponibile"
-  },
   "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb": {
    "titolo": "Equilibrio Perfetto - Set Allenatore Fuoriclasse (ETB)",
    "url": "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb",
@@ -3645,6 +3741,18 @@
    "uscita": null,
    "set": "Equilibrio Perfetto",
    "tipo": "Set Allenatore",
+   "negozio": "Warcard",
+   "stato": "disponibile"
+  },
+  "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste": {
+   "titolo": "Equilibrio Perfetto - Box da 36 Buste",
+   "url": "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste",
+   "comprabile": true,
+   "prezzo": 179.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Box 36 buste",
    "negozio": "Warcard",
    "stato": "disponibile"
   },
@@ -3779,6 +3887,7 @@
   "https://www.magicstoreshop.com/prodotto/pokemon-mini-tin-da-collezione-luminopoli-2026/",
   "https://www.magicstoreshop.com/prodotto/pokemon-tcg-mega-charizard-x-y-tin-ita-sigillata-pokemon-gcc-ufficiale/",
   "https://www.mornatipaglia.com/products/gamevision-pokemon-collezione-premium-mega-greninja-ex",
+  "https://www.mornatipaglia.com/products/gamevision-pokemon-collezione-premium-mega-zygarde-ex-carpk10359-i",
   "https://www.mornatipaglia.com/products/gamevision-pokemon-mega-charizard-tin-assortite-carpk10300-i",
   "https://www.nerdstoreitalia.it/prodotto/collezione-pokemon-day-2026-it/",
   "https://www.nerdstoreitalia.it/prodotto/pokemon-collezione-mewtwo-ex-del-team-rocket-ita/",
@@ -4021,123 +4130,6 @@
    "set": "Ascesa Eroica",
    "tipo": "Collezione",
    "negozio": "Otakura",
-   "stato": "esaurito",
-   "sparito": "2026-09-28"
-  },
-  "https://baruzcard.it/products/pokemon-buio-pesto-bundle-6-buste-ita": {
-   "titolo": "Pokémon Buio Pesto Bundle 6 Buste ITA",
-   "url": "https://baruzcard.it/products/pokemon-buio-pesto-bundle-6-buste-ita",
-   "comprabile": false,
-   "prezzo": 36.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Buio Pesto",
-   "tipo": "Bundle 6 buste",
-   "negozio": "Baruzcard",
-   "stato": "esaurito",
-   "sparito": "2026-09-28"
-  },
-  "https://baruzcard.it/products/pokemon-buio-pesto-blister-3-buste-binacle-ita": {
-   "titolo": "Pokémon Buio Pesto Blister 3 Buste Binacle ITA",
-   "url": "https://baruzcard.it/products/pokemon-buio-pesto-blister-3-buste-binacle-ita",
-   "comprabile": false,
-   "prezzo": 19.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Buio Pesto",
-   "tipo": "Blister",
-   "negozio": "Baruzcard",
-   "stato": "esaurito",
-   "sparito": "2026-09-28"
-  },
-  "https://baruzcard.it/products/pokemon-equilibrio-perfetto-display-36-buste-ita": {
-   "titolo": "Pokémon Equilibrio Perfetto Display 36 Buste ITA",
-   "url": "https://baruzcard.it/products/pokemon-equilibrio-perfetto-display-36-buste-ita",
-   "comprabile": false,
-   "prezzo": 179.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Box 36 buste",
-   "negozio": "Baruzcard",
-   "stato": "esaurito",
-   "sparito": "2026-09-28"
-  },
-  "https://baruzcard.it/products/pokemon-equilibrio-perfetto-blister-3-buste-ita": {
-   "titolo": "Pokémon Equilibrio Perfetto Blister 3 Buste ITA",
-   "url": "https://baruzcard.it/products/pokemon-equilibrio-perfetto-blister-3-buste-ita",
-   "comprabile": false,
-   "prezzo": 19.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Blister",
-   "negozio": "Baruzcard",
-   "stato": "esaurito",
-   "sparito": "2026-09-28"
-  },
-  "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-set-allenatore-ita": {
-   "titolo": "Pokémon Promo Bundle Equilibrio Perfetto Display 36 Buste + Set Allenatore ITA",
-   "url": "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-set-allenatore-ita",
-   "comprabile": false,
-   "prezzo": 239.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Set Allenatore",
-   "negozio": "Baruzcard",
-   "stato": "esaurito",
-   "sparito": "2026-09-28"
-  },
-  "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-bundle-6-bustine-ita": {
-   "titolo": "Pokémon Promo Bundle Equilibrio Perfetto Display 36 Buste + Bundle 6 Bustine ITA",
-   "url": "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-bundle-6-bustine-ita",
-   "comprabile": false,
-   "prezzo": 229.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Box 36 buste",
-   "negozio": "Baruzcard",
-   "stato": "esaurito",
-   "sparito": "2026-09-28"
-  },
-  "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-box-primi-compagni-set-allenatore-ita": {
-   "titolo": "Pokémon Promo Bundle Equilibrio Perfetto Display Box + Primi Compagni + 3 Bundle da 6 ITA",
-   "url": "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-box-primi-compagni-set-allenatore-ita",
-   "comprabile": false,
-   "prezzo": 319.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Bundle 6 buste",
-   "negozio": "Baruzcard",
-   "stato": "esaurito",
-   "sparito": "2026-09-28"
-  },
-  "https://baruzcard.it/products/pokemon-m2-5-collezione-con-adesivi-ascesa-eroica-coppia": {
-   "titolo": "Pokemon M2.5 Collezione con Adesivi Ascesa Eroica Coppia",
-   "url": "https://baruzcard.it/products/pokemon-m2-5-collezione-con-adesivi-ascesa-eroica-coppia",
-   "comprabile": false,
-   "prezzo": 48.0,
-   "preordine": false,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Baruzcard",
-   "stato": "esaurito",
-   "sparito": "2026-09-28"
-  },
-  "https://baruzcard.it/products/pokemon-megaevoluzione-fiamme-spettrali-display-box-36-buste-ita": {
-   "titolo": "Pokemon Megaevoluzione Fiamme Spettrali Display Box 36 Buste ITA",
-   "url": "https://baruzcard.it/products/pokemon-megaevoluzione-fiamme-spettrali-display-box-36-buste-ita",
-   "comprabile": false,
-   "prezzo": 220.0,
-   "preordine": false,
-   "uscita": null,
-   "set": "Fiamme Spettrali",
-   "tipo": "Box 36 buste",
-   "negozio": "Baruzcard",
    "stato": "esaurito",
    "sparito": "2026-09-28"
   }
@@ -4564,6 +4556,6 @@
   "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto|42",
   "2026-11-06|Dominio Delta|Uscita Dominio Delta|42"
  ],
- "ultimo_controllo": "2026-09-28T19:01+02:00",
+ "ultimo_controllo": "2026-09-28T19:38+02:00",
  "negozi_letti": 13
 }
