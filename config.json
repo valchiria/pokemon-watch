@@ -1,37 +1,47 @@
 {
-  "_come_funziona": "Il robot cerca da solo ogni set in tutti i negozi qui sotto: non servono link ai singoli prodotti. Per seguire una nuova espansione basta aggiungere il suo nome in 'set'. I negozi che non rispondono vengono ignorati senza avvisi.",
+  "_come_funziona": "Il robot cerca da solo ogni set in tutti i negozi qui sotto: non servono link ai singoli prodotti. Per seguire una nuova espansione aggiungi il suo nome in 'set' (e 'en' con il nome inglese per calcolare il valore delle carte). I negozi che non rispondono vengono ignorati senza avvisi.",
 
+  "_negozi": "spedizione = costo della spedizione standard in Italia; gratis_da = soglia di spedizione gratuita. null = non indicato sul sito (si vede solo nel carrello).",
   "negozi": [
-    {"nome": "CarteMagic",       "sito": "https://www.cartemagic.com",     "tipo": "woo"},
-    {"nome": "Federicstore",     "sito": "https://federicstore.it",        "tipo": "woo"},
-    {"nome": "Strategia2",       "sito": "https://www.strategia2.it",      "tipo": "woo"},
-    {"nome": "Il Covo del Nerd", "sito": "https://www.ilcovodelnerd.com",  "tipo": "woo"},
-    {"nome": "NerdStore Italia", "sito": "https://www.nerdstoreitalia.it", "tipo": "woo"},
-    {"nome": "Magic Store",      "sito": "https://www.magicstoreshop.com", "tipo": "woo"},
-    {"nome": "Scimmia",          "sito": "https://scimmia.it",             "tipo": "woo"},
-    {"nome": "Cardverse",        "sito": "https://cardverse.it",           "tipo": "shopify"},
-    {"nome": "Manuelpoke3",      "sito": "https://manuelpoke3.it",         "tipo": "shopify"},
-    {"nome": "Baruzcard",        "sito": "https://baruzcard.it",           "tipo": "shopify"},
-    {"nome": "MagicNerd",        "sito": "https://magicnerd.it",           "tipo": "shopify"},
-    {"nome": "Nox Collectibles", "sito": "https://www.noxcollectibles.it", "tipo": "shopify"},
-    {"nome": "Mornati Paglia",   "sito": "https://www.mornatipaglia.com",  "tipo": "shopify"},
-    {"nome": "Otakura",          "sito": "https://otakura.com",            "tipo": "shopify"},
-    {"nome": "GS Gameon",        "sito": "https://www.gs-gameon.com",      "tipo": "shopify"},
-    {"nome": "Warcard",          "sito": "https://www.warcard.it",         "tipo": "shopify"}
+    {"nome": "CarteMagic",       "sito": "https://www.cartemagic.com",     "tipo": "woo",     "spedizione": 5.90, "gratis_da": 69},
+    {"nome": "Federicstore",     "sito": "https://federicstore.it",        "tipo": "woo",     "spedizione": 6.90, "gratis_da": 89},
+    {"nome": "Strategia2",       "sito": "https://www.strategia2.it",      "tipo": "woo",     "spedizione": 5.00, "gratis_da": 50},
+    {"nome": "Il Covo del Nerd", "sito": "https://www.ilcovodelnerd.com",  "tipo": "woo",     "spedizione": 5.90, "gratis_da": 79},
+    {"nome": "NerdStore Italia", "sito": "https://www.nerdstoreitalia.it", "tipo": "woo",     "spedizione": null, "gratis_da": null},
+    {"nome": "Magic Store",      "sito": "https://www.magicstoreshop.com", "tipo": "woo",     "spedizione": null, "gratis_da": null},
+    {"nome": "Scimmia",          "sito": "https://scimmia.it",             "tipo": "woo",     "spedizione": null, "gratis_da": 149},
+    {"nome": "Cardverse",        "sito": "https://cardverse.it",           "tipo": "shopify", "spedizione": 5.90, "gratis_da": 150},
+    {"nome": "Manuelpoke3",      "sito": "https://manuelpoke3.it",         "tipo": "shopify", "spedizione": null, "gratis_da": 50},
+    {"nome": "Baruzcard",        "sito": "https://baruzcard.it",           "tipo": "shopify", "spedizione": null, "gratis_da": 99.90},
+    {"nome": "MagicNerd",        "sito": "https://magicnerd.it",           "tipo": "shopify", "spedizione": 7.99, "gratis_da": 199},
+    {"nome": "Nox Collectibles", "sito": "https://www.noxcollectibles.it", "tipo": "shopify", "spedizione": null, "gratis_da": 79.90},
+    {"nome": "Mornati Paglia",   "sito": "https://www.mornatipaglia.com",  "tipo": "shopify", "spedizione": 5.99, "gratis_da": 60},
+    {"nome": "Otakura",          "sito": "https://otakura.com",            "tipo": "shopify", "spedizione": 6.90, "gratis_da": 79},
+    {"nome": "GS Gameon",        "sito": "https://www.gs-gameon.com",      "tipo": "shopify", "spedizione": null, "gratis_da": 250},
+    {"nome": "Warcard",          "sito": "https://www.warcard.it",         "tipo": "shopify", "spedizione": 6.90, "gratis_da": 100}
   ],
 
+  "_set": "uscita = data di uscita in Italia. certo=true solo se la data è ufficiale: in quel caso tutto ciò che è ordinabile prima dell'uscita è un preordine. speciale=true per i set da collezione (tutti i loro prodotti contano come 'da collezione').",
   "set": [
-    {"nome": "Dominio Delta",      "cerca": "dominio delta"},
-    {"nome": "30° Anniversario",   "cerca": "30 anniversario", "alias": ["30th", "30°"]},
-    {"nome": "Equilibrio Perfetto","cerca": "equilibrio perfetto"},
-    {"nome": "Caos Nascente",      "cerca": "caos nascente"},
-    {"nome": "Buio Pesto",         "cerca": "buio pesto"},
-    {"nome": "Avventure Insieme",  "cerca": "avventure insieme"},
-    {"nome": "Fiamme Spettrali",   "cerca": "fiamme spettrali"},
-    {"nome": "Ascesa Eroica",      "cerca": "ascesa eroica"}
+    {"nome": "Dominio Delta",       "cerca": "dominio delta",       "en": "Delta Reign",        "uscita": "2026-11-06", "certo": true},
+    {"nome": "30° Anniversario",    "cerca": "30 anniversario",     "en": "30th Celebration",   "uscita": "2026-09-16", "certo": true, "speciale": true, "alias": ["30th", "30°"]},
+    {"nome": "Buio Pesto",          "cerca": "buio pesto",          "en": "Pitch Black",        "uscita": "2026-07-17", "certo": true},
+    {"nome": "Caos Nascente",       "cerca": "caos nascente",       "en": "Chaos Rising",       "uscita": "2026-05-22", "certo": true},
+    {"nome": "Equilibrio Perfetto", "cerca": "equilibrio perfetto", "en": "Perfect Order",      "uscita": "2026-03-27", "certo": true},
+    {"nome": "Ascesa Eroica",       "cerca": "ascesa eroica",       "en": "Ascended Heroes",    "uscita": "2026-01-30", "certo": true, "speciale": true},
+    {"nome": "Fiamme Spettrali",    "cerca": "fiamme spettrali",    "en": "Phantasmal Flames",  "uscita": "2025-11-14", "certo": true},
+    {"nome": "Avventure Insieme",   "cerca": "avventure insieme",   "en": "Journey Together",   "uscita": "2025-03-28", "certo": true}
   ],
 
-  "_soglie": "Prezzo massimo (circa il listino) oltre il quale un prodotto non ti interessa. Si può cambiare per singolo set con 'soglie' dentro il set.",
+  "_calendario": "Uscite a ondate e date da ricordare. stima=true: data presa dall'uscita inglese, non ancora confermata in Italia. Il robot ti avvisa 6 settimane, 1 settimana e 1 giorno prima.",
+  "calendario": [
+    {"data": "2026-10-02", "set": "30° Anniversario", "cosa": "Mini Tin, Collezione con Raccoglitore, Bundle 6 buste", "stima": true},
+    {"data": "2026-10-24", "set": "Dominio Delta",    "cosa": "Prerelease nei negozi"},
+    {"data": "2026-11-06", "set": "30° Anniversario", "cosa": "Ultra Premium Umbreon e Espeon, Collezione Premium Ditto, Collezioni Mewtwo e Mew", "stima": true},
+    {"data": "2026-12-04", "set": "30° Anniversario", "cosa": "Tin ex", "stima": true}
+  ],
+
+  "_soglie": "Prezzo di listino (circa) oltre il quale un prodotto normale non ti interessa. Si può cambiare per singolo set con 'soglie' dentro il set.",
   "soglie": {
     "Box 36 buste": 200,
     "Set Allenatore": 60,
@@ -41,6 +51,12 @@
     "Collezione Premium": 50,
     "Collezione": 50,
     "Tin": 27,
-    "Mini Tin": 13
-  }
+    "Mini Tin": 14
+  },
+
+  "_tolleranza_collezione": "I prodotti da collezione (Ultra Premium, Collezione Premium, esclusive, set speciali) vengono segnalati anche sopra listino, fino a listino × questo numero.",
+  "tolleranza_collezione": 1.5,
+
+  "_affare_buste": "Un prodotto con buste viene segnalato anche sopra listino se il valore medio delle carte che contiene è almeno questa frazione del prezzo (1.0 = in media ti ripaghi aprendolo).",
+  "affare_buste": 1.0
 }
