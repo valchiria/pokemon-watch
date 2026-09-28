@@ -1511,18 +1511,9 @@
    "tipo": "Collezione",
    "negozio": "Manuelpoke3"
   },
-  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
-   "comprabile": false,
-   "prezzo": 39.9,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Manuelpoke3"
-  },
-  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
+   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "set": "Ascesa Eroica",
@@ -1538,11 +1529,20 @@
    "tipo": "Mini Tin",
    "negozio": "Manuelpoke3"
   },
-  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
-   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Manuelpoke3"
+  },
+  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
+   "comprabile": false,
+   "prezzo": 39.9,
    "set": "Ascesa Eroica",
    "tipo": "Collezione",
    "negozio": "Manuelpoke3"
@@ -3168,7 +3168,7 @@
    "negozio": "Warcard"
   }
  },
- "ultimo_controllo": "2026-09-28T14:49+02:00",
+ "ultimo_controllo": "2026-09-28T15:02+02:00",
  "negozi_letti": 13,
  "negozi_visti": [
   "Baruzcard",
