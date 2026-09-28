@@ -3528,30 +3528,6 @@
    "negozio": "Otakura",
    "stato": "disponibile"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Gengar (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it",
-   "comprabile": false,
-   "prezzo": 27.0,
-   "preordine": true,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Otakura",
-   "stato": "esaurito"
-  },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Lucario-ex (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it",
-   "comprabile": false,
-   "prezzo": 76.0,
-   "preordine": true,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione Premium",
-   "negozio": "Otakura",
-   "stato": "esaurito"
-  },
   "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it": {
    "titolo": "Megaevoluzione - Ascesa Eroica - Set Allenatore Fuoriclasse (IT)",
    "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it",
@@ -3564,15 +3540,15 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-bundle-da-6-buste-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Bundle da 6 Buste (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-bundle-da-6-buste-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
    "comprabile": false,
-   "prezzo": 53.0,
+   "prezzo": 76.0,
    "preordine": true,
    "uscita": null,
    "set": "Ascesa Eroica",
-   "tipo": "Bundle 6 buste",
+   "tipo": "Collezione Premium",
    "negozio": "Otakura",
    "stato": "esaurito"
   },
@@ -3588,6 +3564,30 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-bundle-da-6-buste-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Bundle da 6 Buste (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-bundle-da-6-buste-it",
+   "comprabile": false,
+   "prezzo": 53.0,
+   "preordine": true,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Bundle 6 buste",
+   "negozio": "Otakura",
+   "stato": "esaurito"
+  },
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Gengar (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it",
+   "comprabile": false,
+   "prezzo": 27.0,
+   "preordine": true,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Otakura",
+   "stato": "esaurito"
+  },
   "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-it": {
    "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Charizard Y (IT)",
    "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-it",
@@ -3600,9 +3600,9 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Lucario-ex (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it",
    "comprabile": false,
    "prezzo": 76.0,
    "preordine": true,
@@ -4876,7 +4876,7 @@
   "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto|42",
   "2026-11-06|Dominio Delta|Uscita Dominio Delta|42"
  ],
- "ultimo_controllo": "2026-09-29T01:01+02:00",
+ "ultimo_controllo": "2026-09-29T01:14+02:00",
  "negozi_letti": 13,
  "nomi_set": {
   "Dominio Delta": {
