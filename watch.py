@@ -109,8 +109,9 @@ def classify(title):
         return None  # buste singole: non sono prodotti da collezione
     if "collezionista" in t and has(t, "bundle", "lotto", "pacchetto"):
         return None  # "bundle del collezionista": pacchetti fatti dal negozio
-    if re.search(r" bundle \d+ (tin|collezion|box|set) ", t):
-        return None
+    if re.search(r" bundle \d+ (tin|collezion|box|set) ", t) or re.search(r" \d+ ?x | x ?\d+ ", t) \
+            or re.search(r" set (di |da )?\d+ (mini tin|tin|artwork)", t) or "collezione completa" in t:
+        return None  # confezioni multiple
     if "ultra premium" in t:
         return "Ultra Premium"
     if has(t, "set allenatore", "etb", "elite trainer", "allenatore fuoriclasse"):
@@ -376,10 +377,11 @@ def tg(token, method, **params):
     return r.json()
 
 
-def send(token, chat, text, button=None):
+def send(token, chat, text, buttons=None):
+    """buttons: lista di (testo, link), uno per riga sotto il messaggio."""
     params = {"chat_id": chat, "text": text, "parse_mode": "HTML", "disable_web_page_preview": "true"}
-    if button:
-        params["reply_markup"] = json.dumps({"inline_keyboard": [[{"text": button[0], "url": button[1]}]]})
+    if buttons:
+        params["reply_markup"] = json.dumps({"inline_keyboard": [[{"text": t[:60], "url": u}] for t, u in buttons]})
     tg(token, "sendMessage", **params)
 
 
@@ -540,75 +542,111 @@ def update_minimi(minimi, offers, today):
 
 
 # ------------------------------------------------------------------ messaggi
+#
+# Due tipi di messaggio:
+# - SCHEDA: una per ogni occasione (preordine aperto, prezzo sceso, di nuovo disponibile...),
+#   breve, con sotto un pulsante per ogni negozio dove comprare/prenotare.
+# - RIEPILOGO del mattino: un unico messaggio con prossime uscite, preordini aperti,
+#   migliori occasioni e mercato, separati da linee.
+
+SEP = "━━━━━━━━━━━━━━━"
+SHORT = {"Box 36 buste": "Box 36", "Bundle 6 buste": "Bundle 6", "Set Allenatore": "Set Allenatore"}
+MAX_BUTTONS = 6
 
 
 def link(o):
     return f"<a href=\"{esc(o['url'])}\">{esc(o['negozio'])}</a>"
 
 
+def short_label(o):
+    v = variant(o["titolo"], o["tipo"])
+    return f"{SHORT.get(o['tipo'], o['tipo'])} {v}".strip()
+
+
+def fmt_short(d):
+    return f"{DAYS[d.weekday()]} {d.day}/{d.month}"
+
+
+def button(o, prefix="🛒 ", suffix=""):
+    return (f"{prefix}{o['negozio']} · {euro(o['prezzo'])}{suffix}", o["url"])
+
+
+def card(head, o, collector=False):
+    title = f"{head}{'  💎' if collector else ''}"
+    return [title, f"<b>{esc(o['set'])}</b> · {esc(product_label(o))}"]
+
+
 def alert_text(ctx, kind, o, old_price=None, others=()):
-    head = {"back": "🟢 <b>Di nuovo disponibile</b>", "new": "🆕 <b>Appena comparso</b>",
-            "drop": "💶 <b>Prezzo sceso</b>"}[kind]
-    if ctx.collector(o):
-        head += " · 💎 da collezione"
+    """Scheda per un prodotto disponibile. Restituisce (testo, pulsanti)."""
+    head = {"back": "🟢 <b>DI NUOVO DISPONIBILE</b>", "new": "🆕 <b>APPENA COMPARSO</b>",
+            "drop": "💶 <b>PREZZO SCESO</b>"}[kind]
+    lines = card(head, o, ctx.collector(o))
+    lines.append(SEP)
     price = f"<b>{euro(o['prezzo'])}</b>"
     if kind == "drop" and old_price:
         price = f"<s>{euro(old_price)}</s> → <b>{euro(o['prezzo'])}</b>"
-    lines = [head, f"<b>{esc(o['set'])}</b> · {esc(product_label(o))}",
-             f"{price} {ctx.ship_text(o)}{ctx.per_pack(o)}"]
-    lines += [x for x in (ctx.over_text(o), ctx.value_line(o), ctx.min_line(o)) if x]
-    lines.append(f"su {link(o)}")
-    others = sorted(others, key=ctx.total)[:4]
-    if others:
-        lines.append("Anche su: " + ", ".join(f"{link(x)} {euro(x['prezzo'])}" for x in others))
-    return "\n".join(lines)
+    lines.append(f"{price}{ctx.per_pack(o) if o['tipo'] in PACK_TYPES else ''}")
+    lines.append(f"🚚 {ctx.ship_text(o)}")
+    lines += [x for x in (ctx.min_line(o), ctx.value_line(o), ctx.over_text(o)) if x]
+    n_others = len(others)
+    others = sorted(others, key=ctx.total)[:2]  # il migliore + le 2 alternative più convenienti
+    if n_others:
+        lines.append(f"<i>Disponibile anche in altri {n_others} "
+                     f"{'negozio' if n_others == 1 else 'negozi'}</i>")
+    buttons = [button(o)] + [button(x, prefix="") for x in others]
+    return "\n".join(lines), buttons
 
 
 def preorder_text(ctx, group, new_urls, dropped):
-    """Un messaggio per prodotto con tutti i negozi dove è prenotabile."""
+    """Scheda per un preordine: un pulsante per ogni negozio dove è prenotabile."""
     first = group[0]
     opened = sorted([o for o in group if o["stato"] == "preordine"], key=ctx.total)
     waiting = sorted({o["negozio"] for o in group if o["stato"] == "in_arrivo"} -
                      {o["negozio"] for o in opened})
+    head = "📅 <b>PREORDINE APERTO</b>" if new_urls else "💶 <b>PREORDINE · PREZZO SCESO</b>"
+    lines = card(head, first, ctx.collector(first))
     rel = fmt_release(ctx, opened + group)
-    head = "📅 <b>Preordine aperto</b>" if new_urls else "💶 <b>Preordine: prezzo sceso</b>"
-    if ctx.collector(first):
-        head += " · 💎 da collezione"
-    lines = [head, f"<b>{esc(first['set'])}</b> · {esc(product_label(first))}"]
     if rel:
-        lines.append(rel)
-    lines.append(f"\nPrenotabile in {len(opened)} {'negozio' if len(opened) == 1 else 'negozi'}:")
-    for o in opened:
-        tag = " ⭐ <i>appena aperto</i>" if o["url"] in new_urls else \
-            (" ⬇️ <i>sceso</i>" if o["url"] in dropped else "")
-        warn = " ⚠️" if ctx.over_text(o) else ""
-        lines.append(f"• {link(o)} <b>{euro(o['prezzo'])}</b>{warn} — {ctx.ship_text(o)}{tag}")
+        lines.append(f"🗓 {rel}")
+    lines.append(SEP)
+    n = len(opened)
+    lines.append(f"Prenotabile in <b>{n}</b> {'negozio' if n == 1 else 'negozi'}"
+                 f"{' · ⭐ appena aperto' if new_urls else ''}")
     best = opened[0]
+    lines.append(f"Il migliore: <b>{euro(best['prezzo'])}</b> su {esc(best['negozio'])} · {ctx.ship_text(best)}")
     if any(ctx.over_text(o) for o in opened):
         lines.append(f"⚠️ = sopra listino ({euro(ctx.soglia(best))})")
     vl = ctx.value_line(best)
     if vl:
         lines.append(vl)
     if waiting:
-        lines.append(f"\n⏳ Scheda online ma non prenotabile (non aperto o già esaurito): {esc(', '.join(waiting))}")
-    have = {o["negozio"] for o in group}
-    missing = [s["nome"] for s in ctx.cfg["negozi"] if s["nome"] not in have]
-    if missing:
-        lines.append(f"🔎 Non ancora in catalogo in {len(missing)} "
-                     f"{'altro negozio' if len(missing) == 1 else 'altri negozi'}: controllo ogni ora.")
-    return "\n".join(lines), best
+        lines.append(f"⏳ Non ancora prenotabile: {esc(', '.join(waiting))}")
+    extra = opened[MAX_BUTTONS:]
+    if extra:
+        lines.append("Anche su: " + ", ".join(f"{link(o)} {euro(o['prezzo'])}" for o in extra))
+    buttons = []
+    for o in opened[:MAX_BUTTONS]:
+        mark = "⭐ " if o["url"] in new_urls else ("⬇️ " if o["url"] in dropped else "")
+        buttons.append(button(o, prefix=mark, suffix=" ⚠️" if ctx.over_text(o) else ""))
+    return "\n".join(lines), buttons
 
 
 def upcoming_text(ctx, group):
     first = group[0]
+    lines = card("👀 <b>IN ARRIVO</b>", first, ctx.collector(first))
     rel = fmt_release(ctx, group)
-    shops = ", ".join(link(o) for o in sorted(group, key=lambda o: o["negozio"]))
-    lines = ["👀 <b>In arrivo</b> · scheda comparsa, non ancora prenotabile",
-             f"<b>{esc(first['set'])}</b> · {esc(product_label(first))}"]
     if rel:
-        lines.append(rel)
-    lines += [f"Su: {shops}", "Ti scrivo appena apre il preordine."]
-    return "\n".join(lines)
+        lines.append(f"🗓 {rel}")
+    lines += [SEP, "Scheda online, non ancora prenotabile.", "Ti scrivo appena apre il preordine."]
+    buttons = [(f"👀 {o['negozio']}", o["url"]) for o in sorted(group, key=lambda o: o["negozio"])[:MAX_BUTTONS]]
+    return "\n".join(lines), buttons
+
+
+def news_text(n):
+    lines = ["🆕 <b>NUOVO PRODOTTO</b> · set non seguito", esc(n["titolo"]), SEP,
+             f"<b>{euro(n['prezzo'])}</b>{' · in preordine' if n.get('preordine') else ''}",
+             "<i>Se ti interessa, aggiungi il set in config.json</i>"]
+    return "\n".join(lines), [button(n)]
 
 
 def matches_event(o, ev):
@@ -637,7 +675,7 @@ def shown_release(ctx, group):
 
 def fmt_release(ctx, group):
     d, est = shown_release(ctx, group)
-    return f"Uscita: {fmt_day(d)}{' (data stimata)' if est else ''}" if d else ""
+    return f"Uscita {fmt_day(d)}{' (data stimata)' if est else ''}" if d else ""
 
 
 def calendar_events(cfg):
@@ -667,119 +705,147 @@ def days_label(days):
 
 def reminder_text(ctx, ev, days, offers):
     d = date.fromisoformat(ev["data"])
-    lines = [f"⏰ <b>{days_label(days)}</b>: {esc(ev['cosa'])}",
-             f"<b>{esc(ev.get('set', ''))}</b> · {fmt_day(d)}{' (data stimata)' if ev.get('stima') else ''}"]
-    st = preorders_of_event(ctx, offers, ev)
+    cosa = ev["cosa"]
+    if cosa == f"Uscita {ev.get('set', '')}":
+        cosa = "Uscita"
+    lines = [f"⏰ <b>{days_label(days).upper()}</b>",
+             f"<b>{esc(ev.get('set', ''))}</b> · {esc(cosa)}",
+             f"🗓 {fmt_day(d)}{' (data stimata)' if ev.get('stima') else ''}", SEP]
+    buttons = []
     if "prerelease" in norm(ev["cosa"]):
-        return "\n".join(lines)
+        lines.append("Tornei con buste in anteprima nei negozi aderenti.")
+        return "\n".join(lines), buttons
+    st = preorders_of_event(ctx, offers, ev)
     if st:
-        lines.append("\nGià prenotabile:")
+        lines.append("Già prenotabile:")
         for label, n, best in st:
-            lines.append(f"• {esc(label)}: {n} {'negozio' if n == 1 else 'negozi'}, "
-                         f"da <b>{euro(best['prezzo'])}</b> su {link(best)}")
+            lines.append(f"• {esc(label)} da <b>{euro(best['prezzo'])}</b> ({n} {'negozio' if n == 1 else 'negozi'})")
+            if len(buttons) < MAX_BUTTONS:
+                buttons.append((f"🛒 {SHORT.get(best['tipo'], label)} · {best['negozio']} {euro(best['prezzo'])}",
+                                best["url"]))
     elif days > REMINDERS[1]:
         lines.append("Di solito i preordini aprono in queste settimane: ti avviso appena si aprono.")
     else:
         lines.append("Nessun negozio ha ancora aperto i preordini.")
-    return "\n".join(lines)
+    return "\n".join(lines), buttons
+
+
+KEY_TYPES = {"Box 36 buste", "Set Allenatore", "Ultra Premium", "Collezione Premium", "Bundle 6 buste"}
+
+
+def deal_score(ctx, o, key, group):
+    """Più basso = occasione migliore. Conta quanto costa meno rispetto agli altri negozi e al
+    listino, con bonus per nuovi minimi, buste che rendono e prodotti principali."""
+    prices = sorted(x["prezzo"] for x in group if x.get("prezzo") and x["stato"] in ("disponibile", "esaurito"))
+    median = prices[len(prices) // 2] if prices else o["prezzo"]
+    sg = ctx.soglia(o) or o["prezzo"]
+    score = o["prezzo"] / median + 0.3 * max(0.0, o["prezzo"] / sg - 1)  # sopra listino: penalità
+    m = ctx.minimi.get(key)
+    if m and o["prezzo"] < m["prezzo"] - 0.009:
+        score -= 0.10  # nuovo minimo
+    r = ctx.ev_ratio(o)
+    if r is not None and r >= ctx.cfg.get("affare_buste", 1.0):
+        score -= 0.30
+    if o["tipo"] in KEY_TYPES:
+        score -= 0.05
+    return score
 
 
 def summary_text(ctx, offers, shops_ok, news, now, weekly):
+    """Riepilogo del mattino: un solo messaggio, sintetico."""
     today = now.date()
-    lines = [f"☀️ <b>Pokémon · {fmt_day(today)}</b>", f"<i>{shops_ok} negozi controllati</i>", ""]
+    lines = [f"☀️ <b>POKÉMON · {fmt_day(today).upper()}</b>"]
 
+    # 📅 prossime uscite (45 giorni)
     soon = [e for e in calendar_events(ctx.cfg)
-            if today <= date.fromisoformat(e["data"]) <= today + timedelta(days=60)]
+            if today <= date.fromisoformat(e["data"]) <= today + timedelta(days=45)]
     if soon:
-        lines.append("📅 <b>Prossime uscite</b>")
-        for e in soon:
+        lines += [SEP, "📅 <b>PROSSIME USCITE</b>"]
+        for e in soon[:6]:
             d = date.fromisoformat(e["data"])
-            n_pre = len({o["negozio"] for o in offers.values() if o["set"] == e["set"] and o["stato"] == "preordine"})
-            pre = f" — prenotabile in {n_pre} {'negozio' if n_pre == 1 else 'negozi'}" \
-                if n_pre and e["cosa"].startswith("Uscita") else ""
-            lines.append(f"• {fmt_day(d)}{' (stima)' if e.get('stima') else ''}: "
-                         f"<b>{esc(e['set'])}</b> · {esc(e['cosa'])}{pre}")
-        lines.append("")
+            cosa = "Uscita" if e["cosa"] == f"Uscita {e['set']}" else e["cosa"]
+            n_pre = len({o["negozio"] for o in offers.values() if o["stato"] == "preordine" and matches_event(o, e)})
+            pre = f" · 🟠 prenotabile in {n_pre}" if n_pre else ""
+            lines.append(f"• <b>{fmt_short(d)}</b> {esc(e['set'])} — {esc(cosa)}"
+                         f"{' <i>(stima)</i>' if e.get('stima') else ''}{pre}")
 
     groups = {}
     for o in offers.values():
         groups.setdefault(product_key(o), []).append(o)
-    order = {s["nome"]: i for i, s in enumerate(ctx.cfg["set"])}
 
-    pre_lines, out_lines = [], {}
-    buy = {}  # set -> tipo -> [migliore offerta di ogni variante, n negozi]
-    for k in sorted(groups, key=lambda k: (order.get(groups[k][0]["set"], 99), k)):
-        g = groups[k]
-        o0 = g[0]
+    # 🟠 preordini aperti
+    pre_rows = []
+    for k, g in groups.items():
         pre = sorted([o for o in g if o["stato"] == "preordine"], key=ctx.total)
         if pre:
-            shops = ", ".join(f"{link(o)} {euro(o['prezzo'])}{' ⚠️' if ctx.over_text(o) else ''}" for o in pre[:4])
-            more = f" +{len(pre) - 4}" if len(pre) > 4 else ""
-            pre_lines.append(f"• <b>{esc(o0['set'])}</b> · {esc(product_label(o0))}: {shops}{more}")
-            continue
-        good = sorted([o for o in g if o["stato"] == "disponibile" and ctx.good(o)], key=ctx.total)
-        if good:
-            buy.setdefault(o0["set"], {}).setdefault(o0["tipo"], []).append((good[0], len(good)))
-        elif any(o["stato"] in ("disponibile", "esaurito") for o in g):
-            out_lines.setdefault(o0["set"], []).append(product_label(o0))
+            pre_rows.append((pre[0]["set"], k, pre))
+    if pre_rows:
+        lines += [SEP, "🟠 <b>PREORDINI APERTI</b>"]
+        order = {x["nome"]: i for i, x in enumerate(ctx.cfg["set"])}
+        for _, k, pre in sorted(pre_rows, key=lambda r: (order.get(r[0], 99), r[1]))[:6]:
+            b = pre[0]
+            lines.append(f"• {esc(b['set'])} · {esc(short_label(b))} — da <b>{euro(b['prezzo'])}</b> "
+                         f"({link(b)}) · {len(pre)} {'negozio' if len(pre) == 1 else 'negozi'}")
+        if len(pre_rows) > 6:
+            lines.append(f"<i>+ altri {len(pre_rows) - 6} prodotti in preordine</i>")
 
-    buy_lines = []
+    # 🔥 migliori occasioni: il migliore per ogni tipo di prodotto, ordinati per convenienza
+    best_by_type = {}
+    for k, g in groups.items():
+        good = [o for o in g if o["stato"] == "disponibile" and ctx.good(o)]
+        if not good:
+            continue
+        b = min(good, key=ctx.total)
+        t = (b["set"], b["tipo"])
+        cand = (deal_score(ctx, b, k, g), b, k)
+        if t not in best_by_type or cand[0] < best_by_type[t][0]:
+            best_by_type[t] = cand
+    deals = sorted(best_by_type.values(), key=lambda x: x[0])
+    lines += [SEP, "🔥 <b>MIGLIORI OCCASIONI</b>"]
+    if deals:
+        for score, b, k in deals[:6]:
+            tags = []
+            m = ctx.minimi.get(k)
+            if m and b["prezzo"] < m["prezzo"] - 0.009:
+                tags.append("📉 minimo")
+            if ctx.collector(b):
+                tags.append("💎")
+            r = ctx.ev_ratio(b)
+            if r is not None and r >= ctx.cfg.get("affare_buste", 1.0):
+                tags.append("🔥 rende")
+            pp = ctx.per_pack(b) if b["tipo"] in PACK_TYPES else ""
+            lines.append(f"• {esc(b['set'])} · {esc(short_label(b))} — <b>{euro(b['prezzo'])}</b>{pp} "
+                         f"({link(b)}){' ' + ' '.join(tags) if tags else ''}")
+        if len(deals) > 6:
+            lines.append(f"<i>+ altri {len(deals) - 6} prodotti al prezzo giusto</i>")
+    else:
+        lines.append("Oggi niente al prezzo giusto.")
+
+    # 📊 mercato: valore medio delle carte e carte top
+    rows = []
     for s in ctx.cfg["set"]:
-        if s["nome"] not in buy:
+        mv = ctx.market.get(s["nome"])
+        if not mv:
             continue
-        buy_lines.append(f"<b>{esc(s['nome'])}</b>{' 💎' if s.get('speciale') else ''}")
-        for tipo, items in sorted(buy[s["nome"]].items(), key=lambda kv: -(packs(kv[0], "") or 0)):
-            b, n = min(items, key=lambda x: ctx.total(x[0]))
-            name = esc(product_label(b)) if len(items) == 1 else f"{esc(tipo)} ({len(items)} versioni)"
-            gem = " 💎" if not s.get("speciale") and ctx.collector(b) else ""
-            warn = " ⚠️" if ctx.over_text(b) else ""
-            shops = f" +{n - 1}" if n > 1 else ""
-            line = (f"• {name}{gem} {'da ' if len(items) > 1 else ''}<b>{euro(b['prezzo'])}</b>{warn}"
-                    f"{ctx.per_pack(b) if tipo in PACK_TYPES else ''} — {link(b)}{shops}")
-            extra = [x for x in (ctx.value_line(b) if tipo == "Box 36 buste" else "",
-                                 ctx.min_line(b) if "più basso" in ctx.min_line(b) else "") if x]
-            buy_lines.append(line + "".join(f"\n   {x}" for x in extra))
-
-    if pre_lines:
-        lines += ["🟠 <b>Preordini aperti</b>"] + pre_lines + [""]
-    if buy_lines:
-        lines += ["🟢 <b>Da prendere ora</b> <i>(⚠️ sopra listino · 💎 da collezione · +N altri negozi)</i>"] \
-            + buy_lines + [""]
-    elif not pre_lines:
-        lines += ["Oggi niente di comprabile al prezzo giusto.", ""]
-
-    if weekly and ctx.market:
-        rows = []
-        for s in ctx.cfg["set"]:
-            mv = ctx.market.get(s["nome"])
-            if not mv:
-                continue
-            best_pp = min((o["prezzo"] / packs(o["tipo"], o["titolo"]) for o in offers.values()
-                           if o["set"] == s["nome"] and o["tipo"] in PACK_TYPES and o["stato"] == "disponibile"
-                           and o.get("prezzo")), default=None)
-            ratio = f" · rende il {round(mv['ev_busta'] / best_pp * 100)}% (busta migliore {euro(best_pp)})" \
-                if best_pp else ""
-            top = ", ".join(f"{esc(t['nome'])} ({esc(t.get('rarita', ''))}) {euro(t['prezzo'])}"
-                            for t in mv["top"][:3])
-            rows.append(f"<b>{esc(s['nome'])}</b>: carte in media {euro(mv['ev_busta'])}/busta{ratio}\n"
-                        f"   Top: {top}")
-        if rows:
-            lines += ["💎 <b>Valore delle carte per set</b> <i>(prezzi Cardmarket, stime)</i>"] + rows + [""]
-
-    if out_lines:
-        lines.append("🔴 <b>Esauriti o sopra prezzo</b>")
-        for s in ctx.cfg["set"]:
-            if s["nome"] in out_lines:
-                lines.append(f"<b>{esc(s['nome'])}</b>: {esc(', '.join(sorted(set(out_lines[s['nome']]))))}")
-        lines.append("")
+        box = [o for o in offers.values() if o["set"] == s["nome"] and o["tipo"] == "Box 36 buste"
+               and o["stato"] == "disponibile" and o.get("prezzo")]
+        rend = ""
+        if box:
+            b = min(box, key=lambda o: o["prezzo"])
+            rend = f" · il box rende il {round(ctx.ev_ratio(b) * 100)}%"
+        rows.append(f"• <b>{esc(s['nome'])}</b>: carte ~{euro(mv['ev_busta'])}/busta{rend}")
+        if weekly and mv.get("top"):
+            rows.append("   " + " · ".join(f"{esc(t['nome'])} {euro(t['prezzo'])}" for t in mv["top"][:2]))
+    if rows:
+        lines += [SEP, "📊 <b>MERCATO</b> <i>(prezzi Cardmarket, stime)</i>"] + rows[:12]
 
     if news:
-        lines.append("🆕 <b>Nuovi in catalogo</b> (set non ancora seguiti)")
-        for n in news[:8]:
-            lines.append(f"• <a href=\"{esc(n['url'])}\">{esc(n['titolo'])}</a> — {esc(n['negozio'])}"
-                         f" {euro(n['prezzo'])}")
-        lines.append("")
-    return "\n".join(lines).strip()
+        lines += [SEP, f"🆕 <b>NOVITÀ</b> · {len(news)} prodotti di set non seguiti"]
+        for n in news[:3]:
+            lines.append(f"• <a href=\"{esc(n['url'])}\">{esc(n['titolo'][:60])}</a> {euro(n['prezzo'])}")
+
+    lines += [SEP, f"<i>{shops_ok} negozi controllati · {now.strftime('%H:%M')}</i>"]
+    return "\n".join(lines)
 
 
 # ------------------------------------------------------------------ main
@@ -846,7 +912,7 @@ def main():
     alerts = []  # (priorità, testo, bottone)
     seen_products = set(state.get("prodotti_visti", []))
     if not baseline:
-        pre_new, pre_drop, singles = {}, {}, []
+        pre_new, pre_drop = {}, {}
         for url, o in offers.items():
             old = prev.get(url) or ghosts.get(url)
             if o["negozio"] not in known_shops:
@@ -864,23 +930,21 @@ def main():
                 continue  # uscito: era già prenotabile, lo sapevi
             others = [x for x in groups[k] if x is not o and x["stato"] == "disponibile" and ctx.good(x)]
             if old is None:
-                singles.append((2, alert_text(ctx, "new", o, others=others), o))
+                alerts.append((2, *alert_text(ctx, "new", o, others=others)))
             elif not (old.get("stato") == "disponibile" and ctx.good(old)):
-                singles.append((1, alert_text(ctx, "back", o, others=others), o))
+                alerts.append((1, *alert_text(ctx, "back", o, others=others)))
             elif old.get("prezzo") and o["prezzo"] < old["prezzo"] - 0.009:
-                singles.append((3, alert_text(ctx, "drop", o, old["prezzo"], others=others), o))
+                alerts.append((3, *alert_text(ctx, "drop", o, old["prezzo"], others=others)))
 
         for k in set(pre_new) | set(pre_drop):
-            text, best = preorder_text(ctx, groups[k], pre_new.get(k, set()), pre_drop.get(k, set()))
-            alerts.append((0 if k in pre_new else 3, text, (f"🛒 Prenota su {best['negozio']}", best["url"])))
-        for p, text, o in singles:
-            alerts.append((p, text, (f"🛒 Apri {o['negozio']}", o["url"])))
+            alerts.append((0 if k in pre_new else 3,
+                           *preorder_text(ctx, groups[k], pre_new.get(k, set()), pre_drop.get(k, set()))))
 
         # 👀 prodotti mai visti prima, presenti solo come scheda non prenotabile
         for k, g in groups.items():
             if k not in seen_products and all(o["stato"] == "in_arrivo" for o in g) and \
                     any(o["negozio"] in known_shops for o in g):
-                alerts.append((1, upcoming_text(ctx, g), None))
+                alerts.append((1, *upcoming_text(ctx, g)))
     state["prodotti_visti"] = sorted(seen_products | set(groups))[-3000:]
 
     # ⏰ promemoria del calendario
@@ -895,7 +959,7 @@ def main():
             if days <= nxt:
                 sent.add(key)  # finestra già passata: non la recuperiamo
             elif days <= limit and not baseline and now.hour >= 8:  # niente promemoria di notte
-                alerts.append((0, reminder_text(ctx, ev, days, offers), None))
+                alerts.append((0, *reminder_text(ctx, ev, days, offers)))
                 sent.add(key)
     state["promemoria"] = sorted(sent)[-300:]
 
@@ -903,12 +967,8 @@ def main():
     news = list({n["url"]: n for n in news}.values())
     fresh_news = [n for n in news if n["url"] not in seen_news]
     state["novita_viste"] = sorted(seen_news | {n["url"] for n in news})[-800:]
-    for n in ([] if baseline else fresh_news):
-        pre = " · in preordine" if n.get("preordine") else ""
-        alerts.append((4, f"🆕 <b>Nuovo prodotto Pokémon</b>{pre}\n{esc(n['titolo'])}\n"
-                          f"<b>{euro(n['prezzo'])}</b> su {esc(n['negozio'])}\n"
-                          f"<i>Set non ancora seguito: se ti interessa, aggiungilo in config.json</i>",
-                       (f"🛒 Apri {n['negozio']}", n["url"])))
+    for n in ([] if baseline else fresh_news[:3]):
+        alerts.append((4, *news_text(n)))
 
     msgs = []
     alerts.sort(key=lambda a: a[0])
@@ -923,8 +983,7 @@ def main():
         weekly = baseline or force or today.weekday() == 0
         text = summary_text(ctx, offers, shops_ok, [] if baseline else fresh_news, now, weekly)
         if baseline:
-            text = ("🤖 <b>Robot Pokémon v3!</b> Ora seguo i preordini in tutti i negozi, il calendario "
-                    "delle uscite, la spedizione, i prezzi minimi e il valore delle carte.\n\n" + text)
+            text = "🤖 <i>Robot Pokémon aggiornato: nuovo layout.</i>\n\n" + text
         msgs += [(part, None, True) for part in split_message(text)]
         did_summary = True
 
@@ -948,7 +1007,7 @@ def main():
     else:
         print("\n--- TELEGRAM_TOKEN mancante: anteprima ---")
         for text, btn, _ in msgs:
-            print(text, f"\n[{btn[0]}]" if btn else "", "\n")
+            print(text, "".join(f"\n[{b[0]}]" for b in btn or []), "\n")
     if did_summary and not failed_summary:
         state["ultimo_riepilogo"] = today_s
 
