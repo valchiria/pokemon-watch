@@ -1,9 +1,9 @@
 name: Controllo Pokémon
 
+# Parte ogni ora grazie a cron-job.org (che chiama "Run workflow") e, come riserva, al timer di GitHub.
 on:
   schedule:
     - cron: "17 * * * *"   # ogni ora, al minuto 17
-    
   workflow_dispatch:
     inputs:
       riepilogo:
@@ -21,9 +21,12 @@ concurrency:
 jobs:
   controllo:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
+      # ref: main = parte sempre dallo stato più recente, anche se il giro era in coda dietro un altro
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -42,5 +45,10 @@ jobs:
           git config user.email "robot-pokemon@users.noreply.github.com"
           [ -f state.json ] || exit 0
           git add state.json
-          git diff --cached --quiet || git commit -m "stato $(date -u +%F\ %H:%M)"
-          git push
+          git diff --cached --quiet && exit 0
+          git commit -m "stato $(date -u +%F\ %H:%M)"
+          for i in 1 2 3; do
+            git push && exit 0
+            git pull --rebase -X theirs origin main || { git rebase --abort; exit 1; }
+          done
+          exit 1  # stato non salvato: meglio vedere il giro in rosso su GitHub
