@@ -564,6 +564,30 @@
    "negozio": "Magic Store",
    "stato": "esaurito"
   },
+  "https://www.magicstoreshop.com/prodotto/carte-pokemon-collezione-premium-mega-greninja-ex/": {
+   "titolo": "Carte Pokémon Collezione Premium Mega Greninja Ex",
+   "url": "https://www.magicstoreshop.com/prodotto/carte-pokemon-collezione-premium-mega-greninja-ex/",
+   "comprabile": true,
+   "preordine": false,
+   "prezzo": 44.99,
+   "uscita": null,
+   "tipo": "Collezione Premium",
+   "negozio": "Magic Store",
+   "set": "Caos Nascente",
+   "stato": "disponibile"
+  },
+  "https://www.magicstoreshop.com/prodotto/pokemon-tcg-mega-charizard-x-y-tin-ita-sigillata-pokemon-gcc-ufficiale/": {
+   "titolo": "Pokémon TCG Mega Charizard X & Y Tin ITA Sigillata Pokémon GCC Ufficiale",
+   "url": "https://www.magicstoreshop.com/prodotto/pokemon-tcg-mega-charizard-x-y-tin-ita-sigillata-pokemon-gcc-ufficiale/",
+   "comprabile": false,
+   "preordine": false,
+   "prezzo": 26.99,
+   "uscita": null,
+   "tipo": "Tin",
+   "negozio": "Magic Store",
+   "set": "Fiamme Spettrali",
+   "stato": "esaurito"
+  },
   "https://scimmia.it/prodotto/pokemon-dominio-delta-etb/": {
    "titolo": "Pokémon – Megaevoluzione: Dominio Delta – Set Allenatore Fuoriclasse (IT)",
    "url": "https://scimmia.it/prodotto/pokemon-dominio-delta-etb/",
@@ -1380,6 +1404,18 @@
    "negozio": "Cardverse",
    "stato": "esaurito"
   },
+  "https://cardverse.it/products/pokemon-collezione-premium-mega-zygarde-ex-it": {
+   "titolo": "Pokémon - Collezione Premium Mega Zygarde Ex (IT)",
+   "url": "https://cardverse.it/products/pokemon-collezione-premium-mega-zygarde-ex-it",
+   "comprabile": true,
+   "prezzo": 47.0,
+   "preordine": false,
+   "uscita": null,
+   "tipo": "Collezione Premium",
+   "negozio": "Cardverse",
+   "set": "Equilibrio Perfetto",
+   "stato": "disponibile"
+  },
   "https://manuelpoke3.it/products/pokemon-dominio-delta-box-36-buste-ita": {
    "titolo": "Pokémon Megaevoluzione Dominio Delta – Box 36 Buste ITA",
    "url": "https://manuelpoke3.it/products/pokemon-dominio-delta-box-36-buste-ita",
@@ -2064,6 +2100,18 @@
    "negozio": "Baruzcard",
    "stato": "esaurito"
   },
+  "https://baruzcard.it/products/pokemon-collezione-ultra-premium-mega-charizard-x-ex-ita": {
+   "titolo": "Pokemon Collezione Ultra Premium Mega Charizard X-EX ITA",
+   "url": "https://baruzcard.it/products/pokemon-collezione-ultra-premium-mega-charizard-x-ex-ita",
+   "comprabile": true,
+   "prezzo": 199.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Fiamme Spettrali",
+   "tipo": "Ultra Premium",
+   "negozio": "Baruzcard",
+   "stato": "disponibile"
+  },
   "https://baruzcard.it/products/pokemon-megaevoluzione-fiamme-spettrali-display-box-36-buste-ita": {
    "titolo": "Pokemon Megaevoluzione Fiamme Spettrali Display Box 36 Buste ITA",
    "url": "https://baruzcard.it/products/pokemon-megaevoluzione-fiamme-spettrali-display-box-36-buste-ita",
@@ -2436,6 +2484,18 @@
    "negozio": "MagicNerd",
    "stato": "esaurito"
   },
+  "https://magicnerd.it/products/pokemon-tin-da-collezione-mega-charizard-x-ita": {
+   "titolo": "Pokemon Tin Da Collezione Mega Charizard X (ITA)",
+   "url": "https://magicnerd.it/products/pokemon-tin-da-collezione-mega-charizard-x-ita",
+   "comprabile": true,
+   "prezzo": 25.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Fiamme Spettrali",
+   "tipo": "Tin",
+   "negozio": "MagicNerd",
+   "stato": "disponibile"
+  },
   "https://magicnerd.it/products/box-fiamme-spettrali-pokemon-display-36-buste-ita": {
    "titolo": "Megaevoluzione Fiamme Spettrali Display Box 36 Buste (ITA)",
    "url": "https://magicnerd.it/products/box-fiamme-spettrali-pokemon-display-36-buste-ita",
@@ -2519,6 +2579,18 @@
    "tipo": "Set Allenatore",
    "negozio": "MagicNerd",
    "stato": "esaurito"
+  },
+  "https://magicnerd.it/products/pokemon-tin-da-collezione-mega-charizard-y-ita": {
+   "titolo": "Pokemon Tin Da Collezione Mega Charizard Y (ITA)",
+   "url": "https://magicnerd.it/products/pokemon-tin-da-collezione-mega-charizard-y-ita",
+   "comprabile": true,
+   "prezzo": 25.9,
+   "preordine": false,
+   "uscita": null,
+   "tipo": "Tin",
+   "negozio": "MagicNerd",
+   "set": "Ascesa Eroica",
+   "stato": "disponibile"
   },
   "https://www.noxcollectibles.it/products/etb-set-allenatore-fuoriclasse-30th-ita": {
    "titolo": "ETB Set Allenatore Fuoriclasse 30TH (ITA)",
@@ -2844,6 +2916,18 @@
    "negozio": "Nox Collectibles",
    "stato": "disponibile"
   },
+  "https://www.noxcollectibles.it/products/ultra-premium-di-mega-charizard-x-ita": {
+   "titolo": "Ultra Premium di Mega Charizard X (ITA)",
+   "url": "https://www.noxcollectibles.it/products/ultra-premium-di-mega-charizard-x-ita",
+   "comprabile": true,
+   "prezzo": 199.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Fiamme Spettrali",
+   "tipo": "Ultra Premium",
+   "negozio": "Nox Collectibles",
+   "stato": "disponibile"
+  },
   "https://www.noxcollectibles.it/products/avventure-insieme-display-36-buste-ita": {
    "titolo": "Avventure Insieme- Display 36 buste ITA",
    "url": "https://www.noxcollectibles.it/products/avventure-insieme-display-36-buste-ita",
@@ -3072,6 +3156,18 @@
    "negozio": "Mornati Paglia",
    "stato": "esaurito"
   },
+  "https://www.mornatipaglia.com/products/gamevision-pokemon-collezione-premium-mega-greninja-ex": {
+   "titolo": "GAMEVISION Pokemon Collezione Premium Mega Greninja-Ex",
+   "url": "https://www.mornatipaglia.com/products/gamevision-pokemon-collezione-premium-mega-greninja-ex",
+   "comprabile": true,
+   "prezzo": 39.92,
+   "preordine": false,
+   "uscita": null,
+   "tipo": "Collezione Premium",
+   "negozio": "Mornati Paglia",
+   "set": "Caos Nascente",
+   "stato": "disponibile"
+  },
   "https://otakura.com/products/pokemon-30-ann-collezione-greninja-ex-sylveon-ex-ita": {
    "titolo": "Pokemon 30° Ann. Collezione Greninja-ex & Sylveon-ex (IT)",
    "url": "https://otakura.com/products/pokemon-30-ann-collezione-greninja-ex-sylveon-ex-ita",
@@ -3288,30 +3384,6 @@
    "negozio": "Otakura",
    "stato": "disponibile"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Gengar (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it",
-   "comprabile": false,
-   "prezzo": 27.0,
-   "preordine": true,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Otakura",
-   "stato": "esaurito"
-  },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Lucario-ex (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it",
-   "comprabile": false,
-   "prezzo": 76.0,
-   "preordine": true,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione Premium",
-   "negozio": "Otakura",
-   "stato": "esaurito"
-  },
   "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it": {
    "titolo": "Megaevoluzione - Ascesa Eroica - Set Allenatore Fuoriclasse (IT)",
    "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it",
@@ -3324,15 +3396,15 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-bundle-da-6-buste-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Bundle da 6 Buste (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-bundle-da-6-buste-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
    "comprabile": false,
-   "prezzo": 53.0,
+   "prezzo": 76.0,
    "preordine": true,
    "uscita": null,
    "set": "Ascesa Eroica",
-   "tipo": "Bundle 6 buste",
+   "tipo": "Collezione Premium",
    "negozio": "Otakura",
    "stato": "esaurito"
   },
@@ -3348,6 +3420,30 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-bundle-da-6-buste-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Bundle da 6 Buste (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-bundle-da-6-buste-it",
+   "comprabile": false,
+   "prezzo": 53.0,
+   "preordine": true,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Bundle 6 buste",
+   "negozio": "Otakura",
+   "stato": "esaurito"
+  },
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Gengar (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it",
+   "comprabile": false,
+   "prezzo": 27.0,
+   "preordine": true,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Otakura",
+   "stato": "esaurito"
+  },
   "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-it": {
    "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Charizard Y (IT)",
    "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-it",
@@ -3360,9 +3456,9 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Lucario-ex (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it",
    "comprabile": false,
    "prezzo": 76.0,
    "preordine": true,
@@ -3431,6 +3527,18 @@
    "tipo": "Set Allenatore",
    "negozio": "Otakura",
    "stato": "esaurito"
+  },
+  "https://otakura.com/products/collezione-premium-mega-zygarde-ex-it": {
+   "titolo": "Collezione Premium Mega Zygarde-EX – Pokémon TCG (ITA)",
+   "url": "https://otakura.com/products/collezione-premium-mega-zygarde-ex-it",
+   "comprabile": true,
+   "prezzo": 58.0,
+   "preordine": false,
+   "uscita": null,
+   "tipo": "Collezione Premium",
+   "negozio": "Otakura",
+   "set": "Equilibrio Perfetto",
+   "stato": "disponibile"
   },
   "https://www.gs-gameon.com/products/30-anniversario-collezione-con-poster-ita": {
    "titolo": "30° Anniversario: Collezione con Poster (ITA)",
@@ -3549,6 +3657,18 @@
    "uscita": null,
    "set": "Equilibrio Perfetto",
    "tipo": "Box 36 buste",
+   "negozio": "GS Gameon",
+   "stato": "disponibile"
+  },
+  "https://www.gs-gameon.com/products/collezione-premium-mega-zygarde-ex-ita": {
+   "titolo": "Collezione Premium Mega Zygarde-EX (ITA)",
+   "url": "https://www.gs-gameon.com/products/collezione-premium-mega-zygarde-ex-ita",
+   "comprabile": true,
+   "prezzo": 49.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Collezione Premium",
    "negozio": "GS Gameon",
    "stato": "disponibile"
   },
@@ -3720,18 +3840,6 @@
    "negozio": "Warcard",
    "stato": "disponibile"
   },
-  "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb": {
-   "titolo": "Equilibrio Perfetto - Set Allenatore Fuoriclasse (ETB)",
-   "url": "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb",
-   "comprabile": true,
-   "prezzo": 69.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Set Allenatore",
-   "negozio": "Warcard",
-   "stato": "disponibile"
-  },
   "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste": {
    "titolo": "Equilibrio Perfetto - Box da 36 Buste",
    "url": "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste",
@@ -3741,6 +3849,18 @@
    "uscita": null,
    "set": "Equilibrio Perfetto",
    "tipo": "Box 36 buste",
+   "negozio": "Warcard",
+   "stato": "disponibile"
+  },
+  "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb": {
+   "titolo": "Equilibrio Perfetto - Set Allenatore Fuoriclasse (ETB)",
+   "url": "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb",
+   "comprabile": true,
+   "prezzo": 69.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Set Allenatore",
    "negozio": "Warcard",
    "stato": "disponibile"
   },
@@ -4477,6 +4597,31 @@
    "prezzo": 26.9,
    "negozio": "Warcard",
    "data": "2026-09-28"
+  },
+  "Caos Nascente|Collezione Premium|": {
+   "prezzo": 39.92,
+   "negozio": "Mornati Paglia",
+   "data": "2026-09-28"
+  },
+  "Equilibrio Perfetto|Collezione Premium|": {
+   "prezzo": 47.0,
+   "negozio": "Cardverse",
+   "data": "2026-09-28"
+  },
+  "Fiamme Spettrali|Ultra Premium|": {
+   "prezzo": 199.9,
+   "negozio": "Baruzcard",
+   "data": "2026-09-28"
+  },
+  "Fiamme Spettrali|Tin|": {
+   "prezzo": 25.9,
+   "negozio": "MagicNerd",
+   "data": "2026-09-28"
+  },
+  "Ascesa Eroica|Tin|": {
+   "prezzo": 25.9,
+   "negozio": "MagicNerd",
+   "data": "2026-09-28"
   }
  },
  "prodotti_visti": [
@@ -4500,6 +4645,7 @@
   "Ascesa Eroica|Collezione|Spille",
   "Ascesa Eroica|Mini Tin|",
   "Ascesa Eroica|Set Allenatore|",
+  "Ascesa Eroica|Tin|",
   "Avventure Insieme|Blister|",
   "Avventure Insieme|Box 36 buste|",
   "Avventure Insieme|Bundle 6 buste|",
@@ -4511,6 +4657,7 @@
   "Caos Nascente|Blister|",
   "Caos Nascente|Box 36 buste|",
   "Caos Nascente|Bundle 6 buste|",
+  "Caos Nascente|Collezione Premium|",
   "Caos Nascente|Set Allenatore|",
   "Dominio Delta|Blister|",
   "Dominio Delta|Box 36 buste|",
@@ -4519,11 +4666,14 @@
   "Equilibrio Perfetto|Blister|",
   "Equilibrio Perfetto|Box 36 buste|",
   "Equilibrio Perfetto|Bundle 6 buste|",
+  "Equilibrio Perfetto|Collezione Premium|",
   "Equilibrio Perfetto|Set Allenatore|",
   "Fiamme Spettrali|Blister|",
   "Fiamme Spettrali|Box 36 buste|",
   "Fiamme Spettrali|Bundle 6 buste|",
-  "Fiamme Spettrali|Set Allenatore|"
+  "Fiamme Spettrali|Set Allenatore|",
+  "Fiamme Spettrali|Tin|",
+  "Fiamme Spettrali|Ultra Premium|"
  ],
  "promemoria": [
   "2025-03-28|Avventure Insieme|Uscita Avventure Insieme|1",
@@ -4557,6 +4707,171 @@
   "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto|42",
   "2026-11-06|Dominio Delta|Uscita Dominio Delta|42"
  ],
- "ultimo_controllo": "2026-09-28T22:01+02:00",
- "negozi_letti": 13
+ "ultimo_controllo": "2026-09-28T23:00+02:00",
+ "negozi_letti": 13,
+ "nomi_set": {
+  "Dominio Delta": {
+   "nomi": [],
+   "aggiornato": "2026-09-28T23:00+02:00"
+  },
+  "30° Anniversario": {
+   "nomi": [
+    "Espeon ex",
+    "Fuecoco ex",
+    "Gengar ex",
+    "Greninja ex",
+    "Jirachi ex",
+    "Mew ex",
+    "Mewtwo ex",
+    "Pikachu ex",
+    "Salamence ex",
+    "Sylveon ex",
+    "Umbreon ex"
+   ],
+   "aggiornato": "2026-09-28T23:00+02:00"
+  },
+  "Buio Pesto": {
+   "nomi": [
+    "Lurantis ex",
+    "Mega Chandelure ex",
+    "Mega Darkrai ex",
+    "Mega Delphox ex",
+    "Mega Excadrill ex",
+    "Mega Slowbro ex",
+    "Mega Zeraora ex",
+    "Morpeko ex",
+    "Rampardos ex",
+    "Wailord ex"
+   ],
+   "aggiornato": "2026-09-28T23:00+02:00"
+  },
+  "Caos Nascente": {
+   "nomi": [
+    "Beedrill ex",
+    "Cinccino ex",
+    "Cobalion ex",
+    "Gourgeist ex",
+    "Krookodile ex",
+    "Mega Dragalge ex",
+    "Mega Floette ex",
+    "Mega Gallade ex",
+    "Mega Greninja ex",
+    "Mega Pyroar ex"
+   ],
+   "aggiornato": "2026-09-28T23:00+02:00"
+  },
+  "Equilibrio Perfetto": {
+   "nomi": [
+    "Decidueye ex",
+    "Lapras ex",
+    "Mega Clefable ex",
+    "Mega Skarmory ex",
+    "Mega Starmie ex",
+    "Mega Zygarde ex",
+    "Meowth ex",
+    "Salazzle ex",
+    "Yveltal ex"
+   ],
+   "aggiornato": "2026-09-28T23:00+02:00"
+  },
+  "Ascesa Eroica": {
+   "nomi": [
+    "Azumarill ex",
+    "Cinderace ex",
+    "Cynthia's Garchomp ex",
+    "Dragapult ex",
+    "Erika's Vileplume ex",
+    "Ethan's Ho-Oh ex",
+    "Fezandipiti ex",
+    "Hop's Pincurchin ex",
+    "Iono's Bellibolt ex",
+    "Koraidon ex",
+    "Larry's Dudunsparce ex",
+    "Lillie's Clefairy ex",
+    "Mandibuzz ex",
+    "Marnie's Grimmsnarl ex",
+    "Mega Audino ex",
+    "Mega Charizard Y ex",
+    "Mega Diancie ex",
+    "Mega Dragonite ex",
+    "Mega Eelektross ex",
+    "Mega Emboar ex",
+    "Mega Feraligatr ex",
+    "Mega Froslass ex",
+    "Mega Gardevoir ex",
+    "Mega Gengar ex",
+    "Mega Hawlucha ex",
+    "Mega Lucario ex",
+    "Mega Meganium ex",
+    "Mega Scrafty ex",
+    "Mega Signal",
+    "Miraidon ex",
+    "N's Zoroark ex",
+    "Pikachu ex",
+    "Regice ex",
+    "Regirock ex",
+    "Registeel ex",
+    "Sprigatito ex",
+    "Steven's Metagross ex",
+    "Stunfisk ex",
+    "Team Rocket's Kangaskhan ex",
+    "Team Rocket's Mewtwo ex",
+    "Terapagos ex",
+    "Togedemaru ex",
+    "Voltorb ex",
+    "Zangoose ex"
+   ],
+   "aggiornato": "2026-09-28T23:00+02:00"
+  },
+  "Fiamme Spettrali": {
+   "nomi": [
+    "Empoleon ex",
+    "Mega Charizard X ex",
+    "Mega Diancie ex",
+    "Mega Gengar ex",
+    "Mega Heracross ex",
+    "Mega Lopunny ex",
+    "Mega Sharpedo ex",
+    "Mismagius ex",
+    "Oricorio ex",
+    "Rotom ex"
+   ],
+   "aggiornato": "2026-09-28T23:00+02:00"
+  },
+  "Avventure Insieme": {
+   "nomi": [
+    "Alcremie ex",
+    "Amoonguss ex",
+    "Blaziken ex",
+    "Dudunsparce ex",
+    "Hop's Zacian ex",
+    "Iono's Bellibolt ex",
+    "Lillie's Clefairy ex",
+    "Mamoswine ex",
+    "Mimikyu ex",
+    "N's Zoroark ex",
+    "Paldean Clodsire ex",
+    "Reshiram ex",
+    "Salamence ex",
+    "Tapu Koko ex",
+    "Veluza ex",
+    "Volcanion ex"
+   ],
+   "aggiornato": "2026-09-28T23:00+02:00"
+  }
+ },
+ "cerca_extra": {
+  "Caos Nascente": [
+   "mega greninja"
+  ],
+  "Fiamme Spettrali": [
+   "mega charizard x"
+  ],
+  "Equilibrio Perfetto": [
+   "mega zygarde"
+  ],
+  "Ascesa Eroica": [
+   "mega charizard y"
+  ]
+ }
 }
