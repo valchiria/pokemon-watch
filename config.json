@@ -35,9 +35,9 @@
 
   "_calendario": "Uscite a ondate e date da ricordare. stima=true: data presa dall'uscita inglese, non ancora confermata in Italia. Il robot ti avvisa 6 settimane, 1 settimana e 1 giorno prima.",
   "calendario": [
-    {"data": "2026-10-02", "set": "30° Anniversario", "cosa": "Mini Tin, Collezione con Raccoglitore, Bundle 6 buste", "stima": true},
-    {"data": "2026-10-24", "set": "Dominio Delta",    "cosa": "Prerelease nei negozi"},
-    {"data": "2026-11-06", "set": "30° Anniversario", "cosa": "Ultra Premium Umbreon e Espeon, Collezione Premium Ditto, Collezioni Mewtwo e Mew", "stima": true},
+    {"data": "2026-10-02", "set": "30° Anniversario", "cosa": "Mini Tin, Raccoglitore, Bundle 6 buste", "stima": true},
+    {"data": "2026-10-24", "set": "Dominio Delta",    "cosa": "Prerelease"},
+    {"data": "2026-11-06", "set": "30° Anniversario", "cosa": "Ultra Premium Umbreon e Espeon, Collezione Premium Ditto", "stima": true},
     {"data": "2026-12-04", "set": "30° Anniversario", "cosa": "Tin ex", "stima": true}
   ],
 
