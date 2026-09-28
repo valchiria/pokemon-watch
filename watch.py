@@ -1,55 +1,121 @@
-"""Robot Pokémon: controlla i negozi e scrive su Telegram quando qualcosa cambia.
+"""Robot Pokémon v2 — cerca i prodotti Pokémon in italiano nei negozi e scrive su Telegram.
 
-Gira su GitHub Actions ogni ora. Legge products.json, confronta con state.json
-(l'ultima situazione vista) e manda un messaggio solo per le novità.
-Una volta al giorno (dalle 9 in poi, ora italiana) manda anche il riepilogo completo.
+Come funziona
+- Per ogni set in config.json cerca il nome del set in ogni negozio usando la ricerca
+  ufficiale del negozio (Shopify o WooCommerce), che dice esattamente se un prodotto
+  si può comprare. Niente link fissi: se un negozio aggiunge un prodotto, lo trova da solo.
+- Riconosce il tipo di prodotto dal titolo (box 36, set allenatore, bundle...) e scarta
+  inglese, giapponese, case da 6 box e carte singole.
+- Avvisa solo quando qualcosa diventa comprabile al prezzo giusto o scende di prezzo.
+- Ogni mattina dalle 9 manda il riepilogo: la migliore offerta per ogni prodotto.
+- I negozi che non rispondono vengono ignorati in silenzio.
 """
 import html
 import json
 import os
 import re
-import sys
 import time
+import unicodedata
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import quote
 from zoneinfo import ZoneInfo
 
 import requests
-from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).parent
-PRODUCTS_FILE = ROOT / "products.json"
+CONFIG_FILE = ROOT / "config.json"
 STATE_FILE = ROOT / "state.json"
 TZ = ZoneInfo("Europe/Rome")
 SUMMARY_HOUR = 9
-DEFAULT_CHAT_ID = "875856621"  # chat Telegram di Riccardo
+DEFAULT_CHAT_ID = "875856621"
+STATE_VERSION = 2
+MAX_ALERTS = 8
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 "
                   "(KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1",
+    "Accept": "application/json,text/html;q=0.8,*/*;q=0.5",
     "Accept-Language": "it-IT,it;q=0.9",
-    "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
 }
 
-DISPONIBILE, PREORDINE, ESAURITO, SCONOSCIUTO = "disponibile", "preordine", "esaurito", "non leggibile"
-COMPRABILE = {DISPONIBILE, PREORDINE}
+# ------------------------------------------------------------------ testo
 
-OUT_WORDS = [
-    "prodotto esaurito", "esaurito", "sold out", "non disponibile", "out of stock",
-    "avvisami quando", "informami quando", "inviami un'e-mail quando", "inviami un’e-mail quando",
-]
-PRE_WORDS = ["preordina", "pre-ordina", "prenota ora", "in preordine"]
-IN_WORDS = ["aggiungi al carrello", "acquista ora", "add to cart"]
+def norm(s):
+    s = unicodedata.normalize("NFKD", str(s)).encode("ascii", "ignore").decode().lower()
+    s = s.replace("°", " ").replace("º", " ")
+    s = re.sub(r"[^a-z0-9]+", " ", s)
+    return f" {s.strip()} "
 
 
-# ---------------------------------------------------------------- lettura pagine
+def has(t, *words):
+    return any(f" {w} " in t for w in words)
 
-def parse_price(value):
-    if value is None:
+
+FOREIGN = ["eng", "english", "inglese", "en", "jap", "jpn", "japanese", "giapponese", "giappone",
+           "kor", "korean", "coreano", "chinese", "cinese", "chn", "de", "deutsch", "tedesco",
+           "fr", "francese", "francais", "es", "spagnolo", "espanol"]
+BULK = ["case", "cassa", "x6", "6x", "x2", "2x", "x3", "3x", "factory sealed", "sealed case", "lotto", "set di"]
+
+TYPES_PACKS = {"Box 36 buste": 36, "Set Allenatore": 9, "Bundle 6 buste": 6, "Ultra Premium": 30,
+               "Collezione Premium": 8, "Tin": 4, "Mini Tin": 2}
+
+
+def classify(title):
+    """Tipo di prodotto sigillato dal titolo, oppure None se va scartato."""
+    t = norm(title)
+    if has(t, *FOREIGN) or any(f" {b} " in t for b in BULK):
         return None
-    if isinstance(value, (int, float)):
-        return float(value)
-    s = str(value).strip().replace("€", "").replace("EUR", "").replace("\xa0", "").strip()
+    if has(t, "carta", "card", "singola", "promo") and not has(t, "box", "display", "bundle", "blister",
+                                                               "collezione", "set", "tin"):
+        return None
+    if has(t, "mazzo", "mazzi", "deck", "portfolio", "raccoglitore", "album", "bustine protettive",
+           "sleeves", "toolkit"):
+        return None
+    if "ultra premium" in t:
+        return "Ultra Premium"
+    if has(t, "set allenatore", "etb", "elite trainer", "allenatore fuoriclasse"):
+        return "Set Allenatore"
+    if "premium" in t:
+        return "Collezione Premium"
+    if has(t, "mini tin"):
+        return "Mini Tin"
+    if has(t, "tin"):
+        return "Tin"
+    if has(t, "box", "display", "booster box") and (" 36 " in t or "36 bust" in t):
+        return "Box 36 buste"
+    if has(t, "bundle", "booster bundle") or re.search(r" (confezione|pack|set) (da |di )?6 bust", t) \
+            or re.search(r" 6 (buste|bustine) ", t):
+        return "Bundle 6 buste"
+    if has(t, "blister"):
+        return "Blister"
+    if has(t, "collezione", "collection"):
+        return "Collezione"
+    return None
+
+
+def packs(kind, title):
+    if kind == "Blister":
+        return 3 if re.search(r" 3 (buste|bustine|pack)", norm(title)) else 2
+    return TYPES_PACKS.get(kind)
+
+
+def matches_set(title, s):
+    t = norm(title)
+    if norm(s["cerca"]).strip() in t:
+        return True
+    # gli alias (es. "30th") sono usati anche in inglese: li accettiamo solo se il titolo dice ITA
+    return any(norm(k).strip() and norm(k).strip() in t for k in s.get("alias", [])) and \
+        has(t, "it", "ita", "italiano", "italiana", "italian")
+
+
+def parse_price(v):
+    if v is None:
+        return None
+    if isinstance(v, (int, float)):
+        return float(v)
+    s = str(v).replace("€", "").replace("\xa0", "").strip()
     m = re.search(r"\d[\d.,]*", s)
     if not m:
         return None
@@ -64,308 +130,272 @@ def parse_price(value):
         return None
 
 
-def read_shopify(url, session):
-    """Negozi Shopify: il file .js del prodotto dice esattamente se si compra."""
-    r = session.get(url.split("?")[0].rstrip("/") + ".js", headers=HEADERS, timeout=25)
-    r.raise_for_status()
-    data = r.json()
-    variants = data.get("variants") or []
-    available = bool(data.get("available")) or any(v.get("available") for v in variants)
-    prices = [v.get("price") for v in variants if v.get("price") is not None] or [data.get("price")]
-    prices = [p for p in prices if p is not None]
-    price = min(prices) / 100 if prices else None
-    status = DISPONIBILE if available else ESAURITO
-    return status, price, "dati del negozio (Shopify)"
+# ------------------------------------------------------------------ negozi
 
-
-def _iter_jsonld(soup):
-    for tag in soup.find_all("script", type="application/ld+json"):
-        try:
-            data = json.loads(tag.string or tag.get_text() or "")
-        except (json.JSONDecodeError, TypeError):
-            continue
-        stack = data if isinstance(data, list) else [data]
-        while stack:
-            item = stack.pop()
-            if isinstance(item, list):
-                stack.extend(item)
-            elif isinstance(item, dict):
-                yield item
-                if "@graph" in item:
-                    stack.extend(item["@graph"] if isinstance(item["@graph"], list) else [item["@graph"]])
-
-
-def read_jsonld(soup):
-    for item in _iter_jsonld(soup):
-        types = item.get("@type")
-        types = types if isinstance(types, list) else [types]
-        if "Product" not in types:
-            continue
-        offers = item.get("offers")
-        if isinstance(offers, dict) and "offers" in offers:
-            offers = offers["offers"]
-        offers = offers if isinstance(offers, list) else [offers] if offers else []
-        for off in offers:
-            if not isinstance(off, dict):
-                continue
-            avail = str(off.get("availability", "")).lower()
-            price = parse_price(off.get("price") or off.get("lowPrice") or
-                                (off.get("priceSpecification") or {}).get("price"))
-            if "preorder" in avail or "presale" in avail:
-                return PREORDINE, price
-            if "instock" in avail or "limitedavailability" in avail or "onlineonly" in avail:
-                return DISPONIBILE, price
-            if any(k in avail for k in ("outofstock", "soldout", "discontinued")):
-                return ESAURITO, price
-            if avail == "" and price is not None:
-                return None, price
-    return None, None
-
-
-def read_text(soup):
-    """Parole vicino al pulsante d'acquisto. Restituisce (stato, preciso?).
-
-    'preciso' è True solo se abbiamo trovato il blocco del carrello del prodotto:
-    altrove la pagina può contenere prodotti correlati con scritte 'Esaurito'.
-    """
-    area, precise = None, False
-    for sel in ["form.cart", ".summary .stock", "p.stock", ".product-form", "form[action*='/cart/add']",
-                ".single_add_to_cart_button", ".product-info-main", ".product-add-form"]:
-        el = soup.select_one(sel)
-        if el is not None:
-            area, precise = (el.find_parent() or el), True
-            break
-    if area is None:
-        area = soup.select_one(".product .summary") or soup.select_one("main") or soup.body or soup
-    text = " ".join(area.get_text(" ", strip=True).lower().split())
-    btn = soup.select_one("button.single_add_to_cart_button, button[name='add-to-cart'], button[name='add']")
-    if btn is not None and (btn.has_attr("disabled") or "disabled" in (btn.get("class") or [])):
-        return ESAURITO, True
-    if any(w in text for w in OUT_WORDS):
-        return ESAURITO, precise
-    if any(w in text for w in PRE_WORDS):
-        return PREORDINE, precise
-    if any(w in text for w in IN_WORDS):
-        return DISPONIBILE, precise
-    return None, False
-
-
-def read_price_meta(soup):
-    for sel, attr in [("meta[property='product:price:amount']", "content"),
-                      ("meta[itemprop='price']", "content"), ("[itemprop='price']", "content")]:
-        el = soup.select_one(sel)
-        if el is not None and el.get(attr):
-            p = parse_price(el.get(attr))
-            if p:
-                return p
-    el = soup.select_one(".summary .price ins .amount, .summary .price .amount, p.price .amount")
-    if el is not None:
-        return parse_price(el.get_text())
-    return None
-
-
-def read_html(url, session):
+def get_json(session, url):
     r = session.get(url, headers=HEADERS, timeout=25)
     r.raise_for_status()
-    soup = BeautifulSoup(r.text, "html.parser")
-    status, price = read_jsonld(soup)
-    text_status, precise = read_text(soup)
-    # "Esaurito" scritto accanto al pulsante vince sui dati strutturati
-    if text_status == ESAURITO and precise:
-        status = ESAURITO
-    elif status is None:
-        status = text_status
-    if price is None:
-        price = read_price_meta(soup)
-    return status or SCONOSCIUTO, price, "pagina del negozio"
+    return r.json()
 
 
-def check(product, session):
-    url = product["url"]
-    last_err = None
-    for attempt in range(2):
+def search_shopify(session, site, query):
+    url = (f"{site}/search/suggest.json?q={quote(query)}&resources[type]=product"
+           "&resources[limit]=10&resources[options][unavailable_products]=last")
+    data = get_json(session, url)
+    out = []
+    for p in data.get("resources", {}).get("results", {}).get("products", []):
+        link = p.get("url", "")
+        link = link if link.startswith("http") else site + link.split("?")[0]
+        out.append({"titolo": p.get("title", ""), "url": link,
+                    "comprabile": bool(p.get("available")),
+                    "prezzo": parse_price(p.get("price") or p.get("price_min"))})
+    return out
+
+
+def search_woo(session, site, query, extra=""):
+    url = f"{site}/wp-json/wc/store/v1/products?search={quote(query)}&per_page=50{extra}"
+    data = get_json(session, url)
+    out = []
+    for p in data if isinstance(data, list) else []:
+        prices = p.get("prices") or {}
+        minor = int(prices.get("currency_minor_unit", 2) or 2)
+        raw = prices.get("price")
+        price = int(raw) / 10 ** minor if raw not in (None, "") and str(raw).isdigit() else parse_price(raw)
+        buy = bool(p.get("is_purchasable", True)) and bool(p.get("is_in_stock"))
+        out.append({"titolo": html.unescape(re.sub("<[^>]+>", "", p.get("name", ""))),
+                    "url": p.get("permalink", ""), "comprabile": buy,
+                    "preordine": bool(p.get("is_on_backorder")), "prezzo": price,
+                    "data": p.get("date_created") or ""})
+    return out
+
+
+QUERIES_SHOPIFY = ["{s}", "{s} box", "{s} set allenatore", "{s} bundle", "{s} collezione"]
+
+
+def scan_shop(shop, sets):
+    """Tutte le offerte di un negozio per i set seguiti. Restituisce (offerte, ok, novità)."""
+    session = requests.Session()
+    offers, found_any, errors = {}, False, 0
+    for s in sets:
+        queries = [s["cerca"]] if shop["tipo"] == "woo" else [q.format(s=s["cerca"]) for q in QUERIES_SHOPIFY]
+        for q in queries:
+            try:
+                res = search_woo(session, shop["sito"], q) if shop["tipo"] == "woo" \
+                    else search_shopify(session, shop["sito"], q)
+                found_any = True
+            except Exception:
+                errors += 1
+                if errors >= 3 and not found_any:
+                    return {}, False, []
+                continue
+            for r in res:
+                if not matches_set(r["titolo"], s):
+                    continue
+                kind = classify(r["titolo"])
+                if not kind:
+                    continue
+                offers[r["url"]] = {**r, "set": s["nome"], "tipo": kind, "negozio": shop["nome"]}
+            time.sleep(0.4)
+    news = []
+    if shop["tipo"] == "woo" and found_any:
         try:
-            if "/products/" in url:
-                try:
-                    return read_shopify(url, session)
-                except Exception:
-                    return read_html(url, session)
-            return read_html(url, session)
-        except Exception as e:  # rete, 403, 404...
-            last_err = e
-            time.sleep(3)
-    return SCONOSCIUTO, None, f"errore: {type(last_err).__name__}"
+            for r in search_woo(session, shop["sito"], "pokemon", "&orderby=date&order=desc&per_page=30"):
+                kind = classify(r["titolo"])
+                if kind and not any(matches_set(r["titolo"], s) for s in sets):
+                    news.append({**r, "tipo": kind, "negozio": shop["nome"]})
+        except Exception:
+            pass
+    return offers, found_any, news
 
 
-# ---------------------------------------------------------------- Telegram
+# ------------------------------------------------------------------ Telegram
 
-def tg(method, token, **params):
+def tg(token, method, **params):
     r = requests.post(f"https://api.telegram.org/bot{token}/{method}", data=params, timeout=25)
     r.raise_for_status()
     return r.json()
 
 
-def find_chat_id(token, state):
-    if os.environ.get("TELEGRAM_CHAT_ID"):
-        return os.environ["TELEGRAM_CHAT_ID"]
-    if state.get("chat_id"):
-        return state["chat_id"]
-    if DEFAULT_CHAT_ID:
-        return DEFAULT_CHAT_ID
-    updates = tg("getUpdates", token).get("result", [])
-    for upd in reversed(updates):
-        msg = upd.get("message") or upd.get("edited_message") or {}
-        chat = msg.get("chat") or {}
-        if chat.get("id"):
-            state["chat_id"] = str(chat["id"])
-            return state["chat_id"]
-    return None
+def send(token, chat, text, button=None):
+    params = {"chat_id": chat, "text": text, "parse_mode": "HTML", "disable_web_page_preview": "true"}
+    if button:
+        params["reply_markup"] = json.dumps({"inline_keyboard": [[{"text": button[0], "url": button[1]}]]})
+    tg(token, "sendMessage", **params)
 
 
-def send(token, chat_id, text):
-    # Telegram accetta al massimo 4096 caratteri per messaggio
-    chunks, cur = [], ""
-    for line in text.split("\n"):
-        if len(cur) + len(line) + 1 > 3900:
-            chunks.append(cur)
-            cur = ""
-        cur += line + "\n"
-    if cur.strip():
-        chunks.append(cur)
-    for c in chunks:
-        tg("sendMessage", token, chat_id=chat_id, text=c, parse_mode="HTML",
-           disable_web_page_preview="true")
-
-
-# ---------------------------------------------------------------- messaggi
+# ------------------------------------------------------------------ messaggi
 
 def euro(p):
     return "—" if p is None else f"{p:,.2f} €".replace(",", "X").replace(".", ",").replace("X", ".")
 
 
-ICON = {DISPONIBILE: "🟢", PREORDINE: "🔵", ESAURITO: "🔴", SCONOSCIUTO: "⚪️"}
+def per_pack(o):
+    n = packs(o["tipo"], o["titolo"])
+    return f" · {euro(o['prezzo'] / n)}/busta" if n and o.get("prezzo") else ""
 
 
-def link(p):
-    return f'<a href="{html.escape(p["url"])}">{html.escape(p["nome"])}</a>'
+def esc(s):
+    return html.escape(str(s))
 
 
-def diff(product, old, new):
-    """Restituisce (priorità, riga) se la novità merita un messaggio, altrimenti None."""
-    st, price = new["status"], new["price"]
-    soglia = product.get("soglia")
-    ok_soglia = soglia is None or price is None or price <= soglia
-    ost, oprice = (old or {}).get("status"), (old or {}).get("price")
-    who = f'{link(product)} · {html.escape(product["negozio"])}'
-
-    if st in COMPRABILE and ost not in COMPRABILE and ost is not None:
-        if not ok_soglia:
-            return (3, f"🟡 {who}\n   è tornato {st}, ma a {euro(price)} (sopra la tua soglia di {euro(soglia)})")
-        verb = "PRENOTABILE" if st == PREORDINE else "COMPRABILE"
-        return (0, f"🚨 {who}\n   ora è <b>{verb}</b> a <b>{euro(price)}</b> (era {ost})")
-    if st == ESAURITO and ost in COMPRABILE:
-        return (2, f"🔴 {who}\n   ora è esaurito (prima {ost} a {euro(oprice)})")
-    if st in COMPRABILE and ost in COMPRABILE and price is not None and oprice is not None and price < oprice - 0.009:
-        tag = " — <b>sotto la tua soglia</b>" if soglia and price <= soglia and oprice > soglia else ""
-        return (1, f"💶 {who}\n   prezzo sceso: {euro(oprice)} → <b>{euro(price)}</b>{tag}")
-    return None
+def soglia_for(cfg, set_name, kind):
+    s = next((x for x in cfg["set"] if x["nome"] == set_name), {})
+    return (s.get("soglie") or {}).get(kind, cfg["soglie"].get(kind))
 
 
-def summary(products, results, now):
-    lines = [f"📋 <b>Riepilogo Pokémon</b> · {now:%d/%m %H:%M}", ""]
-    groups = [(DISPONIBILE, "Comprabili"), (PREORDINE, "Prenotabili"), (ESAURITO, "Esauriti"),
-              (SCONOSCIUTO, "Non leggibili")]
-    for st, title in groups:
-        rows = [(p, r) for p, r in zip(products, results) if r["status"] == st]
-        if not rows:
-            continue
-        lines.append(f"{ICON[st]} <b>{title}</b> ({len(rows)})")
-        for p, r in sorted(rows, key=lambda x: (x[1]["price"] or 9e9)):
-            extra = ""
-            if st in COMPRABILE and p.get("soglia") and r["price"] and r["price"] <= p["soglia"]:
-                extra = " 🎯"
-            lines.append(f"• {link(p)} · {html.escape(p['negozio'])} · {euro(r['price'])}{extra}")
+def good(o, cfg):
+    sg = soglia_for(cfg, o["set"], o["tipo"])
+    return o["comprabile"] and o["prezzo"] is not None and (sg is None or o["prezzo"] <= sg)
+
+
+def alert_text(kind, o, old_price=None):
+    label = "prenotabile" if o.get("preordine") else "disponibile"
+    head = {
+        "back": f"🟢 <b>Di nuovo {label}</b>",
+        "new": f"🆕 <b>Appena comparso</b>",
+        "drop": f"💶 <b>Prezzo sceso</b>",
+    }[kind]
+    price = f"<b>{euro(o['prezzo'])}</b>"
+    if kind == "drop":
+        price = f"<s>{euro(old_price)}</s> → <b>{euro(o['prezzo'])}</b>"
+    return (f"{head}\n<b>{esc(o['set'])}</b> · {esc(o['tipo'])}\n"
+            f"{price}{per_pack(o)}\nsu {esc(o['negozio'])}")
+
+
+def summary_text(cfg, offers, shops_ok, news, now):
+    days = ["lun", "mar", "mer", "gio", "ven", "sab", "dom"]
+    months = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto",
+              "settembre", "ottobre", "novembre", "dicembre"]
+    lines = [f"☀️ <b>Pokémon · {days[now.weekday()]} {now.day} {months[now.month - 1]}</b>",
+             f"<i>{shops_ok} negozi controllati</i>", ""]
+
+    best, seen_kinds = {}, {}
+    for o in offers.values():
+        key = (o["set"], o["tipo"])
+        seen_kinds.setdefault(o["set"], set()).add(o["tipo"])
+        if good(o, cfg) and (key not in best or o["prezzo"] < best[key]["prezzo"]):
+            best[key] = o
+
+    order = [s["nome"] for s in cfg["set"]]
+    if best:
+        lines.append("🟢 <b>Da prendere ora</b>")
+        for set_name in order:
+            items = sorted([o for (sn, _), o in best.items() if sn == set_name], key=lambda o: o["prezzo"])
+            if not items:
+                continue
+            lines.append(f"\n<b>{esc(set_name)}</b>")
+            for o in items:
+                others = sum(1 for x in offers.values()
+                             if x["set"] == set_name and x["tipo"] == o["tipo"] and good(x, cfg)) - 1
+                more = (f" (anche in altri {others} negozi)" if others > 1 else " (anche in un altro negozio)") if others > 0 else ""
+                lines.append(f"• {esc(o['tipo'])} — <b>{euro(o['prezzo'])}</b>{per_pack(o)}\n"
+                             f"   <a href=\"{esc(o['url'])}\">{esc(o['negozio'])}</a>{more}")
         lines.append("")
-    ok = sum(1 for r in results if r["status"] != SCONOSCIUTO)
-    lines.append(f"Letti {ok} prodotti su {len(results)}. 🎯 = sotto la tua soglia.")
-    return "\n".join(lines)
+    else:
+        lines += ["Oggi niente di comprabile al prezzo giusto.", ""]
+
+    out_lines = []
+    for set_name in order:
+        missing = sorted(k for k in seen_kinds.get(set_name, set()) if (set_name, k) not in best)
+        if missing:
+            out_lines.append(f"<b>{esc(set_name)}</b>: {esc(', '.join(missing))}")
+    if out_lines:
+        lines.append("🔴 <b>Esauriti o sopra prezzo</b>")
+        lines += out_lines
+        lines.append("")
+
+    if news:
+        lines.append("🆕 <b>Nuovi in catalogo</b> (set non ancora seguiti)")
+        for n in news[:6]:
+            lines.append(f"• <a href=\"{esc(n['url'])}\">{esc(n['titolo'])}</a> — {esc(n['negozio'])}"
+                         f" {euro(n['prezzo'])}")
+        lines.append("")
+    return "\n".join(lines).strip()
 
 
-# ---------------------------------------------------------------- main
+# ------------------------------------------------------------------ main
 
 def main():
+    cfg = json.loads(CONFIG_FILE.read_text())
     token = os.environ.get("TELEGRAM_TOKEN", "").strip()
-    force_summary = os.environ.get("FORCE_SUMMARY", "") == "true"
-    dry = not token
-    products = json.loads(PRODUCTS_FILE.read_text())["prodotti"]
-    state = json.loads(STATE_FILE.read_text()) if STATE_FILE.exists() else {}
-    seen = state.setdefault("prodotti", {})
-    first_run = not seen
+    chat = os.environ.get("TELEGRAM_CHAT_ID", "").strip() or DEFAULT_CHAT_ID
+    force = os.environ.get("FORCE_SUMMARY", "") == "true"
 
-    session = requests.Session()
-    results = []
-    for p in products:
-        status, price, how = check(p, session)
-        results.append({"status": status, "price": price, "how": how})
-        print(f"{ICON[status]} {p['nome']} · {p['negozio']}: {status} {euro(price)} [{how}]")
+    state = json.loads(STATE_FILE.read_text()) if STATE_FILE.exists() else {}
+    if state.get("versione") != STATE_VERSION:
+        state = {"versione": STATE_VERSION}
+    first = "offerte" not in state
+    prev = state.get("offerte", {})
+    known_shops = set(state.get("negozi_visti", []))
+
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        results = list(ex.map(lambda sh: (sh, *scan_shop(sh, cfg["set"])), cfg["negozi"]))
+
+    offers, news, shops_ok = {}, [], 0
+    for shop, off, ok, nw in results:
+        print(f"{'✅' if ok else '⛔️'} {shop['nome']}: {len(off)} prodotti")
+        if ok:
+            shops_ok += 1
+            offers.update(off)
+            news += nw
+        else:
+            # negozio muto: teniamo quello che sapevamo, senza avvisare
+            offers.update({u: o for u, o in prev.items() if o.get("negozio") == shop["nome"]})
+
+    for o in sorted(offers.values(), key=lambda o: (o["set"], o["tipo"], o["prezzo"] or 0)):
+        print(f"   {'🟢' if o['comprabile'] else '🔴'} {o['set']} · {o['tipo']} · {o['negozio']} "
+              f"{euro(o['prezzo'])} — {o['titolo']}")
 
     now = datetime.now(TZ)
     alerts = []
-    for p, r in zip(products, results):
-        key = p["url"]
-        old = seen.get(key)
-        if r["status"] == SCONOSCIUTO:
-            # pagina non letta: teniamo l'ultima situazione nota, contiamo i fallimenti
-            if old:
-                old["fails"] = old.get("fails", 0) + 1
-            continue
-        d = diff(p, old, r)
-        if d:
-            alerts.append(d)
-        seen[key] = {"status": r["status"], "price": r["price"], "fails": 0,
-                     "visto": now.isoformat(timespec="minutes")}
+    if not first:
+        for url, o in offers.items():
+            old = prev.get(url)
+            if not good(o, cfg):
+                continue
+            if old is None:
+                if o["negozio"] in known_shops:  # la prima lettura di un negozio fa da base, niente avvisi
+                    alerts.append((1, alert_text("new", o), o))
+            elif not good(old, cfg):
+                alerts.append((0, alert_text("back", o), o))
+            elif old.get("prezzo") and o["prezzo"] < old["prezzo"] - 0.009:
+                alerts.append((2, alert_text("drop", o, old["prezzo"]), o))
 
-    # tieni in memoria solo i prodotti ancora in lista
-    for key in list(seen):
-        if key not in {p["url"] for p in products}:
-            del seen[key]
+    seen_news = set(state.get("novita_viste", []))
+    fresh_news = [n for n in news if n["url"] not in seen_news]
+    state["novita_viste"] = sorted(seen_news | {n["url"] for n in news})[-500:]
+    for n in ([] if first else fresh_news):
+        alerts.append((3, f"🆕 <b>Nuovo prodotto Pokémon</b>\n{esc(n['titolo'])}\n"
+                          f"<b>{euro(n['prezzo'])}</b> su {esc(n['negozio'])}", {**n}))
 
     msgs = []
-    if alerts:
-        alerts.sort()
-        head = f"🔔 <b>Pokémon: {len(alerts)} novità</b>"
-        msgs.append(head + "\n\n" + "\n\n".join(a[1] for a in alerts))
+    alerts.sort(key=lambda a: a[0])
+    for _, text, o in alerts[:MAX_ALERTS]:
+        msgs.append((text, (f"🛒 Apri {o['negozio']}", o["url"])))
+    if len(alerts) > MAX_ALERTS:
+        msgs.append((f"…e altre {len(alerts) - MAX_ALERTS} novità: le trovi nel riepilogo di domattina.", None))
 
     today = now.date().isoformat()
-    if first_run or force_summary or (now.hour >= SUMMARY_HOUR and state.get("ultimo_riepilogo") != today):
-        text = summary(products, results, now)
-        if first_run:
-            text = "🤖 <b>Robot Pokémon attivo!</b> Ti scrivo appena qualcosa cambia, più un riepilogo ogni mattina.\n\n" + text
-        msgs.append(text)
+    if first or force or (now.hour >= SUMMARY_HOUR and state.get("ultimo_riepilogo") != today):
+        text = summary_text(cfg, offers, shops_ok, fresh_news if not first else [], now)
+        if first:
+            text = "🤖 <b>Robot Pokémon aggiornato!</b> Ora cerco da solo in tutti i negozi.\n\n" + text
+        msgs.append((text, None))
         state["ultimo_riepilogo"] = today
 
-    unreadable = sum(1 for r in results if r["status"] == SCONOSCIUTO)
-    if unreadable > len(results) / 2 and state.get("avviso_blocco") != today:
-        msgs.append(f"⚠️ Non sono riuscito a leggere {unreadable} negozi su {len(results)}. "
-                    "Se succede di nuovo domani, scrivilo a Claude.")
-        state["avviso_blocco"] = today
-
-    state["ultimo_controllo"] = now.isoformat(timespec="minutes")
-
-    if dry:
-        print("\n--- TELEGRAM_TOKEN mancante: messaggi non inviati ---")
-        for m in msgs:
-            print(m, "\n")
-    elif msgs:
-        chat_id = find_chat_id(token, state)
-        if not chat_id:
-            print("Nessuna chat trovata: apri il bot su Telegram e premi Avvia, poi rilancia.")
-            STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=1))
-            sys.exit(1)
-        for m in msgs:
-            send(token, chat_id, m)
+    if token:
+        for text, btn in msgs:
+            send(token, chat, text, btn)
         print(f"Inviati {len(msgs)} messaggi.")
+    else:
+        print("\n--- TELEGRAM_TOKEN mancante: anteprima ---")
+        for text, btn in msgs:
+            print(text, f"\n[{btn[0]}]" if btn else "", "\n")
 
+    state["offerte"] = offers
+    state["ultimo_controllo"] = now.isoformat(timespec="minutes")
+    state["negozi_letti"] = shops_ok
+    state["negozi_visti"] = sorted(known_shops | {sh["nome"] for sh, _, ok, _ in results if ok})
     STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=1))
 
 
