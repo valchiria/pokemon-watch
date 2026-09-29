@@ -1788,21 +1788,9 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
-   "comprabile": false,
-   "prezzo": 39.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Manuelpoke3",
-   "stato": "esaurito"
-  },
-  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
+   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -1824,9 +1812,21 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
-   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
+   "comprabile": false,
+   "prezzo": 39.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Manuelpoke3",
+   "stato": "esaurito"
+  },
+  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -2040,18 +2040,6 @@
    "negozio": "Baruzcard",
    "stato": "esaurito"
   },
-  "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-set-allenatore-ita": {
-   "titolo": "Pokémon Promo Bundle Equilibrio Perfetto Display 36 Buste + Set Allenatore ITA",
-   "url": "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-set-allenatore-ita",
-   "comprabile": false,
-   "prezzo": 239.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Set Allenatore",
-   "negozio": "Baruzcard",
-   "stato": "esaurito"
-  },
   "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-bundle-6-bustine-ita": {
    "titolo": "Pokémon Promo Bundle Equilibrio Perfetto Display 36 Buste + Bundle 6 Bustine ITA",
    "url": "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-bundle-6-bustine-ita",
@@ -2061,6 +2049,18 @@
    "uscita": null,
    "set": "Equilibrio Perfetto",
    "tipo": "Box 36 buste",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
+  "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-set-allenatore-ita": {
+   "titolo": "Pokémon Promo Bundle Equilibrio Perfetto Display 36 Buste + Set Allenatore ITA",
+   "url": "https://baruzcard.it/products/pokemon-promo-bundle-equilibrio-perfetto-display-36-buste-set-allenatore-ita",
+   "comprabile": false,
+   "prezzo": 239.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Set Allenatore",
    "negozio": "Baruzcard",
    "stato": "esaurito"
   },
@@ -3696,6 +3696,18 @@
    "negozio": "GS Gameon",
    "stato": "disponibile"
   },
+  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
+   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
+   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
+   "comprabile": true,
+   "prezzo": 119.99,
+   "preordine": false,
+   "uscita": null,
+   "set": "30° Anniversario",
+   "tipo": "Set Allenatore",
+   "negozio": "GS Gameon",
+   "stato": "disponibile"
+  },
   "https://www.gs-gameon.com/products/30-anniversario-tin-da-collezione-sylveon-ex-greninja-ex-ita": {
    "titolo": "30° Anniversario: Tin da Collezione Sylveon-ex (ITA)",
    "url": "https://www.gs-gameon.com/products/30-anniversario-tin-da-collezione-sylveon-ex-greninja-ex-ita",
@@ -3996,18 +4008,6 @@
    "negozio": "Warcard",
    "stato": "disponibile"
   },
-  "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb": {
-   "titolo": "Equilibrio Perfetto - Set Allenatore Fuoriclasse (ETB)",
-   "url": "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb",
-   "comprabile": true,
-   "prezzo": 69.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Set Allenatore",
-   "negozio": "Warcard",
-   "stato": "disponibile"
-  },
   "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste": {
    "titolo": "Equilibrio Perfetto - Box da 36 Buste",
    "url": "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste",
@@ -4017,6 +4017,18 @@
    "uscita": null,
    "set": "Equilibrio Perfetto",
    "tipo": "Box 36 buste",
+   "negozio": "Warcard",
+   "stato": "disponibile"
+  },
+  "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb": {
+   "titolo": "Equilibrio Perfetto - Set Allenatore Fuoriclasse (ETB)",
+   "url": "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb",
+   "comprabile": true,
+   "prezzo": 69.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Set Allenatore",
    "negozio": "Warcard",
    "stato": "disponibile"
   },
@@ -4409,19 +4421,6 @@
    "negozio": "Cardverse",
    "stato": "disponibile",
    "sparito": "2026-09-28"
-  },
-  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
-   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
-   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
-   "comprabile": true,
-   "prezzo": 119.99,
-   "preordine": false,
-   "uscita": null,
-   "set": "30° Anniversario",
-   "tipo": "Set Allenatore",
-   "negozio": "GS Gameon",
-   "stato": "disponibile",
-   "sparito": "2026-09-29"
   }
  },
  "mercato": {
@@ -4876,7 +4875,7 @@
   "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto|42",
   "2026-11-06|Dominio Delta|Uscita Dominio Delta|42"
  ],
- "ultimo_controllo": "2026-09-29T05:01+02:00",
+ "ultimo_controllo": "2026-09-29T06:01+02:00",
  "negozi_letti": 13,
  "nomi_set": {
   "Dominio Delta": {
