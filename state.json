@@ -1348,7 +1348,7 @@
    "titolo": "Pokémon – Megaevoluzione Fiamme Spettrali Set Allenatore Fuoriclasse (ITA)",
    "url": "https://cardverse.it/products/pokemon-megaevoluzione-fiamme-spettrali-set-allenatore-fuoriclasse-ita",
    "comprabile": true,
-   "prezzo": 82.0,
+   "prezzo": 81.0,
    "preordine": false,
    "uscita": null,
    "set": "Fiamme Spettrali",
@@ -2193,6 +2193,30 @@
    "uscita": null,
    "set": "Fiamme Spettrali",
    "tipo": "Box 36 buste",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
+  "https://baruzcard.it/products/pokemon-set-allenatore-fiamme-spettrali-ita": {
+   "titolo": "Pokemon Set Allenatore Fiamme Spettrali ITA",
+   "url": "https://baruzcard.it/products/pokemon-set-allenatore-fiamme-spettrali-ita",
+   "comprabile": false,
+   "prezzo": 64.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Fiamme Spettrali",
+   "tipo": "Set Allenatore",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
+  "https://baruzcard.it/products/pokemon-megaevoluzione-fiamme-spettrali-bundle-6-buste-ita": {
+   "titolo": "Pokemon Megaevoluzione Fiamme Spettrali Bundle 6 buste ITA",
+   "url": "https://baruzcard.it/products/pokemon-megaevoluzione-fiamme-spettrali-bundle-6-buste-ita",
+   "comprabile": false,
+   "prezzo": 44.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Fiamme Spettrali",
+   "tipo": "Bundle 6 buste",
    "negozio": "Baruzcard",
    "stato": "esaurito"
   },
@@ -3528,21 +3552,21 @@
    "negozio": "Otakura",
    "stato": "disponibile"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it": {
-   "titolo": "Megaevoluzione - Ascesa Eroica - Set Allenatore Fuoriclasse (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Gengar (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it",
    "comprabile": false,
-   "prezzo": 76.0,
+   "prezzo": 27.0,
    "preordine": true,
    "uscita": null,
    "set": "Ascesa Eroica",
-   "tipo": "Set Allenatore",
+   "tipo": "Collezione",
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Lucario-ex (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it",
    "comprabile": false,
    "prezzo": 76.0,
    "preordine": true,
@@ -3552,15 +3576,15 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-e-mega-gengar-bundle-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Charizard Y e Mega Gengar - Bundle (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-e-mega-gengar-bundle-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it": {
+   "titolo": "Megaevoluzione - Ascesa Eroica - Set Allenatore Fuoriclasse (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it",
    "comprabile": false,
-   "prezzo": 53.0,
+   "prezzo": 76.0,
    "preordine": true,
    "uscita": null,
    "set": "Ascesa Eroica",
-   "tipo": "Bundle 6 buste",
+   "tipo": "Set Allenatore",
    "negozio": "Otakura",
    "stato": "esaurito"
   },
@@ -3576,15 +3600,15 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Gengar (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-e-mega-gengar-bundle-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Charizard Y e Mega Gengar - Bundle (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-e-mega-gengar-bundle-it",
    "comprabile": false,
-   "prezzo": 27.0,
+   "prezzo": 53.0,
    "preordine": true,
    "uscita": null,
    "set": "Ascesa Eroica",
-   "tipo": "Collezione",
+   "tipo": "Bundle 6 buste",
    "negozio": "Otakura",
    "stato": "esaurito"
   },
@@ -3600,9 +3624,9 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Lucario-ex (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
    "comprabile": false,
    "prezzo": 76.0,
    "preordine": true,
@@ -3693,18 +3717,6 @@
    "uscita": null,
    "set": "30° Anniversario",
    "tipo": "Tin",
-   "negozio": "GS Gameon",
-   "stato": "disponibile"
-  },
-  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
-   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
-   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
-   "comprabile": true,
-   "prezzo": 119.99,
-   "preordine": false,
-   "uscita": null,
-   "set": "30° Anniversario",
-   "tipo": "Set Allenatore",
    "negozio": "GS Gameon",
    "stato": "disponibile"
   },
@@ -4421,6 +4433,19 @@
    "negozio": "Cardverse",
    "stato": "disponibile",
    "sparito": "2026-09-28"
+  },
+  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
+   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
+   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
+   "comprabile": true,
+   "prezzo": 119.99,
+   "preordine": false,
+   "uscita": null,
+   "set": "30° Anniversario",
+   "tipo": "Set Allenatore",
+   "negozio": "GS Gameon",
+   "stato": "disponibile",
+   "sparito": "2026-09-29"
   }
  },
  "mercato": {
@@ -4692,9 +4717,9 @@
    "data": "2026-09-28"
   },
   "Fiamme Spettrali|Set Allenatore|": {
-   "prezzo": 82.0,
+   "prezzo": 81.0,
    "negozio": "Cardverse",
-   "data": "2026-09-28"
+   "data": "2026-09-29"
   },
   "30° Anniversario|Mini Tin|": {
    "prezzo": 14.9,
@@ -4875,7 +4900,7 @@
   "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto|42",
   "2026-11-06|Dominio Delta|Uscita Dominio Delta|42"
  ],
- "ultimo_controllo": "2026-09-29T06:01+02:00",
+ "ultimo_controllo": "2026-09-29T07:01+02:00",
  "negozi_letti": 13,
  "nomi_set": {
   "Dominio Delta": {
