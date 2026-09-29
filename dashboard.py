@@ -103,9 +103,17 @@ def render(d, mode="page"):
     if d["focus"]:
         out.append('<section class="focus"><h2><span class="dot" style="background:#e66767"></span>In primo piano</h2>')
         for f in d["focus"][:lim(3)]:
+            verdict = ""
+            if f.get("giudizio"):
+                cls, txt = {"sotto": ("ok", f'{f["scost"]}% sul listino'),
+                            "allineato": ("bassa", "a listino"),
+                            "accettabile": ("media", f'+{f["scost"]}% accettabile'),
+                            "gonfiato": ("alta", f'+{f["scost"]}% gonfiato')}[f["giudizio"]]
+                verdict = f'<div class="sub" style="margin-top:4px"><span class="chip {cls}" style="margin-left:0">{e(txt)}</span>' + \
+                    (f' obiettivo {e(f["obiettivo"])}' if f.get("obiettivo") else "") + '</div>'
             out.append(f'<div class="row"><div class="l"><b>{e(f["label"])}</b>{_chip(f["level"])}'
                        f'<div class="sub">{e(f["set"])} · {e(f["stato"])}</div>'
-                       f'<div class="why">{e(f["why"])}</div>{_meter(f["score"])}</div>'
+                       f'<div class="why">{e(f["why"])}</div>{verdict}{_meter(f["score"])}</div>'
                        f'<div class="r">{_a(f.get("url"), "<b>" + e(f["prezzo"]) + "</b>", page)}'
                        f'<div class="sub">{e(f["dove"])}</div></div></div>')
         out.append('</section>')
@@ -123,7 +131,7 @@ def render(d, mode="page"):
     if d["preordini"]:
         out.append('<section><h2><span class="dot" style="background:#d95926"></span>Preordini aperti</h2>')
         for p in d["preordini"][:lim(4)]:
-            warn = ' <span class="chip alta">sopra listino</span>' if p["sopra"] else ""
+            warn = f' <span class="chip {p["giudizio"][0]}">{e(p["giudizio"][1])}</span>' if p.get("giudizio") else ""
             out.append(f'<div class="row"><div class="l"><b>{e(p["label"])}</b>{_chip(p["level"])}'
                        f'<div class="sub">{e(p["set"])} · {p["n"]} {"negozio" if p["n"] == 1 else "negozi"}</div></div>'
                        f'<div class="r">{_a(p["url"], "<b>" + e(p["prezzo"]) + "</b>", page)}{warn}'

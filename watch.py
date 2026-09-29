@@ -85,6 +85,7 @@ TYPES_PACKS = {"Box 36 buste": 36, "Set Allenatore": 9, "Bundle 6 buste": 6, "Ul
                "Collezione Premium": 8, "Tin": 4, "Mini Tin": 2}
 PACK_TYPES = {"Box 36 buste", "Set Allenatore", "Bundle 6 buste", "Blister"}
 COLLECTOR_TYPES = {"Ultra Premium", "Collezione Premium"}
+STANDARD_PRICE_TYPES = {"Box 36 buste", "Set Allenatore", "Bundle 6 buste", "Blister", "Ultra Premium"}
 FEATURES = [("pokemon center", "Pokémon Center"), ("poster", "Poster"), ("adesivi", "Adesivi"),
             ("sticker", "Adesivi"), ("raccoglitore", "Raccoglitore"), ("binder", "Raccoglitore"),
             ("figura", "Figura"), ("spilla", "Spille"), ("spille", "Spille"), ("moneta", "Moneta")]
@@ -483,6 +484,7 @@ class Ctx:
         self.shops = {s["nome"]: s for s in cfg["negozi"]}
         self.sets = {s["nome"]: s for s in cfg["set"]}
         self.interest = {}  # chiave prodotto -> (punteggio 0-100, motivi)
+        self.first_prices = {}  # chiave prodotto -> {negozio: primo prezzo visto}
 
     def interest_of(self, o):
         return self.interest.get(product_key(o), (0, []))
@@ -532,24 +534,86 @@ class Ctx:
             return None
         return mv["ev_busta"] * n / o["prezzo"]
 
+    # ---- giudizio sul prezzo: sotto listino / allineato / accettabile / gonfiato
+
+    def reference(self, o):
+        """(prezzo di riferimento, fonte). 1) listino ufficiale in config, 2) per i prodotti con listino
+        standard (box, set allenatore...) il listino tipico, 3) per collezioni e tin il prezzo più basso
+        con cui i negozi l'hanno messo in vendita la prima volta, 4) il listino tipico del tipo."""
+        s = self.sets.get(o["set"], {})
+        lst = s.get("listini") or {}
+        label = product_label(o)
+        if label in lst:
+            return lst[label], "ufficiale"
+        if o["tipo"] in lst:
+            return lst[o["tipo"]], "ufficiale"
+        sg = self.soglia(o)
+        if sg is None:
+            return None, None
+        if o["tipo"] in STANDARD_PRICE_TYPES:
+            return sg, "tipico"
+        first = sorted(p for p in self.first_prices.get(product_key(o), {}).values() if p)
+        if first:
+            # prezzo di lancio: il più basso, ma con 3+ negozi il secondo (un errore di prezzo non lo falsa)
+            launch = first[1] if len(first) >= 3 else first[0]
+            return round(min(sg, launch), 2), "negozi"
+        return sg, "tipico"
+
+    def tolerance(self, o):
+        t = self.cfg.get("tolleranza") or {}
+        return t.get("richiesto", 0.30) if self.hot(o) else t.get("normale", 0.15)
+
+    def verdict(self, o):
+        """(fascia, scostamento, riferimento): fascia = sotto | allineato | accettabile | gonfiato."""
+        ref, _ = self.reference(o)
+        if not ref or o.get("prezzo") is None:
+            return "allineato", 0.0, ref
+        pct = o["prezzo"] / ref - 1
+        if pct <= -0.05:
+            band = "sotto"
+        elif pct <= 0.05:
+            band = "allineato"
+        elif pct <= self.tolerance(o) + 0.0001:
+            band = "accettabile"
+        else:
+            band = "gonfiato"
+        return band, pct, ref
+
+    def target(self, o):
+        ref, _ = self.reference(o)
+        return round(ref * (1 + self.tolerance(o)), 2) if ref else None
+
+    def verdict_text(self, o, group=()):
+        band, pct, ref = self.verdict(o)
+        if not ref:
+            return ""
+        p = round(abs(pct) * 100)
+        src = {"ufficiale": "listino", "tipico": "listino tipico", "negozi": "prezzo di lancio"}[self.reference(o)[1]]
+        txt = {"sotto": f"🟢 {p}% sotto il {src} ({euro(ref)})",
+               "allineato": f"⚪ In linea col {src} ({euro(ref)})",
+               "accettabile": f"🟡 +{p}% sul {src} ({euro(ref)}): accettabile",
+               "gonfiato": f"🔴 +{p}% sul {src} ({euro(ref)}): troppo caro, obiettivo {euro(self.target(o))}"}[band]
+        others = sorted(x["prezzo"] for x in group if x is not o and x.get("prezzo")
+                        and x["stato"] in ("disponibile", "preordine"))
+        if len(others) >= 2 and o.get("prezzo"):
+            med = others[len(others) // 2]
+            if o["prezzo"] <= med * 0.85:
+                txt += f" · {round((1 - o['prezzo'] / med) * 100)}% sotto gli altri negozi"
+        return txt
+
     def good(self, o):
-        """Da segnalare come acquisto: sotto listino, oppure da collezione entro tolleranza,
-        oppure buste il cui valore medio in carte ripaga il prezzo."""
+        """Da segnalare come acquisto: prezzo non gonfiato rispetto al riferimento, oppure buste il cui
+        valore medio in carte ripaga il prezzo."""
         if not o.get("comprabile") or o.get("prezzo") is None:
             return False
-        sg = self.soglia(o)
-        if sg is None or o["prezzo"] <= sg:
+        if self.verdict(o)[0] != "gonfiato":
             return True
-        if (self.collector(o) or self.hot(o)) and o["prezzo"] <= sg * self.cfg.get("tolleranza_collezione", 1.5):
-            return True  # da collezione o molto richiesto: interessa anche un po' sopra listino
         r = self.ev_ratio(o)
         return r is not None and r >= self.cfg.get("affare_buste", 1.0)
 
     def over_text(self, o):
-        sg = self.soglia(o)
-        if sg and o.get("prezzo") and o["prezzo"] > sg + 0.009:
-            return f"⚠️ Sopra listino ({euro(sg)}) del {max(1, round((o['prezzo'] / sg - 1) * 100))}%"
-        return ""
+        """Non vuoto se il prezzo è gonfiato (usato per i segnali ⚠️/🔴)."""
+        return self.verdict_text(o) if self.verdict(o)[0] == "gonfiato" else ""
 
     def per_pack(self, o):
         n = packs(o["tipo"], o["titolo"])
@@ -630,35 +694,37 @@ def hot_line(ctx, o):
     return f"🔥 Interesse alto ({sc}/100): {esc(', '.join(why[:2]) or 'prodotto da collezione')}"
 
 
-def alert_text(ctx, kind, o, old_price=None, others=()):
-    """Scheda per un prodotto disponibile. Restituisce (testo, pulsanti)."""
+def alert_text(ctx, kind, o, old_price=None, others=(), group=()):
+    """Scheda per un prodotto disponibile a un prezzo sensato. Restituisce (testo, pulsanti)."""
     head = {"back": "🟢 <b>DI NUOVO DISPONIBILE</b>", "new": "🆕 <b>APPENA COMPARSO</b>",
-            "drop": "💶 <b>PREZZO SCESO</b>"}[kind]
+            "drop": "💶 <b>PREZZO SCESO</b>", "target": "🎯 <b>PREZZO OBIETTIVO RAGGIUNTO</b>"}[kind]
     lines = card(head, o, ctx.collector(o))
     lines.append(SEP)
     price = f"<b>{euro(o['prezzo'])}</b>"
-    if kind == "drop" and old_price:
+    if kind in ("drop", "target") and old_price:
         price = f"<s>{euro(old_price)}</s> → <b>{euro(o['prezzo'])}</b>"
     lines.append(f"{price}{ctx.per_pack(o) if o['tipo'] in PACK_TYPES else ''}")
-    lines.append(f"🚚 {ctx.ship_text(o)}")
-    lines += [x for x in (hot_line(ctx, o), ctx.min_line(o), ctx.value_line(o), ctx.over_text(o)) if x]
+    lines += [x for x in (ctx.verdict_text(o, group), f"🚚 {ctx.ship_text(o)}", hot_line(ctx, o),
+                          ctx.min_line(o), ctx.value_line(o)) if x]
     n_others = len(others)
     others = sorted(others, key=ctx.total)[:2]  # il migliore + le 2 alternative più convenienti
     if n_others:
-        lines.append(f"<i>Disponibile anche in altri {n_others} "
+        lines.append(f"<i>A un prezzo sensato anche in altri {n_others} "
                      f"{'negozio' if n_others == 1 else 'negozi'}</i>")
     buttons = [button(o)] + [button(x, prefix="") for x in others]
     return "\n".join(lines), buttons
 
 
 def preorder_text(ctx, group, new_urls, dropped):
-    """Scheda per un preordine: un pulsante per ogni negozio dove è prenotabile."""
+    """Scheda per un preordine: un pulsante per ogni negozio dove è prenotabile a un prezzo sensato."""
     first = group[0]
     opened = sorted([o for o in group if o["stato"] == "preordine"], key=ctx.total)
+    fair = [o for o in opened if ctx.verdict(o)[0] != "gonfiato"]
+    pricey = [o for o in opened if ctx.verdict(o)[0] == "gonfiato"]
     waiting = sorted({o["negozio"] for o in group if o["stato"] == "in_arrivo"} -
                      {o["negozio"] for o in opened})
     head = "📅 <b>PREORDINE APERTO</b>" if new_urls else "💶 <b>PREORDINE · PREZZO SCESO</b>"
-    if ctx.hot(first) and new_urls:
+    if ctx.hot(first) and new_urls and fair:
         head = "🔥 <b>PRIORITÀ · PREORDINE APERTO</b>"
     lines = card(head, first, ctx.collector(first))
     rel = fmt_release(ctx, opened + group)
@@ -666,27 +732,35 @@ def preorder_text(ctx, group, new_urls, dropped):
         lines.append(f"🗓 {rel}")
     lines.append(SEP)
     n = len(opened)
-    if ctx.hot(first):
-        lines.append(hot_line(ctx, first))
-        lines.append("<b>Tende a sparire: prenotalo subito, meglio se vicino al listino.</b>")
     lines.append(f"Prenotabile in <b>{n}</b> {'negozio' if n == 1 else 'negozi'}"
                  f"{' · ⭐ appena aperto' if new_urls else ''}")
-    best = opened[0]
-    lines.append(f"Il migliore: <b>{euro(best['prezzo'])}</b> su {esc(best['negozio'])} · {ctx.ship_text(best)}")
-    if any(ctx.over_text(o) for o in opened):
-        lines.append(f"⚠️ = sopra listino ({euro(ctx.soglia(best))})")
-    vl = ctx.value_line(best)
+    if ctx.hot(first):
+        lines.append(hot_line(ctx, first))
+    if fair:
+        best = fair[0]
+        lines.append(f"Il migliore: <b>{euro(best['prezzo'])}</b> su {esc(best['negozio'])} · {ctx.ship_text(best)}")
+        lines.append(ctx.verdict_text(best, group))
+        if ctx.hot(first):
+            lines.append("<b>Tende a sparire: se ti interessa, prenotalo subito.</b>")
+    else:
+        best = opened[0]
+        lines.append(f"🔴 Per ora solo prezzi gonfiati (da {euro(best['prezzo'])}): "
+                     f"ti avviso se qualcuno lo mette sotto {euro(ctx.target(best))}.")
+    vl = ctx.value_line(fair[0] if fair else best)
     if vl:
         lines.append(vl)
+    if pricey and fair:
+        lines.append("🔴 Troppo cari: " + ", ".join(f"{esc(o['negozio'])} {euro(o['prezzo'])}" for o in pricey[:4]))
     if waiting:
         lines.append(f"⏳ Non ancora prenotabile: {esc(', '.join(waiting))}")
-    extra = opened[MAX_BUTTONS:]
+    extra = fair[MAX_BUTTONS:]
     if extra:
         lines.append("Anche su: " + ", ".join(f"{link(o)} {euro(o['prezzo'])}" for o in extra))
     buttons = []
-    for o in opened[:MAX_BUTTONS]:
+    for o in fair[:MAX_BUTTONS]:
         mark = "⭐ " if o["url"] in new_urls else ("⬇️ " if o["url"] in dropped else "")
-        buttons.append(button(o, prefix=mark, suffix=" ⚠️" if ctx.over_text(o) else ""))
+        band = ctx.verdict(o)[0]
+        buttons.append(button(o, prefix=mark, suffix={"sotto": " 🟢", "accettabile": " 🟡"}.get(band, "")))
     return "\n".join(lines), buttons
 
 
@@ -800,8 +874,8 @@ def deal_score(ctx, o, key, group):
     listino, con bonus per nuovi minimi, buste che rendono e prodotti principali."""
     prices = sorted(x["prezzo"] for x in group if x.get("prezzo") and x["stato"] in ("disponibile", "esaurito"))
     median = prices[len(prices) // 2] if prices else o["prezzo"]
-    sg = ctx.soglia(o) or o["prezzo"]
-    score = o["prezzo"] / median + 0.3 * max(0.0, o["prezzo"] / sg - 1)  # sopra listino: penalità
+    _, pct, _ = ctx.verdict(o)
+    score = 0.5 * (o["prezzo"] / median) + 0.5 * (1 + pct)  # metà rispetto agli altri negozi, metà al listino
     m = ctx.minimi.get(key)
     if m and o["prezzo"] < m["prezzo"] - 0.009:
         score -= 0.10  # nuovo minimo
@@ -945,11 +1019,16 @@ def dashboard_data(ctx, offers, groups, shops_ok, now, news_items, archived):
         o = buy[0] if buy else g[0]
         st = {"preordine": "preordine aperto", "disponibile": "disponibile"}.get(
             o["stato"], "in arrivo" if o["stato"] == "in_arrivo" else "esaurito ovunque")
+        band, pct, ref = ctx.verdict(o)
+        if not buy:
+            band = None
         focus.append({"score": sc, "level": interest.level(sc), "label": product_label(o), "set": o["set"],
                       "stato": st, "why": ", ".join(why[:2]) or "prodotto da collezione",
                       "prezzo": euro(o["prezzo"]) if buy else "—",
-                      "dove": o["negozio"] if buy else f"listino {euro(ctx.soglia(o))}",
-                      "url": o["url"] if buy else None})
+                      "dove": o["negozio"] if buy else f"listino {euro(ref)}",
+                      "url": o["url"] if buy and band != "gonfiato" else None,
+                      "giudizio": band, "scost": round(pct * 100) if buy else None,
+                      "obiettivo": euro(ctx.target(o)) if band == "gonfiato" else None})
     focus.sort(key=lambda f: -f["score"])
     d["focus"] = focus[:6]
 
@@ -970,9 +1049,12 @@ def dashboard_data(ctx, offers, groups, shops_ok, now, news_items, archived):
         if op and op[0]["set"] not in archived:
             b = op[0]
             sc = ctx.interest.get(k, (0, []))[0]
+            band, pct, _ = ctx.verdict(b)
+            chip = {"sotto": ("ok", f"{round(pct * 100)}%"), "allineato": ("bassa", "a listino"),
+                    "accettabile": ("media", f"+{round(pct * 100)}%")}.get(band, ("alta", f"+{round(pct * 100)}% gonfiato"))
             pre.append((-sc, {"label": product_label(b), "set": b["set"], "prezzo": euro(b["prezzo"]),
-                              "negozio": b["negozio"], "url": b["url"], "n": len(op), "level": interest.level(sc),
-                              "sopra": bool(ctx.over_text(b))}))
+                              "negozio": b["negozio"], "url": b["url"] if band != "gonfiato" else None, "n": len(op),
+                              "level": interest.level(sc), "sopra": band == "gonfiato", "giudizio": chip}))
     d["preordini"] = [p for _, p in sorted(pre, key=lambda x: x[0])]
 
     d["occasioni"] = []
@@ -980,6 +1062,9 @@ def dashboard_data(ctx, offers, groups, shops_ok, now, news_items, archived):
         if b["set"] in archived:
             continue
         tags = []
+        band, pct, _ = ctx.verdict(b)
+        tags.append({"sotto": ("ok", f"{round(pct * 100)}%"), "allineato": ("bassa", "a listino"),
+                     "accettabile": ("media", f"+{round(pct * 100)}%")}.get(band, ("alta", f"+{round(pct * 100)}%")))
         m = ctx.minimi.get(k)
         if m and b["prezzo"] < m["prezzo"] - 0.009:
             tags.append(("ok", "minimo"))
@@ -1005,7 +1090,7 @@ def dashboard_data(ctx, offers, groups, shops_ok, now, news_items, archived):
     d["mercato"].sort(key=lambda m: -(m["rende"] or 0))
 
     d["notizie"] = [{"titolo": n["titolo"][:110], "fonte": n["fonte"], "url": n["url"], "ufficiale": n.get("ufficiale")}
-                    for n in news_items[:8]]
+                    for n in news_items if sources.relevant(n["titolo"])][:8]
     d["seguiti"] = [s["nome"] for s in ctx.cfg["set"] if s["nome"] not in archived]
     d["archiviati"] = sorted(archived)
     d["kpi"] = [{"label": "Preordini", "value": str(len(d["preordini"])),
@@ -1198,15 +1283,25 @@ def main():
     for o in offers.values():
         groups.setdefault(product_key(o), []).append(o)
 
+    # 💶 primo prezzo con cui ogni negozio ha messo in vendita ogni prodotto (serve per il "prezzo di lancio")
+    firsts = state.setdefault("primi_prezzi", {})
+    for k, g in groups.items():
+        fp = firsts.setdefault(k, {})
+        for o in g:
+            if o.get("prezzo") and o["negozio"] not in fp:
+                fp[o["negozio"]] = o["prezzo"]
+    ctx.first_prices = firsts
+
     # 🔥 indice di interesse di ogni prodotto + storico giornaliero della domanda
     hist = state.setdefault("storia", {})
     for k, g in groups.items():
         o0 = g[0]
+        ref = ctx.reference(o0)[0]
         flags = (bool(ctx.sets.get(o0["set"], {}).get("speciale")),
                  any("pokemon center" in norm(o["titolo"]) or has(norm(o["titolo"]), "esclusiva", "esclusivo")
                      for o in g))
-        ctx.interest[k] = interest.score(o0, g, ctx.soglia(o0), flags, hist.get(k), today)
-        interest.record(hist, k, interest.snapshot(g, ctx.soglia(o0)), today)
+        ctx.interest[k] = interest.score(o0, g, ref, flags, hist.get(k), today)
+        interest.record(hist, k, interest.snapshot(g, ref), today)
     for k in [k for k in hist if k not in groups and hist[k][-1]["d"] < (today - timedelta(days=30)).isoformat()]:
         del hist[k]
 
@@ -1247,14 +1342,21 @@ def main():
                 continue  # uscito: era già prenotabile, lo sapevi
             others = [x for x in groups[k] if x is not o and x["stato"] == "disponibile" and ctx.good(x)]
             boost = -1 if ctx.hot(o) else 0  # i prodotti molto richiesti passano davanti
+            g = groups[k]
             if old is None:
-                alerts.append((2 + boost, *alert_text(ctx, "new", o, others=others)))
+                alerts.append((2 + boost, *alert_text(ctx, "new", o, others=others, group=g)))
+            elif old.get("stato") == "disponibile" and old.get("prezzo") and not ctx.good(old):
+                # era in vendita ma a prezzo gonfiato, ora è sceso a un prezzo sensato
+                alerts.append((0 + boost, *alert_text(ctx, "target", o, old["prezzo"], others=others, group=g)))
             elif not (old.get("stato") == "disponibile" and ctx.good(old)):
-                alerts.append((1 + boost, *alert_text(ctx, "back", o, others=others)))
+                alerts.append((1 + boost, *alert_text(ctx, "back", o, others=others, group=g)))
             elif old.get("prezzo") and o["prezzo"] < old["prezzo"] - 0.009:
-                alerts.append((3 + boost, *alert_text(ctx, "drop", o, old["prezzo"], others=others)))
+                alerts.append((3 + boost, *alert_text(ctx, "drop", o, old["prezzo"], others=others, group=g)))
 
         for k in set(pre_new) | set(pre_drop):
+            if k not in pre_new and not any(ctx.verdict(o)[0] != "gonfiato"
+                                            for o in groups[k] if o["stato"] == "preordine"):
+                continue  # è sceso ma resta gonfiato: niente avviso
             alerts.append((0 if k in pre_new else 3,
                            *preorder_text(ctx, groups[k], pre_new.get(k, set()), pre_drop.get(k, set()))))
 
@@ -1400,7 +1502,12 @@ def summary_caption(ctx, d, groups):
         lines.append(f"📅 Prossima: {esc(u['set'])} — {esc(u['cosa'])}, {esc(u['tra'])}")
     if d["focus"]:
         f = d["focus"][0]
-        lines.append(f"💎 In primo piano: {esc(f['label'])} {esc(f['set'])} ({esc(f['stato'])})")
+        price = ""
+        if f.get("giudizio") == "gonfiato":
+            price = f", {esc(f['prezzo'])} = +{f['scost']}%: aspetta, obiettivo {esc(f['obiettivo'])}"
+        elif f.get("giudizio"):
+            price = f", {esc(f['prezzo'])} su {esc(f['dove'])}"
+        lines.append(f"💎 In primo piano: {esc(f['label'])} {esc(f['set'])} ({esc(f['stato'])}{price})")
     return "\n".join(lines)
 
 
@@ -1413,16 +1520,18 @@ def summary_buttons(ctx, cfg, groups, archived):
             break
         if groups[k][0]["set"] in archived:
             continue
-        buy = sorted([o for o in groups[k] if o["stato"] in ("preordine", "disponibile") and o.get("prezzo")],
-                     key=ctx.total)
-        if buy and k not in seen:
+        buy = sorted([o for o in groups[k] if o["stato"] in ("preordine", "disponibile") and o.get("prezzo")
+                      and ctx.verdict(o)[0] != "gonfiato"], key=ctx.total)
+        if buy and k not in seen:  # solo se si trova a un prezzo sensato
             picks.append(("🔥", buy[0]))
             seen.add(k)
     for _, b, k in best_deals(ctx, groups):
         if k not in seen and b["set"] not in archived:
             picks.append(("🛒", b))
             seen.add(k)
-    buttons = [(f"{ic} {short_label(o)} {o['set']} · {euro(o['prezzo'])}", o["url"]) for ic, o in picks[:3]]
+    marks = {"sotto": "🟢", "allineato": "⚪", "accettabile": "🟡"}
+    buttons = [(f"{ic} {short_label(o)} {o['set']} · {euro(o['prezzo'])} {marks.get(ctx.verdict(o)[0], '')}".strip(),
+                o["url"]) for ic, o in picks[:3]]
     if cfg.get("cruscotto_url"):
         buttons.append(("📊 Cruscotto completo", cfg["cruscotto_url"]))
     return buttons

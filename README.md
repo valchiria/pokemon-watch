@@ -27,12 +27,15 @@ ricerca ufficiale di ogni negozio, e scrive su Telegram:
 - La pagina completa, aggiornata ogni ora, è su GitHub Pages (`cruscotto_url` in config.json):
   va attivata una volta in *Settings → Pages → Deploy from a branch → main / docs*.
 
-## Quando un prodotto viene segnalato
-- Prodotti normali: se costano al massimo il listino (`soglie`).
-- Prodotti da collezione (Ultra Premium, Collezione Premium, esclusive, set con `speciale`):
-  anche sopra listino, fino a listino × `tolleranza_collezione`.
-- Prodotti con buste: anche sopra listino se il valore medio delle carte che contengono è almeno
-  `affare_buste` × il prezzo.
+## Giudizio sul prezzo
+Ogni prezzo è confrontato con un **riferimento**: il listino ufficiale (`listini` dentro il set), per
+box/set allenatore/bundle/blister/Ultra Premium il listino tipico (`soglie`), per collezioni e tin il
+prezzo con cui i negozi l'hanno lanciato. Fasce:
+- 🟢 **sotto listino** (almeno -5%) · ⚪ **in linea** (±5%) · 🟡 **accettabile** (fino a +15%, +30% per i
+  prodotti molto richiesti: `tolleranza`) · 🔴 **gonfiato** (oltre).
+- I prezzi gonfiati non generano avvisi né pulsanti: il robot indica il **prezzo obiettivo** e manda
+  🎯 **PREZZO OBIETTIVO RAGGIUNTO** quando un negozio scende sotto.
+- Eccezione: prodotti con buste il cui valore medio in carte è almeno `affare_buste` × il prezzo.
 
 ## Cose da sapere
 - Il valore delle carte è una **stima**: probabilità di uscita della community (non ufficiali),

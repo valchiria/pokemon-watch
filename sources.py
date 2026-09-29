@@ -105,6 +105,13 @@ def fetch_feed(session, name, url):
     return items
 
 
+def relevant(title):
+    """Solo notizie sulle carte fisiche (niente Pokémon Pocket, Live, app, videogiochi)."""
+    t = f" {_plain(title)} "
+    return bool(re.search(r"gcc|espansion|carte|megaevoluzione", t)) and \
+        not re.search(r" (pocket|live|videogioc\w*|app|tcg live) ", t)
+
+
 def refresh_news(cache, now, session=None):
     """Aggiorna al massimo ogni 6 ore l'elenco delle notizie GCC. Non solleva mai eccezioni."""
     cache = dict(cache or {})
@@ -120,9 +127,7 @@ def refresh_news(cache, now, session=None):
         print("pokemon.com/it non raggiungibile:", e)
     for name, url in FEEDS:
         try:
-            items += [i for i in fetch_feed(session, name, url)
-                      if re.search(r"gcc|espansion|carte|megaevoluzione", _plain(i["titolo"]))
-                      and not re.search(r"pocket|live|videogioc|app ", _plain(i["titolo"]))]  # solo carte fisiche
+            items += [i for i in fetch_feed(session, name, url) if relevant(i["titolo"])]
             ok += 1
         except Exception as e:
             print(f"{name} non raggiungibile:", e)

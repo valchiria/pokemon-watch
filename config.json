@@ -23,8 +23,10 @@
 
   "_set": "uscita = data di uscita in Italia. certo=true solo se la data è ufficiale: in quel caso tutto ciò che è ordinabile prima dell'uscita è un preordine. speciale=true per i set da collezione (tutti i loro prodotti contano come 'da collezione').",
   "set": [
-    {"nome": "Dominio Delta",       "cerca": "dominio delta",       "en": "Delta Reign",        "uscita": "2026-11-06", "certo": true},
-    {"nome": "30° Anniversario",    "cerca": "30 anniversario",     "en": "30th Celebration",   "uscita": "2026-09-16", "certo": true, "speciale": true, "alias": ["30th", "30°"]},
+    {"nome": "Dominio Delta",       "cerca": "dominio delta",       "en": "Delta Reign",        "uscita": "2026-11-06", "certo": true,
+     "listini": {"Box 36 buste": 199.99, "Set Allenatore": 54.90, "Bundle 6 buste": 36.99, "Blister": 18.99}},
+    {"nome": "30° Anniversario",    "cerca": "30 anniversario",     "en": "30th Celebration",   "uscita": "2026-09-16", "certo": true, "speciale": true, "alias": ["30th", "30°"],
+     "listini": {"Set Allenatore": 59.90, "Collezione Raccoglitore": 49.90}},
     {"nome": "Buio Pesto",          "cerca": "buio pesto",          "en": "Pitch Black",        "uscita": "2026-07-17", "certo": true},
     {"nome": "Caos Nascente",       "cerca": "caos nascente",       "en": "Chaos Rising",       "uscita": "2026-05-22", "certo": true},
     {"nome": "Equilibrio Perfetto", "cerca": "equilibrio perfetto", "en": "Perfect Order",      "uscita": "2026-03-27", "certo": true},
@@ -41,7 +43,7 @@
     {"data": "2026-12-04", "set": "30° Anniversario", "cosa": "Tin ex", "stima": true}
   ],
 
-  "_soglie": "Prezzo di listino (circa) oltre il quale un prodotto normale non ti interessa. Si può cambiare per singolo set con 'soglie' dentro il set.",
+  "_soglie": "Listino tipico per tipo di prodotto, usato quando il set non ha 'listini' ufficiali. Il giudizio sul prezzo (sotto/in linea/accettabile/gonfiato) si calcola rispetto a questo.",
   "soglie": {
     "Box 36 buste": 200,
     "Set Allenatore": 60,
@@ -54,8 +56,8 @@
     "Mini Tin": 14
   },
 
-  "_tolleranza_collezione": "I prodotti da collezione (Ultra Premium, Collezione Premium, esclusive, set speciali) vengono segnalati anche sopra listino, fino a listino × questo numero.",
-  "tolleranza_collezione": 1.5,
+  "_tolleranza": "Quanto sopra il listino un prezzo è ancora 'accettabile' (0.15 = +15%). Oltre è 'gonfiato': niente pulsanti, ti avviso quando scende. 'richiesto' vale per i prodotti ad alto interesse.",
+  "tolleranza": {"normale": 0.15, "richiesto": 0.30},
 
   "_affare_buste": "Un prodotto con buste viene segnalato anche sopra listino se il valore medio delle carte che contiene è almeno questa frazione del prezzo (1.0 = in media ti ripaghi aprendolo).",
   "affare_buste": 1.0,
