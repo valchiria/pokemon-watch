@@ -964,7 +964,7 @@
    "titolo": "Pokémon - Megaevoluzione Dominio Delta Booster Box 36 Buste (IT)",
    "url": "https://cardverse.it/products/pokemon-megaevoluzione-dominio-delta-booster-box-36-buste-it",
    "comprabile": false,
-   "prezzo": 251.0,
+   "prezzo": 252.0,
    "preordine": true,
    "uscita": "2026-11-06",
    "set": "Dominio Delta",
@@ -1168,7 +1168,7 @@
    "titolo": "Pokémon - Equilibrio Perfetto Booster Box 36 Buste (IT)",
    "url": "https://cardverse.it/products/pokemon-equilibrio-perfetto-booster-box-36-buste-it",
    "comprabile": true,
-   "prezzo": 251.0,
+   "prezzo": 252.0,
    "preordine": false,
    "uscita": null,
    "set": "Equilibrio Perfetto",
@@ -1360,7 +1360,7 @@
    "titolo": "Pokémon - Fiamme Spettrali Booster Box 36 Buste (IT)",
    "url": "https://cardverse.it/products/pokemon-fiamme-spettrali-booster-box-36-buste-it",
    "comprabile": false,
-   "prezzo": 260.0,
+   "prezzo": 261.0,
    "preordine": false,
    "uscita": null,
    "set": "Fiamme Spettrali",
@@ -1788,21 +1788,9 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
-   "comprabile": false,
-   "prezzo": 39.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Manuelpoke3",
-   "stato": "esaurito"
-  },
-  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
+   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -1824,9 +1812,21 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
-   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
+   "comprabile": false,
+   "prezzo": 39.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Manuelpoke3",
+   "stato": "esaurito"
+  },
+  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -3519,14 +3519,14 @@
   "https://otakura.com/products/megaevoluzione-caos-nascente-set-allenatore-fuoriclasse-pokemon-tcg-ita": {
    "titolo": "Megaevoluzione: Caos Nascente - Set Allenatore Fuoriclasse - Pokémon TCG (ITA)",
    "url": "https://otakura.com/products/megaevoluzione-caos-nascente-set-allenatore-fuoriclasse-pokemon-tcg-ita",
-   "comprabile": true,
+   "comprabile": false,
    "prezzo": 70.0,
    "preordine": true,
    "uscita": null,
    "set": "Caos Nascente",
    "tipo": "Set Allenatore",
    "negozio": "Otakura",
-   "stato": "disponibile"
+   "stato": "esaurito"
   },
   "https://otakura.com/products/megaevoluzione-caos-nascente-bundle-6-bustine-pokemon-tcg-ita": {
    "titolo": "Megaevoluzione: Caos Nascente - Bundle 6 Bustine - Pokémon TCG (ITA)",
@@ -3568,7 +3568,7 @@
    "titolo": "Megaevoluzione Equilibrio Perfetto – Booster Display da 36 Bustine – Pokémon (ITA)",
    "url": "https://otakura.com/products/megaevoluzione-equilibrio-perfetto-booster-display-da-36-bustine-pokemon-ita",
    "comprabile": true,
-   "prezzo": 250.0,
+   "prezzo": 251.0,
    "preordine": false,
    "uscita": null,
    "set": "Equilibrio Perfetto",
@@ -3700,7 +3700,7 @@
    "titolo": "Megaevoluzione - Fiamme Spettrali - Box da 36 Bustine (ITA)",
    "url": "https://otakura.com/products/megaevoluzione-fiamme-spettrali-display-box-italiano",
    "comprabile": false,
-   "prezzo": 251.0,
+   "prezzo": 252.0,
    "preordine": true,
    "uscita": null,
    "set": "Fiamme Spettrali",
@@ -3777,6 +3777,18 @@
    "uscita": null,
    "set": "30° Anniversario",
    "tipo": "Tin",
+   "negozio": "GS Gameon",
+   "stato": "disponibile"
+  },
+  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
+   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
+   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
+   "comprabile": true,
+   "prezzo": 119.99,
+   "preordine": false,
+   "uscita": null,
+   "set": "30° Anniversario",
+   "tipo": "Set Allenatore",
    "negozio": "GS Gameon",
    "stato": "disponibile"
   },
@@ -4505,53 +4517,40 @@
    "negozio": "Cardverse",
    "stato": "disponibile",
    "sparito": "2026-09-28"
-  },
-  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
-   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
-   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
-   "comprabile": true,
-   "prezzo": 119.99,
-   "preordine": false,
-   "uscita": null,
-   "set": "30° Anniversario",
-   "tipo": "Set Allenatore",
-   "negozio": "GS Gameon",
-   "stato": "disponibile",
-   "sparito": "2026-09-29"
   }
  },
  "mercato": {
   "Buio Pesto": {
-   "ev_busta": 1.94,
+   "ev_busta": 1.92,
    "top": [
     {
      "nome": "Mega Darkrai ex",
-     "prezzo": 208.28,
+     "prezzo": 206.7,
      "rarita": "Illustrazione speciale"
     },
     {
      "nome": "Mega Darkrai ex",
-     "prezzo": 140.81,
+     "prezzo": 141.0,
      "rarita": "Iper rara"
     },
     {
      "nome": "Morpeko ex",
-     "prezzo": 57.78,
+     "prezzo": 55.55,
      "rarita": "Illustrazione speciale"
     },
     {
      "nome": "Mega Zeraora ex",
-     "prezzo": 49.85,
+     "prezzo": 49.31,
      "rarita": "Illustrazione speciale"
     },
     {
      "nome": "Mega Chandelure ex",
-     "prezzo": 32.06,
+     "prezzo": 31.22,
      "rarita": "Illustrazione speciale"
     }
    ],
    "carte": 120,
-   "aggiornato": "2026-09-28T17:25+02:00",
+   "aggiornato": "2026-09-29T14:01+02:00",
    "stima_generica": true
   },
   "Caos Nascente": {
@@ -4559,98 +4558,98 @@
    "top": [
     {
      "nome": "Mega Greninja ex",
-     "prezzo": 143.89,
+     "prezzo": 147.1,
      "rarita": "Illustrazione speciale"
     },
     {
      "nome": "Mega Greninja ex",
-     "prezzo": 120.13,
+     "prezzo": 120.52,
      "rarita": "Iper rara"
     },
     {
      "nome": "Cinccino ex",
-     "prezzo": 39.11,
+     "prezzo": 38.36,
      "rarita": "Illustrazione speciale"
     },
     {
      "nome": "Mega Dragalge ex",
-     "prezzo": 33.49,
+     "prezzo": 32.95,
      "rarita": "Illustrazione speciale"
     },
     {
      "nome": "Mega Floette ex",
-     "prezzo": 24.57,
+     "prezzo": 24.47,
      "rarita": "Illustrazione speciale"
     }
    ],
    "carte": 122,
-   "aggiornato": "2026-09-28T17:25+02:00",
+   "aggiornato": "2026-09-29T14:01+02:00",
    "stima_generica": true
   },
   "Equilibrio Perfetto": {
-   "ev_busta": 2.14,
+   "ev_busta": 2.15,
    "top": [
     {
      "nome": "Mega Zygarde ex",
-     "prezzo": 111.69,
+     "prezzo": 113.4,
      "rarita": "Iper rara"
     },
     {
      "nome": "Meowth ex",
-     "prezzo": 97.93,
+     "prezzo": 97.85,
      "rarita": "Illustrazione speciale"
     },
     {
      "nome": "Mega Zygarde ex",
-     "prezzo": 48.66,
+     "prezzo": 48.22,
      "rarita": "Illustrazione speciale"
     },
     {
      "nome": "Mega Clefable ex",
-     "prezzo": 43.84,
+     "prezzo": 46.92,
      "rarita": "Illustrazione speciale"
     },
     {
      "nome": "Rosa's Encouragement",
-     "prezzo": 41.94,
+     "prezzo": 43.97,
      "rarita": "Illustrazione speciale"
     }
    ],
    "carte": 124,
-   "aggiornato": "2026-09-28T17:25+02:00",
+   "aggiornato": "2026-09-29T14:01+02:00",
    "stima_generica": true
   },
   "Fiamme Spettrali": {
-   "ev_busta": 2.85,
+   "ev_busta": 2.77,
    "top": [
     {
      "nome": "Mega Charizard X ex",
-     "prezzo": 672.75,
+     "prezzo": 639.4,
      "rarita": "Illustrazione speciale"
     },
     {
      "nome": "Mega Charizard X ex",
-     "prezzo": 263.5,
+     "prezzo": 267.09,
      "rarita": "Iper rara"
     },
     {
      "nome": "Mega Charizard X ex",
-     "prezzo": 21.46,
+     "prezzo": 21.21,
      "rarita": "Ultra rara"
     },
     {
      "nome": "Mega Sharpedo ex",
-     "prezzo": 21.11,
+     "prezzo": 20.93,
      "rarita": "Illustrazione speciale"
     },
     {
      "nome": "Meowth",
-     "prezzo": 19.23,
+     "prezzo": 18.28,
      "rarita": "Illustrazione rara"
     }
    ],
    "carte": 130,
-   "aggiornato": "2026-09-28T17:25+02:00",
+   "aggiornato": "2026-09-29T14:01+02:00",
    "stima_generica": true
   },
   "Avventure Insieme": {
@@ -4658,7 +4657,7 @@
    "top": [
     {
      "nome": "Lillie's Clefairy ex",
-     "prezzo": 107.35,
+     "prezzo": 102.63,
      "rarita": "Illustrazione speciale"
     },
     {
@@ -4673,7 +4672,7 @@
     },
     {
      "nome": "Hop's Zacian ex",
-     "prezzo": 39.09,
+     "prezzo": 38.46,
      "rarita": "Illustrazione speciale"
     },
     {
@@ -4683,7 +4682,7 @@
     }
    ],
    "carte": 190,
-   "aggiornato": "2026-09-28T17:25+02:00",
+   "aggiornato": "2026-09-29T14:01+02:00",
    "stima_generica": true
   }
  },
@@ -4972,7 +4971,7 @@
   "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto|42",
   "2026-11-06|Dominio Delta|Uscita Dominio Delta|42"
  ],
- "ultimo_controllo": "2026-09-29T13:01+02:00",
+ "ultimo_controllo": "2026-09-29T14:01+02:00",
  "negozi_letti": 13,
  "nomi_set": {
   "Dominio Delta": {
