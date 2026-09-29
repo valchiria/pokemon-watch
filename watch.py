@@ -34,6 +34,7 @@ import requests
 import dashboard
 import interest
 import market
+import shipping
 import sources
 
 ROOT = Path(__file__).parent
@@ -485,6 +486,10 @@ class Ctx:
         self.sets = {s["nome"]: s for s in cfg["set"]}
         self.interest = {}  # chiave prodotto -> (punteggio 0-100, motivi)
         self.first_prices = {}  # chiave prodotto -> {negozio: primo prezzo visto}
+        self.measured = {}  # negozio -> costo di spedizione letto dal carrello
+        self.by_shop = {}  # negozio -> offerte (per i carrelli consigliati)
+        self.archived = set()
+        self._baskets = {}
 
     def interest_of(self, o):
         return self.interest.get(product_key(o), (0, []))
@@ -493,19 +498,102 @@ class Ctx:
         return self.interest_of(o)[0] >= interest.HIGH
 
     def shipping(self, o):
+        """Costo di spedizione per questo solo prodotto: letto dal carrello, oppure da config, oppure None."""
         sh = self.shops.get(o["negozio"], {})
         if o.get("prezzo") is None:
             return None
         if sh.get("gratis_da") is not None and o["prezzo"] >= sh["gratis_da"]:
             return 0.0
-        return sh.get("spedizione")
+        measured = self.measured.get(o["negozio"])
+        return measured if measured is not None else sh.get("spedizione")
+
+    def ship_share(self, o):
+        """(quota di spedizione da aggiungere al prezzo, tipo): gratis | carrello | inclusa | stimata."""
+        sp = self.shipping(o)
+        if sp == 0:
+            return 0.0, "gratis"
+        if self.basket(o):
+            return 0.0, "carrello"
+        if sp is None:
+            return self.cfg.get("spedizione_stimata", 6.9), "stimata"
+        return sp, "inclusa"
+
+    def delivered(self, o):
+        return (o.get("prezzo") or 0) + self.ship_share(o)[0]
+
+    def basket(self, o):
+        """Carrello consigliato per non pagare la spedizione: altri prodotti dello stesso negozio, solo
+        occasioni vere (sotto listino o in linea), il meno possibile oltre la soglia di spedizione gratuita."""
+        if o["url"] in self._baskets:
+            return self._baskets[o["url"]]
+        self._baskets[o["url"]] = None
+        sh = self.shops.get(o["negozio"], {})
+        th = sh.get("gratis_da")
+        sp = self.shipping(o)
+        if not th or not o.get("prezzo") or o["prezzo"] >= th or sp == 0 or \
+                self.verdict(o, with_shipping=False)[0] == "gonfiato":
+            return None
+        gap = th - o["prezzo"]
+        best_by_key = {}
+        for x in self.by_shop.get(o["negozio"], []):
+            k = product_key(x)
+            if x["url"] == o["url"] or k == product_key(o) or x["stato"] != "disponibile" or not x.get("prezzo") \
+                    or not x.get("comprabile") or x["set"] in self.archived:
+                continue
+            band, pct, _ = self.verdict(x, with_shipping=False)
+            if band not in ("sotto", "allineato"):
+                continue
+            if k not in best_by_key or x["prezzo"] < best_by_key[k][0]["prezzo"]:
+                best_by_key[k] = (x, pct)
+        cands = sorted(best_by_key.values(), key=lambda t: t[1] - (0.1 if self.hot(t[0]) else 0))[:12]
+        best = None
+        from itertools import combinations
+        for n in (1, 2, 3):
+            for combo in combinations(cands, n):
+                extra = sum(x["prezzo"] for x, _ in combo)
+                if extra < gap - 0.009 or extra > gap + max(20.0, gap):
+                    continue
+                key = (extra, sum(p for _, p in combo))
+                if best is None or key < best[0]:
+                    best = (key, combo)
+            if best:
+                break
+        if best:
+            items = [x for x, _ in best[1]]
+            extra = round(sum(x["prezzo"] for x in items), 2)
+            self._baskets[o["url"]] = {"items": items, "extra": extra, "total": round(o["prezzo"] + extra, 2),
+                                       "soglia": th, "risparmio": sp if sp is not None else
+                                       self.cfg.get("spedizione_stimata", 6.9)}
+        return self._baskets[o["url"]]
+
+    def ship_line(self, o):
+        share, kind = self.ship_share(o)
+        sh = self.shops.get(o["negozio"], {})
+        if kind == "gratis":
+            return "🚚 Spedizione gratis"
+        if kind == "carrello":
+            sp = self.shipping(o)
+            cost = euro(sp) if sp is not None else "~" + euro(self.cfg.get("spedizione_stimata", 6.9))
+            return f"🚚 Spedizione gratis col carrello qui sotto (da solo +{cost})"
+        est = "~" if kind == "stimata" else ""
+        free = f", gratis da {euro(sh['gratis_da'])}" if sh.get("gratis_da") else ""
+        return f"🚚 +{est}{euro(share)} spedizione{free} → <b>{est}{euro(self.delivered(o))}</b> consegnato"
+
+    def basket_line(self, o):
+        b = self.basket(o)
+        if not b:
+            return ""
+        marks = {"sotto": "🟢", "allineato": "⚪"}
+        items = " + ".join(f"{esc(short_label(x))} {esc(x['set'])} {euro(x['prezzo'])} "
+                           f"{marks.get(self.verdict(x, with_shipping=False)[0], '')}" for x in b["items"])
+        return (f"🧺 <b>Carrello consigliato</b>: aggiungi {items} → totale {euro(b['total'])}, "
+                f"spedizione gratis (soglia {euro(b['soglia'])})")
 
     def total(self, o):
-        """Prezzo + spedizione (se il negozio non la dichiara, una stima media) per ordinare i negozi."""
+        """Costo consegnato (con spedizione, azzerata se c'è un carrello consigliato) per ordinare i negozi."""
         if o.get("prezzo") is None:
             return float("inf")
-        sp = self.shipping(o)
-        return o["prezzo"] + (self.cfg.get("spedizione_stimata", 6.9) if sp is None else sp)
+        return self.delivered(o)
 
     def ship_text(self, o):
         sh = self.shops.get(o["negozio"], {})
@@ -563,12 +651,14 @@ class Ctx:
         t = self.cfg.get("tolleranza") or {}
         return t.get("richiesto", 0.30) if self.hot(o) else t.get("normale", 0.15)
 
-    def verdict(self, o):
-        """(fascia, scostamento, riferimento): fascia = sotto | allineato | accettabile | gonfiato."""
+    def verdict(self, o, with_shipping=True):
+        """(fascia, scostamento, riferimento): fascia = sotto | allineato | accettabile | gonfiato.
+        Di norma giudica il costo consegnato (prezzo + spedizione, a meno che un carrello la azzeri)."""
         ref, _ = self.reference(o)
         if not ref or o.get("prezzo") is None:
             return "allineato", 0.0, ref
-        pct = o["prezzo"] / ref - 1
+        price = self.delivered(o) if with_shipping else o["prezzo"]
+        pct = price / ref - 1
         if pct <= -0.05:
             band = "sotto"
         elif pct <= 0.05:
@@ -589,10 +679,12 @@ class Ctx:
             return ""
         p = round(abs(pct) * 100)
         src = {"ufficiale": "listino", "tipico": "listino tipico", "negozi": "prezzo di lancio"}[self.reference(o)[1]]
-        txt = {"sotto": f"🟢 {p}% sotto il {src} ({euro(ref)})",
-               "allineato": f"⚪ In linea col {src} ({euro(ref)})",
-               "accettabile": f"🟡 +{p}% sul {src} ({euro(ref)}): accettabile",
-               "gonfiato": f"🔴 +{p}% sul {src} ({euro(ref)}): troppo caro, obiettivo {euro(self.target(o))}"}[band]
+        what = "consegnato " if self.ship_share(o)[0] > 0 else ""
+        txt = {"sotto": f"🟢 {what}{p}% sotto il {src} ({euro(ref)})",
+               "allineato": f"⚪ {what}in linea col {src} ({euro(ref)})",
+               "accettabile": f"🟡 {what}+{p}% sul {src} ({euro(ref)}): accettabile",
+               "gonfiato": f"🔴 {what}+{p}% sul {src} ({euro(ref)}): troppo caro, obiettivo "
+                           f"{euro(self.target(o))}{' spedito' if what else ''}"}[band]
         others = sorted(x["prezzo"] for x in group if x is not o and x.get("prezzo")
                         and x["stato"] in ("disponibile", "preordine"))
         if len(others) >= 2 and o.get("prezzo"):
@@ -704,21 +796,25 @@ def alert_text(ctx, kind, o, old_price=None, others=(), group=()):
     if kind in ("drop", "target") and old_price:
         price = f"<s>{euro(old_price)}</s> → <b>{euro(o['prezzo'])}</b>"
     lines.append(f"{price}{ctx.per_pack(o) if o['tipo'] in PACK_TYPES else ''}")
-    lines += [x for x in (ctx.verdict_text(o, group), f"🚚 {ctx.ship_text(o)}", hot_line(ctx, o),
+    lines += [x for x in (ctx.verdict_text(o, group), ctx.ship_line(o), ctx.basket_line(o), hot_line(ctx, o),
                           ctx.min_line(o), ctx.value_line(o)) if x]
+    b = ctx.basket(o) if ctx.ship_share(o)[1] == "carrello" else None
     n_others = len(others)
-    others = sorted(others, key=ctx.total)[:2]  # il migliore + le 2 alternative più convenienti
+    others = sorted(others, key=ctx.delivered)[:2]  # il migliore + le 2 alternative più convenienti
     if n_others:
         lines.append(f"<i>A un prezzo sensato anche in altri {n_others} "
                      f"{'negozio' if n_others == 1 else 'negozi'}</i>")
-    buttons = [button(o)] + [button(x, prefix="") for x in others]
+    buttons = [button(o)]
+    if b:
+        buttons += [(f"🧺 {short_label(x)} {x['set']} · {euro(x['prezzo'])}", x["url"]) for x in b["items"]]
+    buttons += [button(x, prefix="") for x in others][:max(0, 4 - len(buttons))]
     return "\n".join(lines), buttons
 
 
 def preorder_text(ctx, group, new_urls, dropped):
     """Scheda per un preordine: un pulsante per ogni negozio dove è prenotabile a un prezzo sensato."""
     first = group[0]
-    opened = sorted([o for o in group if o["stato"] == "preordine"], key=ctx.total)
+    opened = sorted([o for o in group if o["stato"] == "preordine"], key=ctx.delivered)
     fair = [o for o in opened if ctx.verdict(o)[0] != "gonfiato"]
     pricey = [o for o in opened if ctx.verdict(o)[0] == "gonfiato"]
     waiting = sorted({o["negozio"] for o in group if o["stato"] == "in_arrivo"} -
@@ -738,8 +834,8 @@ def preorder_text(ctx, group, new_urls, dropped):
         lines.append(hot_line(ctx, first))
     if fair:
         best = fair[0]
-        lines.append(f"Il migliore: <b>{euro(best['prezzo'])}</b> su {esc(best['negozio'])} · {ctx.ship_text(best)}")
-        lines.append(ctx.verdict_text(best, group))
+        lines.append(f"Il migliore: <b>{euro(best['prezzo'])}</b> su {esc(best['negozio'])}")
+        lines += [x for x in (ctx.ship_line(best), ctx.verdict_text(best, group), ctx.basket_line(best)) if x]
         if ctx.hot(first):
             lines.append("<b>Tende a sparire: se ti interessa, prenotalo subito.</b>")
     else:
@@ -1073,9 +1169,27 @@ def dashboard_data(ctx, offers, groups, shops_ok, now, news_items, archived):
         elif ctx.collector(b):
             tags.append(("media", "collezione"))
         n = packs(b["tipo"], b["titolo"]) if b["tipo"] in PACK_TYPES else None
+        share, kind = ctx.ship_share(b)
+        if kind == "carrello":
+            tags.append(("pre", "carrello"))
         d["occasioni"].append({"label": product_label(b), "set": b["set"], "prezzo": euro(b["prezzo"]),
-                               "negozio": b["negozio"], "url": b["url"], "tags": tags,
+                               "negozio": b["negozio"] + (f" · +{'~' if kind == 'stimata' else ''}{euro(share)} sped."
+                                                           if share else ""),
+                               "url": b["url"], "tags": tags,
                                "busta": f"{euro(b['prezzo'] / n)}/busta" if n else ""})
+
+    # 🧺 carrelli consigliati: le occasioni che conviene prendere insieme per non pagare la spedizione
+    d["carrelli"], seen_shops = [], set()
+    for _, b, k in best_deals(ctx, groups):
+        bk = ctx.basket(b) if ctx.ship_share(b)[1] == "carrello" else None
+        if not bk or b["negozio"] in seen_shops or b["set"] in archived:
+            continue
+        seen_shops.add(b["negozio"])
+        d["carrelli"].append({"negozio": b["negozio"], "totale": euro(bk["total"]), "soglia": euro(bk["soglia"]),
+                              "risparmio": euro(bk["risparmio"]),
+                              "items": [(product_label(x), x["set"], euro(x["prezzo"]), x["url"])
+                                        for x in [b] + bk["items"]]})
+    d["carrelli"] = d["carrelli"][:3]
 
     d["mercato"] = []
     for s in ctx.cfg["set"]:
@@ -1278,6 +1392,12 @@ def main():
         o["stato"] = status(o, cfg, today)
     old_minimi = update_minimi(minimi, offers, today)
     ctx = Ctx(cfg, market.values(state["mercato"]), old_minimi, today)  # nei messaggi: il minimo di PRIMA di questo giro
+    # 🚚 costo di spedizione letto dal carrello dei negozi (una volta a settimana)
+    state["spedizioni"] = shipping.refresh(cfg, state.get("spedizioni", {}),
+                                           {u: o for u, o in offers.items() if o["negozio"] in ok_shops}, today)
+    ctx.measured = {k: v["costo"] for k, v in state["spedizioni"].items() if v.get("costo") is not None}
+    for o in offers.values():
+        ctx.by_shop.setdefault(o["negozio"], []).append(o)
 
     groups = {}
     for o in offers.values():
@@ -1311,6 +1431,7 @@ def main():
 
     # 🧊 set raffreddati / tornati caldi, 🆕 set nuovi confermati dalle fonti
     archived, arch_msgs = update_archive(state, ctx, groups, today, baseline)
+    ctx.archived, ctx._baskets = set(archived), {}
     new_sets = discover_sets(state, cfg["set"], shop_names, raw_news, offers, news_items, today, baseline)
 
     # set scoperti al giro prima: primo passaggio nei negozi, solo gli avvisi di preordine
@@ -1500,6 +1621,10 @@ def summary_caption(ctx, d, groups):
     if d["uscite"]:
         u = d["uscite"][0]
         lines.append(f"📅 Prossima: {esc(u['set'])} — {esc(u['cosa'])}, {esc(u['tra'])}")
+    if d.get("carrelli"):
+        c = d["carrelli"][0]
+        lines.append(f"🧺 Carrello {esc(c['negozio'])}: {len(c['items'])} occasioni a {esc(c['totale'])}, "
+                     f"spedizione gratis")
     if d["focus"]:
         f = d["focus"][0]
         price = ""

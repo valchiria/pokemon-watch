@@ -154,6 +154,16 @@ def render(d, mode="page"):
         out.append('<div class="sub">Oggi niente al prezzo giusto.</div>')
     out.append('</section>')
 
+    if d.get("carrelli"):
+        out.append('<section><h2><span class="dot" style="background:#c98500"></span>Carrelli consigliati</h2>')
+        for c in d["carrelli"][:lim(2) if not page else 3]:
+            items = "".join(f'<div class="sub">· {_a(u, e(lb), page)} ({e(st)}) {e(pr)}</div>' for lb, st, pr, u in c["items"])
+            out.append(f'<div class="row"><div class="l"><b>{e(c["negozio"])}</b>{items}</div>'
+                       f'<div class="r"><b>{e(c["totale"])}</b><div class="sub">spedizione gratis</div>'
+                       f'<div class="sub">risparmi {e(c["risparmio"])}</div></div></div>')
+        out.append('<div class="note">Solo prodotti sotto listino o in linea, il minimo per arrivare alla '
+                   'spedizione gratuita del negozio.</div></section>')
+
     if d["mercato"]:
         out.append('<section class="bars"><h2><span class="dot" style="background:#3987e5"></span>'
                    'Quanto rende un box in carte</h2>')

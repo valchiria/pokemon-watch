@@ -37,6 +37,15 @@ prezzo con cui i negozi l'hanno lanciato. Fasce:
   🎯 **PREZZO OBIETTIVO RAGGIUNTO** quando un negozio scende sotto.
 - Eccezione: prodotti con buste il cui valore medio in carte è almeno `affare_buste` × il prezzo.
 
+## Spedizione e carrelli
+- Il giudizio si calcola sul **costo consegnato** (prezzo + spedizione): un blister a 15 € con 9 € di
+  spedizione costa 24 € e non è un affare da solo.
+- Il costo di spedizione di ogni negozio viene **letto dal carrello** una volta a settimana (un prodotto
+  economico nel carrello, indirizzo di Milano, nessun ordine). Se non si riesce, vale `spedizione` in
+  config.json, altrimenti una stima di 6,90 € (segnata con ~).
+- 🧺 **Carrello consigliato**: se nello stesso negozio ci sono altre occasioni vere (sotto listino o in
+  linea), il robot propone la combinazione più piccola che arriva alla spedizione gratuita.
+
 ## Cose da sapere
 - Il valore delle carte è una **stima**: probabilità di uscita della community (non ufficiali),
   prezzi Cardmarket di tendenza, buste reverse non contate. Per i set speciali (buste diverse)
