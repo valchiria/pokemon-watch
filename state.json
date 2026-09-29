@@ -1788,9 +1788,21 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
-   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
+   "comprabile": false,
+   "prezzo": 39.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Manuelpoke3",
+   "stato": "esaurito"
+  },
+  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -1812,21 +1824,9 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
-   "comprabile": false,
-   "prezzo": 39.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Manuelpoke3",
-   "stato": "esaurito"
-  },
-  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
+   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -3552,30 +3552,6 @@
    "negozio": "Otakura",
    "stato": "disponibile"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Gengar (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it",
-   "comprabile": false,
-   "prezzo": 27.0,
-   "preordine": true,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Otakura",
-   "stato": "esaurito"
-  },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Lucario-ex (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it",
-   "comprabile": false,
-   "prezzo": 76.0,
-   "preordine": true,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione Premium",
-   "negozio": "Otakura",
-   "stato": "esaurito"
-  },
   "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it": {
    "titolo": "Megaevoluzione - Ascesa Eroica - Set Allenatore Fuoriclasse (IT)",
    "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-set-allenatore-fuoriclasse-it",
@@ -3588,9 +3564,21 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-bundle-da-6-buste-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Bundle da 6 Buste (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-bundle-da-6-buste-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
+   "comprabile": false,
+   "prezzo": 76.0,
+   "preordine": true,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione Premium",
+   "negozio": "Otakura",
+   "stato": "esaurito"
+  },
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-e-mega-gengar-bundle-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Charizard Y e Mega Gengar - Bundle (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-e-mega-gengar-bundle-it",
    "comprabile": false,
    "prezzo": 53.0,
    "preordine": true,
@@ -3600,9 +3588,21 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-e-mega-gengar-bundle-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Charizard Y e Mega Gengar - Bundle (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-charizard-y-e-mega-gengar-bundle-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Adesivo Mega Gengar (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-adesivo-mega-gengar-it",
+   "comprabile": false,
+   "prezzo": 27.0,
+   "preordine": true,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Otakura",
+   "stato": "esaurito"
+  },
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-bundle-da-6-buste-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Bundle da 6 Buste (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-bundle-da-6-buste-it",
    "comprabile": false,
    "prezzo": 53.0,
    "preordine": true,
@@ -3624,9 +3624,9 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Lucario-ex (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it",
    "comprabile": false,
    "prezzo": 76.0,
    "preordine": true,
@@ -4020,18 +4020,6 @@
    "negozio": "Warcard",
    "stato": "disponibile"
   },
-  "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste": {
-   "titolo": "Equilibrio Perfetto - Box da 36 Buste",
-   "url": "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste",
-   "comprabile": true,
-   "prezzo": 179.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Box 36 buste",
-   "negozio": "Warcard",
-   "stato": "disponibile"
-  },
   "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb": {
    "titolo": "Equilibrio Perfetto - Set Allenatore Fuoriclasse (ETB)",
    "url": "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb",
@@ -4041,6 +4029,18 @@
    "uscita": null,
    "set": "Equilibrio Perfetto",
    "tipo": "Set Allenatore",
+   "negozio": "Warcard",
+   "stato": "disponibile"
+  },
+  "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste": {
+   "titolo": "Equilibrio Perfetto - Box da 36 Buste",
+   "url": "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste",
+   "comprabile": true,
+   "prezzo": 179.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Box 36 buste",
    "negozio": "Warcard",
    "stato": "disponibile"
   },
@@ -4115,6 +4115,18 @@
    "tipo": "Blister",
    "negozio": "Warcard",
    "stato": "disponibile"
+  },
+  "https://www.warcard.it/products/avventure-insieme-set-allenatore-fuoriclasse-etb": {
+   "titolo": "Avventure Insieme - Set Allenatore Fuoriclasse (ETB)",
+   "url": "https://www.warcard.it/products/avventure-insieme-set-allenatore-fuoriclasse-etb",
+   "comprabile": false,
+   "prezzo": 84.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Avventure Insieme",
+   "tipo": "Set Allenatore",
+   "negozio": "Warcard",
+   "stato": "esaurito"
   }
  },
  "negozi_visti": [
@@ -4900,7 +4912,7 @@
   "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto|42",
   "2026-11-06|Dominio Delta|Uscita Dominio Delta|42"
  ],
- "ultimo_controllo": "2026-09-29T07:01+02:00",
+ "ultimo_controllo": "2026-09-29T08:01+02:00",
  "negozi_letti": 13,
  "nomi_set": {
   "Dominio Delta": {
