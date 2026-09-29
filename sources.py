@@ -121,7 +121,8 @@ def refresh_news(cache, now, session=None):
     for name, url in FEEDS:
         try:
             items += [i for i in fetch_feed(session, name, url)
-                      if re.search(r"gcc|espansion|carte|megaevoluzione", _plain(i["titolo"]))]
+                      if re.search(r"gcc|espansion|carte|megaevoluzione", _plain(i["titolo"]))
+                      and not re.search(r"pocket|live|videogioc|app ", _plain(i["titolo"]))]  # solo carte fisiche
             ok += 1
         except Exception as e:
             print(f"{name} non raggiungibile:", e)

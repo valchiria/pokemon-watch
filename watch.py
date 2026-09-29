@@ -1017,13 +1017,14 @@ def dashboard_data(ctx, offers, groups, shops_ok, now, news_items, archived):
     return d
 
 
-def send_photo(token, chat, png, caption, buttons=None):
-    params = {"chat_id": chat, "caption": caption, "parse_mode": "HTML"}
+def send_photo(token, chat, png, caption, buttons=None, as_document=False):
+    params = {"chat_id": chat, "caption": caption[:1000], "parse_mode": "HTML"}
     if buttons:
         params["reply_markup"] = json.dumps({"inline_keyboard": [[{"text": t[:60], "url": u}] for t, u in buttons]})
+    kind = "document" if as_document else "photo"
     with open(png, "rb") as f:
-        r = requests.post(f"https://api.telegram.org/bot{token}/sendPhoto", data=params,
-                          files={"photo": ("riepilogo.png", f, "image/png")}, timeout=60)
+        r = requests.post(f"https://api.telegram.org/bot{token}/send{kind.title()}", data=params,
+                          files={kind: ("riepilogo.png", f, "image/png")}, timeout=60)
     r.raise_for_status()
 
 
@@ -1301,11 +1302,15 @@ def main():
                      "buttons": None, "summary": False})
 
     # 📊 cruscotto: la pagina web si aggiorna a ogni giro, l'immagine parte la mattina
+    diag = state["diagnostica"] = {"ora": now.isoformat(timespec="minutes"), "chrome": dashboard.find_chrome()}
     data = dashboard_data(ctx, offers, groups, shops_ok, now, news_items, archived)
     try:
         DOCS_DIR.mkdir(exist_ok=True)
         (DOCS_DIR / "index.html").write_text(dashboard.render(data, "page"), encoding="utf-8")
-    except OSError as e:
+        (DOCS_DIR / ".nojekyll").write_text("")  # GitHub Pages: pubblica la pagina così com'è
+        diag["pagina"] = str((DOCS_DIR / "index.html").resolve())
+    except Exception as e:
+        diag["pagina"] = f"errore: {e}"
         print("Pagina del cruscotto non scritta:", e)
 
     today_s = today.isoformat()
@@ -1315,11 +1320,20 @@ def main():
         png = Path(tempfile.gettempdir()) / f"riepilogo_pokemon_{os.getpid()}.png"
         png.unlink(missing_ok=True)  # mai mandare un'immagine vecchia
         text = summary_text(ctx, offers, shops_ok, [] if baseline else fresh_news, now, today.weekday() == 0)
-        if dashboard.screenshot(dashboard.render(data, "image"), str(png)):
-            msgs.append({"text": summary_caption(ctx, data, groups), "buttons": summary_buttons(ctx, cfg, groups, archived),
+        try:
+            ok, why = dashboard.screenshot(dashboard.render(data, "image"), str(png))
+        except Exception as e:
+            ok, why = False, f"errore nel disegno: {e}"
+        diag["immagine"] = why
+        print("Immagine del mattino:", why)
+        buttons = summary_buttons(ctx, cfg, groups, archived)
+        if ok:
+            msgs.append({"text": summary_caption(ctx, data, groups), "buttons": buttons,
                          "summary": True, "photo": str(png), "fallback": split_message(text)})
-        else:  # niente Chrome: riepilogo testuale come prima
-            msgs += [{"text": part, "buttons": None, "summary": True} for part in split_message(text)]
+        else:  # niente immagine: riepilogo testuale, con il motivo e i pulsanti
+            parts = split_message(f"⚠️ <i>Immagine non creata: {esc(why)[:200]}</i>\n\n" + text)
+            msgs += [{"text": part, "buttons": buttons if i == len(parts) - 1 else None, "summary": True}
+                     for i, part in enumerate(parts)]
 
     failed_summary = False
     if token:
@@ -1328,9 +1342,13 @@ def main():
                 try:
                     if m.get("photo") and attempt == 1:
                         send_photo(token, chat, m["photo"], m["text"], m["buttons"])
-                    elif m.get("photo"):  # la foto non passa: riepilogo in testo
-                        for part in m["fallback"]:
-                            send(token, chat, part, None)
+                    elif m.get("photo"):  # la foto non passa: come documento, poi in testo
+                        try:
+                            send_photo(token, chat, m["photo"], m["text"], m["buttons"], as_document=True)
+                        except Exception as e2:
+                            diag["invio_foto"] = str(e2)[:300]
+                            for part in m["fallback"]:
+                                send(token, chat, part, None)
                     else:
                         # secondo tentativo in testo semplice, nel caso Telegram rifiuti HTML o foto
                         send(token, chat, m["text"] if attempt == 1 else
@@ -1338,6 +1356,8 @@ def main():
                     break
                 except Exception as e:
                     print(f"Invio non riuscito (tentativo {attempt}):", e)
+                    detail = getattr(getattr(e, "response", None), "text", "") or ""
+                    diag.setdefault("errori_invio", []).append(f"{e} {detail}"[:300])
                     if attempt == 1:
                         time.sleep(5)
                     elif m["summary"]:

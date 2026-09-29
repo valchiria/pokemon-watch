@@ -85,11 +85,11 @@ def _a(url, inner, page):
 def render(d, mode="page"):
     page = mode == "page"
     lim = (lambda n: None) if page else (lambda n: n)
-    out = [f'<!doctype html><html lang="it"><head><meta charset="utf-8">'
-           f'<meta name="viewport" content="width=device-width,initial-scale=1">'
-           f'<title>Cruscotto Pokémon</title>'
-           f'<link rel="preconnect" href="https://fonts.googleapis.com">'
-           f'<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">'
+    out = ['<!doctype html><html lang="it"><head><meta charset="utf-8">'
+           '<meta name="viewport" content="width=device-width,initial-scale=1">'
+           '<title>Cruscotto Pokémon</title>'
+           + ('<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" '
+              'rel="stylesheet">' if page else "") +
            f'<style>{CSS}</style></head><body class="{mode}"><div class="wrap">']
     out.append(f'<header><h1><small>Pokémon · mercato</small>{e(d["data"])}</h1>'
                f'<div class="meta">{d["negozi"]} negozi<br>ore {e(d["ora"])}</div></header>')
@@ -195,31 +195,36 @@ def find_chrome():
 
 
 def screenshot(html_text, png_path, width=540):
-    """Foto della pagina in modalità immagine. Restituisce True se riuscita."""
+    """Foto della pagina in modalità immagine. Restituisce (riuscita, motivo)."""
     chrome = find_chrome()
     if not chrome:
-        print("Chrome non trovato: niente immagine")
-        return False
+        return False, "Chrome non trovato sul server"
+    png = Path(png_path)
+    png.unlink(missing_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
         src = Path(tmp) / "c.html"
         src.write_text(html_text, encoding="utf-8")
-        cmd = [chrome, "--headless=new", "--no-sandbox", "--disable-gpu", "--hide-scrollbars",
-               "--force-device-scale-factor=2", f"--window-size={width},3200", "--virtual-time-budget=6000",
-               f"--screenshot={png_path}", src.as_uri()]
+        cmd = [chrome, "--headless=new", "--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage",
+               "--hide-scrollbars", "--no-first-run", f"--user-data-dir={tmp}/profilo",
+               "--force-device-scale-factor=2", f"--window-size={width},3200", "--virtual-time-budget=3000",
+               f"--screenshot={png}", src.as_uri()]
         try:
-            subprocess.run(cmd, check=True, timeout=90, capture_output=True)
+            r = subprocess.run(cmd, timeout=120, capture_output=True, text=True)
         except Exception as ex:
-            print("Screenshot non riuscito:", ex)
-            return False
+            return False, f"Chrome bloccato: {ex}"
+        if not png.exists() or png.stat().st_size < 1000:
+            err = (r.stderr or r.stdout or "").strip().splitlines()
+            return False, f"Chrome ({Path(chrome).name}) non ha creato l'immagine, codice {r.returncode}: " + \
+                " | ".join(err[-3:])[:300]
     try:
         from PIL import Image
-        im = Image.open(png_path).convert("RGB")
+        im = Image.open(png).convert("RGB")
         bg = im.getpixel((2, im.height - 2))
         px = im.load()
         bottom = im.height - 1
         while bottom > 0 and all(px[x, bottom] == bg for x in range(0, im.width, 7)):
             bottom -= 1
-        im.crop((0, 0, im.width, min(im.height, bottom + 24))).save(png_path, optimize=True)
+        im.crop((0, 0, im.width, min(im.height, bottom + 24))).save(png, optimize=True)
     except Exception as ex:
         print("Ritaglio immagine non riuscito (la mando intera):", ex)
-    return Path(png_path).exists() and Path(png_path).stat().st_size > 1000
+    return True, f"ok ({Path(chrome).name}, {png.stat().st_size // 1024} KB)"
