@@ -45,6 +45,7 @@ jobs:
           git config user.email "robot-pokemon@users.noreply.github.com"
           [ -f state.json ] || exit 0
           git add state.json
+          [ -d docs ] && git add docs
           git diff --cached --quiet && exit 0
           git commit -m "stato $(date -u +%F\ %H:%M)"
           for i in 1 2 3; do
