@@ -19,7 +19,7 @@ import html
 import json
 import os
 import re
-import tempfile
+import subprocess
 import time
 import unicodedata
 from concurrent.futures import ThreadPoolExecutor
@@ -1309,23 +1309,32 @@ def main():
         (DOCS_DIR / "index.html").write_text(dashboard.render(data, "page"), encoding="utf-8")
         (DOCS_DIR / ".nojekyll").write_text("")  # GitHub Pages: pubblica la pagina così com'è
         diag["pagina"] = str((DOCS_DIR / "index.html").resolve())
+        for name, cmd in (("git_ignore", ["git", "check-ignore", "-v", "docs/index.html"]),
+                          ("git_status", ["git", "status", "--porcelain", "--ignored", "docs"])):
+            try:  # per capire perché la pagina non finisce nel repository
+                r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=20)
+                diag[name] = (r.stdout + r.stderr).strip()[:300] or "(niente)"
+            except Exception as e:
+                diag[name] = f"errore: {e}"
     except Exception as e:
         diag["pagina"] = f"errore: {e}"
         print("Pagina del cruscotto non scritta:", e)
+
+    # l'immagine si disegna a ogni giro (pochi secondi): così la pagina web la mostra sempre aggiornata
+    # e la diagnostica dice subito se sul server funziona, senza aspettare la mattina
+    png = DOCS_DIR / "riepilogo.png"
+    try:
+        ok, why = dashboard.screenshot(dashboard.render(data, "image"), str(png))
+    except Exception as e:
+        ok, why = False, f"errore nel disegno: {e}"
+    diag["immagine"] = why
+    print("Immagine del mattino:", why)
 
     today_s = today.isoformat()
     did_summary = False
     if baseline or force or (now.hour >= SUMMARY_HOUR and state.get("ultimo_riepilogo") != today_s):
         did_summary = True
-        png = Path(tempfile.gettempdir()) / f"riepilogo_pokemon_{os.getpid()}.png"
-        png.unlink(missing_ok=True)  # mai mandare un'immagine vecchia
         text = summary_text(ctx, offers, shops_ok, [] if baseline else fresh_news, now, today.weekday() == 0)
-        try:
-            ok, why = dashboard.screenshot(dashboard.render(data, "image"), str(png))
-        except Exception as e:
-            ok, why = False, f"errore nel disegno: {e}"
-        diag["immagine"] = why
-        print("Immagine del mattino:", why)
         buttons = summary_buttons(ctx, cfg, groups, archived)
         if ok:
             msgs.append({"text": summary_caption(ctx, data, groups), "buttons": buttons,
