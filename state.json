@@ -2232,6 +2232,18 @@
    "negozio": "Baruzcard",
    "stato": "esaurito"
   },
+  "https://baruzcard.it/products/pokemon-megaevoluzione-fiamme-spettrali-display-box-36-buste-ita-2a-scelta": {
+   "titolo": "Pokemon Megaevoluzione Fiamme Spettrali Display Box 36 Buste ITA - 2a Scelta",
+   "url": "https://baruzcard.it/products/pokemon-megaevoluzione-fiamme-spettrali-display-box-36-buste-ita-2a-scelta",
+   "comprabile": false,
+   "prezzo": 229.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Fiamme Spettrali",
+   "tipo": "Box 36 buste",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
   "https://baruzcard.it/products/pokemon-avventure-insieme-display-box-36-bustine-ita": {
    "titolo": "Pokemon Avventure Insieme Display Box 36 Bustine ITA",
    "url": "https://baruzcard.it/products/pokemon-avventure-insieme-display-box-36-bustine-ita",
@@ -3240,18 +3252,6 @@
    "negozio": "Mornati Paglia",
    "stato": "esaurito"
   },
-  "https://www.mornatipaglia.com/products/gamevision-pokemon-megaevoluzioni-ascesa-eroica-collezione-con-adesivi-carpk10314-i": {
-   "titolo": "GAMEVISION Pokemon Megaevoluzioni Ascesa Eroica Collezione Con Adesivi - CARPK10314-I",
-   "url": "https://www.mornatipaglia.com/products/gamevision-pokemon-megaevoluzioni-ascesa-eroica-collezione-con-adesivi-carpk10314-i",
-   "comprabile": false,
-   "prezzo": 21.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Mornati Paglia",
-   "stato": "esaurito"
-  },
   "https://www.mornatipaglia.com/products/gamevision-pokemon-megaevoluzione-ascesa-eroica-bundle-6-buste-carpk10311-i": {
    "titolo": "GAMEVISION Pokémon Megaevoluzione Ascesa Eroica Bundle 6 Buste - CARPK10311-I",
    "url": "https://www.mornatipaglia.com/products/gamevision-pokemon-megaevoluzione-ascesa-eroica-bundle-6-buste-carpk10311-i",
@@ -3261,6 +3261,18 @@
    "uscita": null,
    "set": "Ascesa Eroica",
    "tipo": "Bundle 6 buste",
+   "negozio": "Mornati Paglia",
+   "stato": "esaurito"
+  },
+  "https://www.mornatipaglia.com/products/gamevision-pokemon-megaevoluzioni-ascesa-eroica-collezione-con-adesivi-carpk10314-i": {
+   "titolo": "GAMEVISION Pokemon Megaevoluzioni Ascesa Eroica Collezione Con Adesivi - CARPK10314-I",
+   "url": "https://www.mornatipaglia.com/products/gamevision-pokemon-megaevoluzioni-ascesa-eroica-collezione-con-adesivi-carpk10314-i",
+   "comprabile": false,
+   "prezzo": 21.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
    "negozio": "Mornati Paglia",
    "stato": "esaurito"
   },
@@ -3676,7 +3688,7 @@
    "titolo": "Scarlatto e Violetto - Avventure Insieme - Display Box da 36 Buste (IT)",
    "url": "https://otakura.com/products/scarlatto-e-violetto-avventure-insieme-box-da-36-buste-it",
    "comprabile": true,
-   "prezzo": 220.0,
+   "prezzo": 221.0,
    "preordine": true,
    "uscita": null,
    "set": "Avventure Insieme",
@@ -3729,6 +3741,18 @@
    "uscita": null,
    "set": "30° Anniversario",
    "tipo": "Tin",
+   "negozio": "GS Gameon",
+   "stato": "disponibile"
+  },
+  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
+   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
+   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
+   "comprabile": true,
+   "prezzo": 119.99,
+   "preordine": false,
+   "uscita": null,
+   "set": "30° Anniversario",
+   "tipo": "Set Allenatore",
    "negozio": "GS Gameon",
    "stato": "disponibile"
   },
@@ -4032,18 +4056,6 @@
    "negozio": "Warcard",
    "stato": "disponibile"
   },
-  "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste": {
-   "titolo": "Equilibrio Perfetto - Box da 36 Buste",
-   "url": "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste",
-   "comprabile": true,
-   "prezzo": 179.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Box 36 buste",
-   "negozio": "Warcard",
-   "stato": "disponibile"
-  },
   "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb": {
    "titolo": "Equilibrio Perfetto - Set Allenatore Fuoriclasse (ETB)",
    "url": "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb",
@@ -4053,6 +4065,18 @@
    "uscita": null,
    "set": "Equilibrio Perfetto",
    "tipo": "Set Allenatore",
+   "negozio": "Warcard",
+   "stato": "disponibile"
+  },
+  "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste": {
+   "titolo": "Equilibrio Perfetto - Box da 36 Buste",
+   "url": "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste",
+   "comprabile": true,
+   "prezzo": 179.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Box 36 buste",
    "negozio": "Warcard",
    "stato": "disponibile"
   },
@@ -4457,19 +4481,6 @@
    "negozio": "Cardverse",
    "stato": "disponibile",
    "sparito": "2026-09-28"
-  },
-  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
-   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
-   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
-   "comprabile": true,
-   "prezzo": 119.99,
-   "preordine": false,
-   "uscita": null,
-   "set": "30° Anniversario",
-   "tipo": "Set Allenatore",
-   "negozio": "GS Gameon",
-   "stato": "disponibile",
-   "sparito": "2026-09-29"
   }
  },
  "mercato": {
@@ -4924,7 +4935,7 @@
   "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto|42",
   "2026-11-06|Dominio Delta|Uscita Dominio Delta|42"
  ],
- "ultimo_controllo": "2026-09-29T09:01+02:00",
+ "ultimo_controllo": "2026-09-29T10:01+02:00",
  "negozi_letti": 13,
  "nomi_set": {
   "Dominio Delta": {
