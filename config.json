@@ -58,5 +58,8 @@
   "tolleranza_collezione": 1.5,
 
   "_affare_buste": "Un prodotto con buste viene segnalato anche sopra listino se il valore medio delle carte che contiene è almeno questa frazione del prezzo (1.0 = in media ti ripaghi aprendolo).",
-  "affare_buste": 1.0
+  "affare_buste": 1.0,
+
+  "_cruscotto_url": "Indirizzo della pagina con il cruscotto completo (GitHub Pages).",
+  "cruscotto_url": "https://valchiria.github.io/pokemon-watch/"
 }
