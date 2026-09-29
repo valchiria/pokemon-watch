@@ -605,7 +605,7 @@
    "url": "https://scimmia.it/prodotto/pokemon-dominio-delta-display-box/",
    "comprabile": true,
    "preordine": false,
-   "prezzo": 185.9,
+   "prezzo": 189.9,
    "uscita": null,
    "set": "Dominio Delta",
    "tipo": "Box 36 buste",
@@ -1788,9 +1788,21 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
-   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
+   "comprabile": false,
+   "prezzo": 39.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Manuelpoke3",
+   "stato": "esaurito"
+  },
+  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -1812,21 +1824,9 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
-   "comprabile": false,
-   "prezzo": 39.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Manuelpoke3",
-   "stato": "esaurito"
-  },
-  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
+   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -3568,7 +3568,7 @@
    "titolo": "Megaevoluzione Equilibrio Perfetto – Booster Display da 36 Bustine – Pokémon (ITA)",
    "url": "https://otakura.com/products/megaevoluzione-equilibrio-perfetto-booster-display-da-36-bustine-pokemon-ita",
    "comprabile": true,
-   "prezzo": 251.0,
+   "prezzo": 250.0,
    "preordine": false,
    "uscita": null,
    "set": "Equilibrio Perfetto",
@@ -3756,18 +3756,6 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://www.gs-gameon.com/products/30-anniversario-collezione-con-poster-ita": {
-   "titolo": "30° Anniversario: Collezione con Poster (ITA)",
-   "url": "https://www.gs-gameon.com/products/30-anniversario-collezione-con-poster-ita",
-   "comprabile": true,
-   "prezzo": 34.99,
-   "preordine": false,
-   "uscita": null,
-   "set": "30° Anniversario",
-   "tipo": "Collezione",
-   "negozio": "GS Gameon",
-   "stato": "disponibile"
-  },
   "https://www.gs-gameon.com/products/30-anniversario-tin-da-collezione-greninja-ex-ita": {
    "titolo": "30° Anniversario: Tin da Collezione Greninja-ex (ITA)",
    "url": "https://www.gs-gameon.com/products/30-anniversario-tin-da-collezione-greninja-ex-ita",
@@ -3777,6 +3765,18 @@
    "uscita": null,
    "set": "30° Anniversario",
    "tipo": "Tin",
+   "negozio": "GS Gameon",
+   "stato": "disponibile"
+  },
+  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
+   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
+   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
+   "comprabile": true,
+   "prezzo": 119.99,
+   "preordine": false,
+   "uscita": null,
+   "set": "30° Anniversario",
+   "tipo": "Set Allenatore",
    "negozio": "GS Gameon",
    "stato": "disponibile"
   },
@@ -4506,15 +4506,15 @@
    "stato": "disponibile",
    "sparito": "2026-09-28"
   },
-  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
-   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
-   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
+  "https://www.gs-gameon.com/products/30-anniversario-collezione-con-poster-ita": {
+   "titolo": "30° Anniversario: Collezione con Poster (ITA)",
+   "url": "https://www.gs-gameon.com/products/30-anniversario-collezione-con-poster-ita",
    "comprabile": true,
-   "prezzo": 119.99,
+   "prezzo": 34.99,
    "preordine": false,
    "uscita": null,
    "set": "30° Anniversario",
-   "tipo": "Set Allenatore",
+   "tipo": "Collezione",
    "negozio": "GS Gameon",
    "stato": "disponibile",
    "sparito": "2026-09-29"
@@ -4972,7 +4972,7 @@
   "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto|42",
   "2026-11-06|Dominio Delta|Uscita Dominio Delta|42"
  ],
- "ultimo_controllo": "2026-09-29T11:01+02:00",
+ "ultimo_controllo": "2026-09-29T11:46+02:00",
  "negozi_letti": 13,
  "nomi_set": {
   "Dominio Delta": {
