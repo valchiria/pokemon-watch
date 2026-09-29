@@ -964,7 +964,7 @@
    "titolo": "Pokémon - Megaevoluzione Dominio Delta Booster Box 36 Buste (IT)",
    "url": "https://cardverse.it/products/pokemon-megaevoluzione-dominio-delta-booster-box-36-buste-it",
    "comprabile": false,
-   "prezzo": 252.0,
+   "prezzo": 251.0,
    "preordine": true,
    "uscita": "2026-11-06",
    "set": "Dominio Delta",
@@ -1168,7 +1168,7 @@
    "titolo": "Pokémon - Equilibrio Perfetto Booster Box 36 Buste (IT)",
    "url": "https://cardverse.it/products/pokemon-equilibrio-perfetto-booster-box-36-buste-it",
    "comprabile": true,
-   "prezzo": 252.0,
+   "prezzo": 251.0,
    "preordine": false,
    "uscita": null,
    "set": "Equilibrio Perfetto",
@@ -1360,7 +1360,7 @@
    "titolo": "Pokémon - Fiamme Spettrali Booster Box 36 Buste (IT)",
    "url": "https://cardverse.it/products/pokemon-fiamme-spettrali-booster-box-36-buste-it",
    "comprabile": false,
-   "prezzo": 261.0,
+   "prezzo": 260.0,
    "preordine": false,
    "uscita": null,
    "set": "Fiamme Spettrali",
@@ -1788,9 +1788,21 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
-   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
+   "comprabile": false,
+   "prezzo": 39.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Manuelpoke3",
+   "stato": "esaurito"
+  },
+  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -1812,21 +1824,9 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
-   "comprabile": false,
-   "prezzo": 39.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Manuelpoke3",
-   "stato": "esaurito"
-  },
-  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
+   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -2748,6 +2748,18 @@
    "negozio": "MagicNerd",
    "stato": "esaurito"
   },
+  "https://www.noxcollectibles.it/products/pokemon-30th-collezione-con-poster-ita": {
+   "titolo": "Pokemon 30th - Collezione con Poster ITA",
+   "url": "https://www.noxcollectibles.it/products/pokemon-30th-collezione-con-poster-ita",
+   "comprabile": true,
+   "prezzo": 29.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "30° Anniversario",
+   "tipo": "Collezione",
+   "negozio": "Nox Collectibles",
+   "stato": "disponibile"
+  },
   "https://www.noxcollectibles.it/products/etb-set-allenatore-fuoriclasse-30th-ita": {
    "titolo": "ETB Set Allenatore Fuoriclasse 30TH (ITA)",
    "url": "https://www.noxcollectibles.it/products/etb-set-allenatore-fuoriclasse-30th-ita",
@@ -2765,18 +2777,6 @@
    "url": "https://www.noxcollectibles.it/products/pokemon-30-th-collezione-con-raccoglitore-ita",
    "comprabile": false,
    "prezzo": 69.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "30° Anniversario",
-   "tipo": "Collezione",
-   "negozio": "Nox Collectibles",
-   "stato": "esaurito"
-  },
-  "https://www.noxcollectibles.it/products/pokemon-30th-collezione-con-poster-ita": {
-   "titolo": "Pokemon 30th - Collezione con Poster ITA",
-   "url": "https://www.noxcollectibles.it/products/pokemon-30th-collezione-con-poster-ita",
-   "comprabile": false,
-   "prezzo": 29.9,
    "preordine": false,
    "uscita": null,
    "set": "30° Anniversario",
@@ -3700,7 +3700,7 @@
    "titolo": "Megaevoluzione - Fiamme Spettrali - Box da 36 Bustine (ITA)",
    "url": "https://otakura.com/products/megaevoluzione-fiamme-spettrali-display-box-italiano",
    "comprabile": false,
-   "prezzo": 252.0,
+   "prezzo": 251.0,
    "preordine": true,
    "uscita": null,
    "set": "Fiamme Spettrali",
@@ -3777,18 +3777,6 @@
    "uscita": null,
    "set": "30° Anniversario",
    "tipo": "Tin",
-   "negozio": "GS Gameon",
-   "stato": "disponibile"
-  },
-  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
-   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
-   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
-   "comprabile": true,
-   "prezzo": 119.99,
-   "preordine": false,
-   "uscita": null,
-   "set": "30° Anniversario",
-   "tipo": "Set Allenatore",
    "negozio": "GS Gameon",
    "stato": "disponibile"
   },
@@ -4092,18 +4080,6 @@
    "negozio": "Warcard",
    "stato": "disponibile"
   },
-  "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb": {
-   "titolo": "Equilibrio Perfetto - Set Allenatore Fuoriclasse (ETB)",
-   "url": "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb",
-   "comprabile": true,
-   "prezzo": 69.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Set Allenatore",
-   "negozio": "Warcard",
-   "stato": "disponibile"
-  },
   "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste": {
    "titolo": "Equilibrio Perfetto - Box da 36 Buste",
    "url": "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste",
@@ -4113,6 +4089,18 @@
    "uscita": null,
    "set": "Equilibrio Perfetto",
    "tipo": "Box 36 buste",
+   "negozio": "Warcard",
+   "stato": "disponibile"
+  },
+  "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb": {
+   "titolo": "Equilibrio Perfetto - Set Allenatore Fuoriclasse (ETB)",
+   "url": "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb",
+   "comprabile": true,
+   "prezzo": 69.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Set Allenatore",
    "negozio": "Warcard",
    "stato": "disponibile"
   },
@@ -4517,6 +4505,19 @@
    "negozio": "Cardverse",
    "stato": "disponibile",
    "sparito": "2026-09-28"
+  },
+  "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita": {
+   "titolo": "30° Anniversario: Set Allenatore Fuoriclasse (ITA)",
+   "url": "https://www.gs-gameon.com/products/30-anniversario-set-allenatore-fuoriclasse-ita",
+   "comprabile": true,
+   "prezzo": 119.99,
+   "preordine": false,
+   "uscita": null,
+   "set": "30° Anniversario",
+   "tipo": "Set Allenatore",
+   "negozio": "GS Gameon",
+   "stato": "disponibile",
+   "sparito": "2026-09-29"
   }
  },
  "mercato": {
@@ -4768,9 +4769,9 @@
    "data": "2026-09-28"
   },
   "30° Anniversario|Collezione|Poster": {
-   "prezzo": 34.99,
-   "negozio": "GS Gameon",
-   "data": "2026-09-28"
+   "prezzo": 29.9,
+   "negozio": "Nox Collectibles",
+   "data": "2026-09-29"
   },
   "30° Anniversario|Tin|": {
    "prezzo": 44.9,
@@ -4971,7 +4972,7 @@
   "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto|42",
   "2026-11-06|Dominio Delta|Uscita Dominio Delta|42"
  ],
- "ultimo_controllo": "2026-09-29T12:01+02:00",
+ "ultimo_controllo": "2026-09-29T13:01+02:00",
  "negozi_letti": 13,
  "nomi_set": {
   "Dominio Delta": {
