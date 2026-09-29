@@ -1788,21 +1788,9 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
-   "comprabile": false,
-   "prezzo": 39.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Ascesa Eroica",
-   "tipo": "Collezione",
-   "negozio": "Manuelpoke3",
-   "stato": "esaurito"
-  },
-  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
-   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
+   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -1824,9 +1812,21 @@
    "negozio": "Manuelpoke3",
    "stato": "esaurito"
   },
-  "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica": {
-   "titolo": "Collezione Meganium-EX dell'Espansione Megaevoluzione - Ascesa Eroica",
-   "url": "https://manuelpoke3.it/products/collezione-meganium-ex-dellespansione-megaevoluzione-ascesa-eroica",
+  "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione con Spilla Deluxe Compagni d'Avventura - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-con-spilla-deluxe-compagni-davventura-dellespansione-megaevoluzione-ascesa-eroica",
+   "comprabile": false,
+   "prezzo": 39.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Ascesa Eroica",
+   "tipo": "Collezione",
+   "negozio": "Manuelpoke3",
+   "stato": "esaurito"
+  },
+  "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica": {
+   "titolo": "Collezione Mega Emboar-ex - Megaevoluzione Ascesa Eroica [ITA]",
+   "url": "https://manuelpoke3.it/products/collezione-mega-emboar-ex-dellespansione-megaevoluzione-ascesa-eroica",
    "comprabile": false,
    "prezzo": 30.0,
    "preordine": false,
@@ -2217,6 +2217,18 @@
    "uscita": null,
    "set": "Fiamme Spettrali",
    "tipo": "Bundle 6 buste",
+   "negozio": "Baruzcard",
+   "stato": "esaurito"
+  },
+  "https://baruzcard.it/products/pokemon-fiamme-spettrali-3-pack-blister-2-pezzi-diversi-ita": {
+   "titolo": "Pokemon Fiamme Spettrali - 3 Pack Blister - 2 Pezzi diversi ITA",
+   "url": "https://baruzcard.it/products/pokemon-fiamme-spettrali-3-pack-blister-2-pezzi-diversi-ita",
+   "comprabile": false,
+   "prezzo": 44.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Fiamme Spettrali",
+   "tipo": "Blister",
    "negozio": "Baruzcard",
    "stato": "esaurito"
   },
@@ -3564,9 +3576,9 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Lucario-ex (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it",
    "comprabile": false,
    "prezzo": 76.0,
    "preordine": true,
@@ -3624,9 +3636,9 @@
    "negozio": "Otakura",
    "stato": "esaurito"
   },
-  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it": {
-   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Lucario-ex (IT)",
-   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-mega-lucario-ex-it",
+  "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it": {
+   "titolo": "Megaevoluzione: Ascesa Eroica - Collezione con Poster Premium di Mega Gardevoir-ex (IT)",
+   "url": "https://otakura.com/products/megaevoluzione-ascesa-eroica-collezione-con-poster-premium-di-mega-gardevoir-ex-it",
    "comprabile": false,
    "prezzo": 76.0,
    "preordine": true,
@@ -3664,7 +3676,7 @@
    "titolo": "Scarlatto e Violetto - Avventure Insieme - Display Box da 36 Buste (IT)",
    "url": "https://otakura.com/products/scarlatto-e-violetto-avventure-insieme-box-da-36-buste-it",
    "comprabile": true,
-   "prezzo": 221.0,
+   "prezzo": 220.0,
    "preordine": true,
    "uscita": null,
    "set": "Avventure Insieme",
@@ -4020,18 +4032,6 @@
    "negozio": "Warcard",
    "stato": "disponibile"
   },
-  "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb": {
-   "titolo": "Equilibrio Perfetto - Set Allenatore Fuoriclasse (ETB)",
-   "url": "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb",
-   "comprabile": true,
-   "prezzo": 69.9,
-   "preordine": false,
-   "uscita": null,
-   "set": "Equilibrio Perfetto",
-   "tipo": "Set Allenatore",
-   "negozio": "Warcard",
-   "stato": "disponibile"
-  },
   "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste": {
    "titolo": "Equilibrio Perfetto - Box da 36 Buste",
    "url": "https://www.warcard.it/products/equilibrio-perfetto-box-da-36-buste",
@@ -4041,6 +4041,18 @@
    "uscita": null,
    "set": "Equilibrio Perfetto",
    "tipo": "Box 36 buste",
+   "negozio": "Warcard",
+   "stato": "disponibile"
+  },
+  "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb": {
+   "titolo": "Equilibrio Perfetto - Set Allenatore Fuoriclasse (ETB)",
+   "url": "https://www.warcard.it/products/equilibrio-perfetto-set-allenatore-fuoriclasse-etb",
+   "comprabile": true,
+   "prezzo": 69.9,
+   "preordine": false,
+   "uscita": null,
+   "set": "Equilibrio Perfetto",
+   "tipo": "Set Allenatore",
    "negozio": "Warcard",
    "stato": "disponibile"
   },
@@ -4196,7 +4208,7 @@
   "https://www.nerdstoreitalia.it/prodotto/tin-pokemon-go-poke-ball-surprise-it/",
   "https://www.noxcollectibles.it/products/pokemon-blister-zarude-ita"
  ],
- "ultimo_riepilogo": "2026-09-28",
+ "ultimo_riepilogo": "2026-09-29",
  "versione": 3,
  "spariti": {
   "https://manuelpoke3.it/products/pokemon-30-anniversario-bundle-collezionista-2-ita": {
@@ -4912,7 +4924,7 @@
   "2026-11-06|30° Anniversario|Ultra Premium Umbreon e Espeon, Collezione Premium Ditto|42",
   "2026-11-06|Dominio Delta|Uscita Dominio Delta|42"
  ],
- "ultimo_controllo": "2026-09-29T08:01+02:00",
+ "ultimo_controllo": "2026-09-29T09:01+02:00",
  "negozi_letti": 13,
  "nomi_set": {
   "Dominio Delta": {
